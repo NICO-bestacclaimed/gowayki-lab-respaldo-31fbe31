@@ -12,5 +12,6 @@ abstract interface class CityPackRepository
   Future<List<CityPlace>> searchPlaces(String query, {int limit = 20});
   Future<Map<String, Object?>> configuration();
   Future<CityFare?> fareForLine(String lineId);
+  Future<CityPackInfo> packageInfo();
   Future<void> close();
 }

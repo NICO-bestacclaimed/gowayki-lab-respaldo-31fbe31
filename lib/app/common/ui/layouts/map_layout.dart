@@ -19,18 +19,13 @@ class MapLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
+      value: Theme.of(context).brightness == Brightness.dark
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
       child: Scaffold(
         backgroundColor: AppColors.background,
         resizeToAvoidBottomInset: false,
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            map,
-            ...overlays,
-            ?sheet,
-          ],
-        ),
+        body: Stack(fit: StackFit.expand, children: [map, ...overlays, ?sheet]),
       ),
     );
   }
@@ -95,7 +90,9 @@ class MapRoundButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: selected ? AppColors.primary : AppColors.surface,
+      color: selected
+          ? AppColors.primary
+          : Theme.of(context).colorScheme.surface,
       elevation: 2,
       shadowColor: Colors.black26,
       shape: const CircleBorder(),

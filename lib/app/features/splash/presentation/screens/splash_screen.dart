@@ -1,55 +1,42 @@
+import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import '../../../../../shared/brand/brand_assets.dart';
 
-import '../../../../../shared/theme/theme.dart';
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key, required this.onReady});
-
-  final VoidCallback onReady;
-
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  bool _left = false;
-
-  @override
-  void initState() {
-    super.initState();
-    Future<void>.delayed(const Duration(milliseconds: 900), () {
-      if (!mounted || _left) return;
-      _left = true;
-      widget.onReady();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColors.primary,
-      body: Center(
+  Widget build(BuildContext context) => Scaffold(
+    body: SafeArea(
+      child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.pets_rounded, size: 80, color: Colors.white),
-            SizedBox(height: AppSpacing.lg),
-            Text(
-              'Gowayki Lab',
-              style: TextStyle(
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
                 color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.w800,
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: Image.asset(
+                BrandAssets.logo,
+                key: const ValueKey('brand.splash.logo'),
+                width: 200,
+                height: 200,
+                cacheWidth: 600,
+                semanticLabel: context.l10n.appTitle,
               ),
             ),
-            SizedBox(height: AppSpacing.sm),
-            Text(
-              'TECSUP · proyecto académico',
-              style: TextStyle(color: Colors.white70),
+            const SizedBox(height: 24),
+            Text(context.l10n.preparing),
+            const SizedBox(height: 20),
+            const SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
             ),
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
 }

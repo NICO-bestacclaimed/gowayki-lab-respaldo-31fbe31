@@ -92,3 +92,15 @@ class CityFare {
   final double amount;
   final String currency;
 }
+
+class CityPackInfo {
+  const CityPackInfo({
+    required this.cityCode,
+    required this.version,
+    required this.generatedAt,
+    required this.sha256,
+  });
+  final String cityCode, sha256;
+  final int version;
+  final DateTime generatedAt;
+}

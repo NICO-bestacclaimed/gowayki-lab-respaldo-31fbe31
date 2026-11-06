@@ -24,6 +24,17 @@ class SqliteCityPackRepository implements CityPackRepository {
     return SqliteCityPackRepository._(installed, db);
   }
 
+  @override
+  Future<CityPackInfo> packageInfo() async {
+    _ensureOpen();
+    return CityPackInfo(
+      cityCode: 'arequipa',
+      version: manifest.version,
+      generatedAt: manifest.generatedAt,
+      sha256: manifest.sha256,
+    );
+  }
+
   CityPackManifest get manifest => installed.manifest;
   CityPackVersionStatus compareVersion(CityPackManifest candidate) =>
       manifest.compare(candidate);

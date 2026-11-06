@@ -1,17 +1,19 @@
+import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/models/feedback_item.dart';
-import '../../../../../data/service_locator.dart';
+import '../../../../providers/app_providers.dart';
 import '../../../../../shared/theme/theme.dart';
 
-class FeedbackScreen extends StatefulWidget {
+class FeedbackScreen extends ConsumerStatefulWidget {
   const FeedbackScreen({super.key});
 
   @override
-  State<FeedbackScreen> createState() => _FeedbackScreenState();
+  ConsumerState<FeedbackScreen> createState() => _FeedbackScreenState();
 }
 
-class _FeedbackScreenState extends State<FeedbackScreen> {
+class _FeedbackScreenState extends ConsumerState<FeedbackScreen> {
   FeedbackKind _kind = FeedbackKind.idea;
   final _message = TextEditingController();
   bool _sending = false;
@@ -25,21 +27,21 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Future<void> _submit() async {
     final text = _message.text.trim();
     if (text.length < 5) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Escribe al menos 5 caracteres')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.feedbackMinimum)));
       return;
     }
     setState(() => _sending = true);
     try {
-      final city = await ServiceLocator.preferences.readCityCode();
-      await ServiceLocator.feedback.submit(
-        FeedbackItem(kind: _kind, message: text, cityCode: city),
-      );
+      final city = await ref.read(preferencesRepositoryProvider).readCityCode();
+      await ref
+          .read(feedbackRepositoryProvider)
+          .submit(FeedbackItem(kind: _kind, message: text, cityCode: city));
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Gracias. Comentario enviado.')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.feedbackSent)));
       Navigator.of(context).pop();
     } catch (e) {
       if (!mounted) return;
@@ -52,16 +54,25 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(title: const Text('Ayuda y comentarios')),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(title: Text(context.l10n.help)),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
           SegmentedButton<FeedbackKind>(
-            segments: const [
-              ButtonSegment(value: FeedbackKind.bug, label: Text('Bug')),
-              ButtonSegment(value: FeedbackKind.idea, label: Text('Idea')),
-              ButtonSegment(value: FeedbackKind.other, label: Text('Otro')),
+            segments: [
+              ButtonSegment(
+                value: FeedbackKind.bug,
+                label: Text(context.l10n.feedbackBug),
+              ),
+              ButtonSegment(
+                value: FeedbackKind.idea,
+                label: Text(context.l10n.feedbackIdea),
+              ),
+              ButtonSegment(
+                value: FeedbackKind.other,
+                label: Text(context.l10n.feedbackOther),
+              ),
             ],
             selected: {_kind},
             onSelectionChanged: (s) => setState(() => _kind = s.first),
@@ -70,8 +81,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           TextField(
             controller: _message,
             maxLines: 6,
-            decoration: const InputDecoration(
-              labelText: 'Mensaje',
+            decoration: InputDecoration(
+              labelText: context.l10n.message,
               alignLabelWithHint: true,
             ),
           ),
@@ -82,9 +93,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ? const SizedBox(
                     height: 22,
                     width: 22,
-                    child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
                   )
-                : const Text('Enviar'),
+                : Text(context.l10n.send),
           ),
         ],
       ),

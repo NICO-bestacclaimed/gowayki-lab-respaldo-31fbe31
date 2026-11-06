@@ -66,5 +66,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>GoWayki usa tu ubicación mientras utilizas la app para sugerir puntos de subida cercanos.</string>
 </dict>
 </plist>

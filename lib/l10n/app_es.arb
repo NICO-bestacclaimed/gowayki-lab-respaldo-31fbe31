@@ -1,0 +1,196 @@
+{
+  "@@locale": "es",
+  "appTitle": "GoWayki",
+  "explore": "Explorar",
+  "routes": "Rutas",
+  "favorites": "Favoritos",
+  "profile": "Perfil",
+  "retry": "Reintentar",
+  "settings": "Ajustes",
+  "help": "Ayuda y comentarios",
+  "signOut": "Cerrar sesión",
+  "signIn": "Iniciar sesión",
+  "guest": "Invitado",
+  "menu": "Menú",
+  "back": "Volver",
+  "continueAction": "Continuar",
+  "bootstrapError": "No pudimos preparar los datos de Arequipa.",
+  "linesError": "No pudimos cargar las líneas.",
+  "favoritesEmpty": "Aún no tienes líneas favoritas. Guarda una desde Rutas.",
+  "linesEmpty": "No hay líneas en el paquete actual.",
+  "removeFavorite": "Quitar de favoritos",
+  "addFavorite": "Guardar en favoritos",
+  "saveFailed": "No se pudo guardar el cambio. Inténtalo otra vez.",
+  "noSession": "No hay sesión iniciada.",
+  "localGuestHelp": "Puedes explorar rutas y guardar favoritos en este dispositivo.",
+  "locationTitle": "Tu ubicación, tú decides",
+  "locationExplanation": "GoWayki puede usar tu ubicación para sugerir puntos de subida cercanos y ayudarte a iniciar un viaje desde tu posición.",
+  "locationOptional": "El permiso es opcional. Puedes continuar sin ubicación.",
+  "locationDenied": "El permiso no se concedió. Puedes continuar y cambiarlo más adelante.",
+  "locationPermanent": "El permiso está desactivado en los ajustes de la aplicación.",
+  "openSettings": "Abrir ajustes",
+  "waitMoment": "Un momento…",
+  "allowLocation": "Permitir ubicación",
+  "continueWithoutLocation": "Continuar sin ubicación",
+  "continueFailed": "No pudimos continuar. Inténtalo otra vez.",
+  "permissionFailed": "No pudimos solicitar el permiso. Puedes continuar sin ubicación.",
+  "permissionSettingsHelp": "Abre los ajustes de la aplicación para cambiar el permiso.",
+  "deviceSettingsHelp": "Puedes cambiar el permiso desde los ajustes del dispositivo.",
+  "onboardFind": "Encuentra tu combi",
+  "onboardFindBody": "Explora las líneas de Arequipa y reconoce tu micro.",
+  "onboardAlight": "Sabe dónde bajar",
+  "onboardAlightBody": "Consulta los puntos del recorrido y los transbordos de tu viaje.",
+  "onboardTime": "Llega a tiempo (tiempos estimados)",
+  "onboardTimeBody": "Compara alternativas con tiempos aproximados de caminata, espera y viaje.",
+  "skip": "Omitir",
+  "start": "Comenzar",
+  "next": "Siguiente",
+  "preparing": "Preparando Arequipa…",
+  "line": "Línea",
+  "allDirections": "Todas",
+  "outbound": "Ida",
+  "inbound": "Vuelta",
+  "whereTo": "¿Adónde vas?",
+  "searchExamples": "Prueba “TECSUP”, “Plaza” o “Mall”",
+  "directions": "Cómo llegar",
+  "buses": "Combis",
+  "searchLine": "Buscar línea o combi…",
+  "noResults": "Sin resultados",
+  "mapError": "No se pudo cargar el mapa sin conexión.",
+  "feedbackMinimum": "Escribe al menos 5 caracteres",
+  "feedbackSent": "Gracias. Comentario enviado.",
+  "feedbackBug": "Bug",
+  "feedbackIdea": "Idea",
+  "feedbackOther": "Otro",
+  "message": "Mensaje",
+  "send": "Enviar",
+  "genericError": "No pudimos completar la acción. Inténtalo otra vez.",
+  "planTrip": "Planificar viaje",
+  "demoOptions": "Opciones de demostración",
+  "demoOrigin": "Origen de demostración",
+  "brandTagline": "Tu ciudad, más cerca",
+  "email": "Correo",
+  "password": "Contraseña",
+  "createAccount": "Crear cuenta",
+  "guestEntry": "Entrar como invitado",
+  "firebaseActive": "Firebase Auth activo",
+  "localDemo": "Modo demo · sin Firebase",
+  "pageUnavailable": "Esta página no está disponible.",
+  "backExplore": "Volver a Explorar",
+  "chooseDestination": "Selecciona un destino desde Explorar.",
+  "city": "Ciudad",
+  "activeCity": "Ciudad activa",
+  "language": "Idioma",
+  "systemDefault": "Sistema",
+  "spanish": "Español (Perú)",
+  "english": "English",
+  "appearance": "Apariencia",
+  "theme": "Tema",
+  "lightTheme": "Claro",
+  "darkTheme": "Oscuro",
+  "plannerPreferences": "Preferencias de viaje",
+  "maxWalking": "Caminata máxima hasta un paradero",
+  "avoidTransfers": "Evitar transbordos",
+  "alarmType": "Aviso de bajada",
+  "alarmSound": "Sonido",
+  "alarmVibration": "Vibración",
+  "alarmOff": "Desactivado",
+  "offlineData": "Datos sin conexión",
+  "checkUpdate": "Buscar actualización",
+  "updatesLater": "Las actualizaciones del paquete estarán disponibles próximamente.",
+  "about": "Acerca de",
+  "privacy": "Privacidad",
+  "terms": "Términos",
+  "legalUnavailable": "Los documentos legales estarán disponibles cuando se publiquen.",
+  "openLinkFailed": "No se pudo abrir el enlace.",
+  "osmAttribution": "© Colaboradores de OpenStreetMap · ODbL",
+  "openMapTilesAttribution": "OpenMapTiles · cartografía sin conexión",
+  "emptyTitle": "Todavía no hay elementos.",
+  "gpsOffTitle": "Activa la ubicación del dispositivo",
+  "gpsOffBody": "Activa el GPS para encontrar puntos cercanos.",
+  "permissionTitle": "Permiso de ubicación necesario",
+  "permissionBody": "Puedes permitir la ubicación o continuar eligiendo los puntos del viaje.",
+  "noResultsBody": "Prueba con otro punto o cambia las preferencias del viaje.",
+  "outsideTitle": "Fuera del área de servicio",
+  "outsideBody": "El paquete actual contiene rutas de Arequipa.",
+  "errorTitle": "No pudimos cargar la información",
+  "errorBody": "Inténtalo otra vez. Tus datos guardados se conservan.",
+  "towards": "hacia {destination}",
+  "@towards": {
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "outboundTo": "Ida → {destination}",
+  "@outboundTo": {
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "inboundTo": "Vuelta → {destination}",
+  "@inboundTo": {
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "directionCount": "{count, plural, one {1 sentido} other {{count} sentidos}}",
+  "@directionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tripStats": "~{minutes} min · {transfers, plural, one {1 transbordo} other {{transfers} transbordos}}",
+  "@tripStats": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "transfers": {
+        "type": "int"
+      }
+    }
+  },
+  "walkingLimit": "Hasta {meters} m",
+  "@walkingLimit": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "automaticWalking": "Automático ({initial}–{fallback} m)",
+  "@automaticWalking": {
+    "placeholders": {
+      "initial": {
+        "type": "int"
+      },
+      "fallback": {
+        "type": "int"
+      }
+    }
+  },
+  "dataVersion": "Versión de datos: {version}",
+  "@dataVersion": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "dataBuiltAt": "Paquete compilado el {date}",
+  "@dataBuiltAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
+}

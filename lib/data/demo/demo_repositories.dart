@@ -15,6 +15,7 @@ import '../../domain/repositories/preferences_repository.dart';
 import '../../domain/repositories/trip_plan_repository.dart';
 
 class DemoAuthRepository implements AuthRepository {
+  Future<void> close() => _controller.close();
   final _controller = StreamController<AuthUser?>.broadcast();
   AuthUser? _user;
 
@@ -46,8 +47,7 @@ class DemoAuthRepository implements AuthRepository {
     required String email,
     required String password,
     String? displayName,
-  }) =>
-      signInWithEmail(email: email, password: password);
+  }) => signInWithEmail(email: email, password: password);
 
   @override
   Future<void> signInAnonymously() async {
@@ -69,14 +69,14 @@ class DemoAuthRepository implements AuthRepository {
 class DemoCityRepository implements CityRepository {
   @override
   Future<List<City>> activeCities() async => const [
-        City(
-          code: 'arequipa',
-          name: 'Arequipa',
-          region: 'Arequipa',
-          centerLat: -16.4090,
-          centerLng: -71.5375,
-        ),
-      ];
+    City(
+      code: 'arequipa',
+      name: 'Arequipa',
+      region: 'Arequipa',
+      centerLat: -16.4090,
+      centerLng: -71.5375,
+    ),
+  ];
 }
 
 class DemoPlaceSearchRepository implements PlaceSearchRepository {

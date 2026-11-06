@@ -2,7 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'app.dart';
-import 'data/service_locator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'app/providers/app_providers.dart';
 import 'firebase_options.dart';
 
 const bool kUseFirebase = bool.fromEnvironment(
@@ -19,6 +20,10 @@ Future<void> main() async {
     );
   }
 
-  await ServiceLocator.init(useFirebase: kUseFirebase);
-  runApp(const GowaykiLabApp());
+  runApp(
+    ProviderScope(
+      overrides: [useFirebaseProvider.overrideWithValue(kUseFirebase)],
+      child: const GowaykiLabApp(),
+    ),
+  );
 }

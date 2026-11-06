@@ -1,15 +1,17 @@
+import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/models/place_result.dart';
 import '../../../../../core/models/transit_line.dart';
-import '../../../../../data/service_locator.dart';
+import '../../../../providers/app_providers.dart';
 import '../../../../../shared/theme/theme.dart';
 import '../../../../common/ui/layouts/map_layout.dart';
 import '../widgets/combis_sheet.dart';
 import '../widgets/explorer_map.dart';
 
 /// Explorador: mapa a pantalla completa (interfaz tipo Gowayki GO).
-class ExplorerScreen extends StatefulWidget {
+class ExplorerScreen extends ConsumerStatefulWidget {
   const ExplorerScreen({
     super.key,
     required this.onPlanTrip,
@@ -20,15 +22,15 @@ class ExplorerScreen extends StatefulWidget {
   final VoidCallback onOpenMenu;
 
   @override
-  State<ExplorerScreen> createState() => _ExplorerScreenState();
+  ConsumerState<ExplorerScreen> createState() => _ExplorerScreenState();
 }
 
-class _ExplorerScreenState extends State<ExplorerScreen> {
+class _ExplorerScreenState extends ConsumerState<ExplorerScreen> {
   final _mapKey = GlobalKey<ExplorerMapState>();
   final _query = TextEditingController();
   final _focus = FocusNode();
 
-  List<PlaceResult> _results = const [];
+  List<PlaceResult> _results = [];
   PlaceResult? _selected;
   TransitLine? _focusedLine;
   TransitDirectionKind? _focusedDirection;
@@ -48,7 +50,7 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
       _searching = true;
       _searchOpen = true;
     });
-    final results = await ServiceLocator.places.search(value);
+    final results = await ref.read(placeSearchRepositoryProvider).search(value);
     if (!mounted) return;
     setState(() {
       _results = results;
@@ -94,8 +96,8 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
     final sheetH = _focusedLine != null
         ? 188.0 + bottomPad
         : _selected != null
-            ? 168.0 + bottomPad
-            : (_searchOpen ? 280.0 + bottomPad : 0.0);
+        ? 168.0 + bottomPad
+        : (_searchOpen ? 280.0 + bottomPad : 0.0);
 
     return MapLayout(
       map: ExplorerMap(
@@ -118,7 +120,7 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
             onClear: () {
               _query.clear();
               setState(() {
-                _results = const [];
+                _results = [];
                 _searchOpen = false;
                 _selected = null;
               });
@@ -147,10 +149,8 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
               const SizedBox(height: AppSpacing.sm),
               MapRoundButton(
                 icon: Icons.my_location_rounded,
-                onPressed: () => _mapKey.currentState?.flyTo(
-                  lat: -16.3989,
-                  lng: -71.5369,
-                ),
+                onPressed: () =>
+                    _mapKey.currentState?.flyTo(lat: -16.3989, lng: -71.5369),
               ),
             ],
           ),
@@ -161,9 +161,11 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
           : Align(
               alignment: Alignment.bottomCenter,
               child: Material(
-                color: AppColors.surface,
+                color: Theme.of(context).colorScheme.surface,
                 elevation: 8,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
                 child: SizedBox(
                   height: sheetH,
                   width: double.infinity,
@@ -174,8 +176,9 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
                           selected: _focusedDirection,
                           onSelectDirection: (kind) => setState(() {
                             // Tocar de nuevo el activo = volver a ambos.
-                            _focusedDirection =
-                                _focusedDirection == kind ? null : kind;
+                            _focusedDirection = _focusedDirection == kind
+                                ? null
+                                : kind;
                           }),
                           onClose: () => setState(() {
                             _focusedLine = null;
@@ -188,16 +191,16 @@ class _ExplorerScreenState extends State<ExplorerScreen> {
                           }),
                         )
                       : _selected != null
-                          ? _PlacePreview(
-                              place: _selected!,
-                              onClose: () => setState(() => _selected = null),
-                              onDirections: () => widget.onPlanTrip(_selected!),
-                            )
-                          : _SearchResults(
-                              searching: _searching,
-                              results: _results,
-                              onTap: _select,
-                            ),
+                      ? _PlacePreview(
+                          place: _selected!,
+                          onClose: () => setState(() => _selected = null),
+                          onDirections: () => widget.onPlanTrip(_selected!),
+                        )
+                      : _SearchResults(
+                          searching: _searching,
+                          results: _results,
+                          onTap: _select,
+                        ),
                 ),
               ),
             ),
@@ -239,21 +242,27 @@ class _CombiPreview extends StatelessWidget {
                   line.shortName.isEmpty
                       ? '?'
                       : (line.shortName.length > 3
-                          ? line.shortName.substring(0, 3)
-                          : line.shortName),
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+                            ? line.shortName.substring(0, 3)
+                            : line.shortName),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  line.shortName.isEmpty ? 'Línea' : line.shortName,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                  line.shortName.isEmpty ? context.l10n.line : line.shortName,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
               TextButton(
                 onPressed: onShowAll,
-                child: const Text('Todas'),
+                child: Text(context.l10n.allDirections),
               ),
               IconButton(
                 onPressed: onClose,
@@ -301,7 +310,9 @@ class _DirectionChip extends StatelessWidget {
       duration: const Duration(milliseconds: 180),
       opacity: active ? 1 : 0.45,
       child: Material(
-        color: active ? color.withValues(alpha: 0.16) : AppColors.background,
+        color: active
+            ? color.withValues(alpha: 0.16)
+            : Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: BorderSide(
@@ -318,16 +329,16 @@ class _DirectionChip extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ida ? 'Ida' : 'Vuelta',
+                  ida ? context.l10n.outbound : context.l10n.inbound,
                   style: const TextStyle(fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  'hacia ${direction.headsign}',
+                  context.l10n.towards(direction.headsign),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: AppColors.onSurfaceMuted,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -359,13 +370,13 @@ class _SearchField extends StatelessWidget {
       child: Material(
         elevation: 2,
         borderRadius: BorderRadius.circular(16),
-        color: AppColors.surface,
+        color: Theme.of(context).colorScheme.surface,
         child: TextField(
           controller: controller,
           focusNode: focusNode,
           onChanged: onChanged,
           decoration: InputDecoration(
-            hintText: '¿Adónde vas?',
+            hintText: context.l10n.whereTo,
             prefixIcon: const Icon(Icons.search_rounded),
             suffixIcon: ListenableBuilder(
               listenable: controller,
@@ -406,10 +417,12 @@ class _SearchResults extends StatelessWidget {
       return const Center(child: CircularProgressIndicator());
     }
     if (results.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          'Prueba “TECSUP”, “Plaza” o “Mall”',
-          style: TextStyle(color: AppColors.onSurfaceMuted),
+          context.l10n.searchExamples,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
       );
     }
@@ -421,9 +434,15 @@ class _SearchResults extends StatelessWidget {
         final p = results[i];
         return ListTile(
           leading: const Icon(Icons.place_outlined, color: AppColors.primary),
-          title: Text(p.name, style: const TextStyle(fontWeight: FontWeight.w600)),
+          title: Text(
+            p.name,
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
           subtitle: Text(p.address),
-          trailing: const Icon(Icons.directions_rounded, color: AppColors.primary),
+          trailing: const Icon(
+            Icons.directions_rounded,
+            color: AppColors.primary,
+          ),
           onTap: () => onTap(p),
         );
       },
@@ -463,12 +482,17 @@ class _PlacePreview extends StatelessWidget {
               IconButton(onPressed: onClose, icon: const Icon(Icons.close)),
             ],
           ),
-          Text(place.address, style: const TextStyle(color: AppColors.onSurfaceMuted)),
+          Text(
+            place.address,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
           const Spacer(),
           FilledButton.icon(
             onPressed: onDirections,
             icon: const Icon(Icons.directions_rounded),
-            label: const Text('Cómo llegar'),
+            label: Text(context.l10n.directions),
           ),
         ],
       ),

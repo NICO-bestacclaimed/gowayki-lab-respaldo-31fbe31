@@ -1,15 +1,17 @@
+import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 import '../../../../../core/models/transit_line.dart';
-import '../../../../../data/service_locator.dart';
+import '../../../../providers/app_providers.dart';
 import '../../../../../infra/map/offline_map_package.dart';
 import '../../../../../shared/theme/theme.dart';
 
 /// Mapa MapLibre offline + capas de combis (ida / vuelta).
-class ExplorerMap extends StatefulWidget {
+class ExplorerMap extends ConsumerStatefulWidget {
   const ExplorerMap({
     super.key,
     this.showTransit = true,
@@ -26,10 +28,10 @@ class ExplorerMap extends StatefulWidget {
   final VoidCallback? onMapReady;
 
   @override
-  State<ExplorerMap> createState() => ExplorerMapState();
+  ConsumerState<ExplorerMap> createState() => ExplorerMapState();
 }
 
-class ExplorerMapState extends State<ExplorerMap> {
+class ExplorerMapState extends ConsumerState<ExplorerMap> {
   static const _srcIda = 'lab-ida';
   static const _srcVuelta = 'lab-vuelta';
 
@@ -59,7 +61,7 @@ class ExplorerMapState extends State<ExplorerMap> {
   Future<void> _boot() async {
     try {
       final style = await const OfflineMapPackage().loadStyle();
-      final lines = await ServiceLocator.transit.lines();
+      final lines = await ref.read(transitNetworkRepositoryProvider).lines();
       if (!mounted) return;
       setState(() {
         _style = style;
@@ -193,8 +195,9 @@ class ExplorerMapState extends State<ExplorerMap> {
               'properties': <String, dynamic>{},
               'geometry': {
                 'type': 'LineString',
-                'coordinates':
-                    g.map((p) => [p[1], p[0]]).toList(growable: false),
+                'coordinates': g
+                    .map((p) => [p[1], p[0]])
+                    .toList(growable: false),
               },
             },
           )
@@ -202,10 +205,7 @@ class ExplorerMapState extends State<ExplorerMap> {
     };
   }
 
-  Future<void> _fitLine(
-    TransitLine line,
-    TransitDirectionKind? only,
-  ) async {
+  Future<void> _fitLine(TransitLine line, TransitDirectionKind? only) async {
     final map = _map;
     if (map == null) return;
     final pts = <List<double>>[];
@@ -241,9 +241,7 @@ class ExplorerMapState extends State<ExplorerMap> {
   Future<void> flyTo({required double lat, required double lng}) async {
     final map = _map;
     if (map == null) return;
-    await map.animateCamera(
-      CameraUpdate.newLatLngZoom(LatLng(lat, lng), 15),
-    );
+    await map.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat, lng), 15));
   }
 
   @override
@@ -252,10 +250,7 @@ class ExplorerMapState extends State<ExplorerMap> {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Text(
-            'No se pudo cargar el mapa offline.\n$_styleError',
-            textAlign: TextAlign.center,
-          ),
+          child: Text(context.l10n.mapError, textAlign: TextAlign.center),
         ),
       );
     }
