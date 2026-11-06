@@ -19,7 +19,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
 
   static const _origin = PlaceResult(
     id: 'me',
-    name: 'Mi ubicación',
+    name: 'Origen de demostración',
     address: 'Punto de partida (demo)',
     latitude: -16.40,
     longitude: -71.54,
@@ -59,7 +59,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
               ),
               const SizedBox(height: AppSpacing.lg),
               const Text(
-                'Opciones',
+                'Opciones de demostración',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -69,7 +69,7 @@ class _PlannerScreenState extends State<PlannerScreen> {
                   child: ExpansionTile(
                     title: Text(o.summary),
                     subtitle: Text(
-                      '${o.durationMinutes} min · ${o.transferCount} transbordo(s)',
+                      '~${o.durationMinutes} min · ${o.transferCount} transbordo(s)',
                     ),
                     children: o.legs
                         .map(

@@ -23,8 +23,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ),
     (
       Icons.directions_bus_filled_rounded,
-      'Rutas en tiempo real',
-      'Mira las líneas del GTFS offline sobre MapLibre.',
+      'Rutas sin conexión',
+      'Consulta los recorridos de las líneas en el mapa sin conexión.',
     ),
     (
       Icons.route_rounded,
