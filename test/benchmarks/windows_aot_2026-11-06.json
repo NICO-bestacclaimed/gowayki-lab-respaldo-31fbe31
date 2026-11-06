@@ -1,0 +1,1003 @@
+{
+  "generated_at": "2026-11-06T22:33:02.808997Z",
+  "platform": "windows",
+  "os": "\"Windows 11 Pro\" 10.0 (Build 26200)",
+  "processors": 16,
+  "dart": "3.13.7 (stable) (Thu Oct 22 14:28:57 2026 -0700) on \"windows_x64\"",
+  "execution": "native CLI; use dart build cli for AOT",
+  "android_midrange_validated": false,
+  "pack_version": 2,
+  "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
+  "startup_ms": 251.435,
+  "summary": {
+    "samples": 28,
+    "median_ms": 152.709,
+    "worst_ms": 393.125,
+    "host_under_400_ms": true
+  },
+  "depart_at": {
+    "samples": 25,
+    "median_ms": 149.649,
+    "worst_ms": 347.43,
+    "host_under_400_ms": true
+  },
+  "arrive_by": {
+    "samples": 3,
+    "median_ms": 192.441,
+    "worst_ms": 393.125,
+    "host_under_400_ms": true
+  },
+  "records": [
+    {
+      "case": "TECSUP → Mall Aventura",
+      "mode": "leaveAt",
+      "milliseconds": 54.892,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 18.438622333333335,
+          "walking_meters": 641.2709561186152,
+          "transfers": 0,
+          "lines": [
+            "Monterrey Corbacho"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "TECSUP → Mall Aventura",
+      "mode": "leaveAt",
+      "milliseconds": 55.14,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 18.438622333333335,
+          "walking_meters": 641.2709561186152,
+          "transfers": 0,
+          "lines": [
+            "Monterrey Corbacho"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "TECSUP → Mall Aventura",
+      "mode": "leaveAt",
+      "milliseconds": 54.171,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 18.438622333333335,
+          "walking_meters": 641.2709561186152,
+          "transfers": 0,
+          "lines": [
+            "Monterrey Corbacho"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "TECSUP → Mall Aventura",
+      "mode": "leaveAt",
+      "milliseconds": 56.445,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 18.438622333333335,
+          "walking_meters": 641.2709561186152,
+          "transfers": 0,
+          "lines": [
+            "Monterrey Corbacho"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "TECSUP → Mall Aventura",
+      "mode": "leaveAt",
+      "milliseconds": 56.186,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 18.438622333333335,
+          "walking_meters": 641.2709561186152,
+          "transfers": 0,
+          "lines": [
+            "Monterrey Corbacho"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "TECSUP → Mall Aventura",
+      "mode": "arriveBy",
+      "milliseconds": 98.084,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 18.438622333333335,
+          "walking_meters": 641.2709561186152,
+          "transfers": 0,
+          "lines": [
+            "Monterrey Corbacho"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Plaza de Armas → Terminal",
+      "mode": "leaveAt",
+      "milliseconds": 146.856,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 25.0060029,
+          "walking_meters": 544.8532851553834,
+          "transfers": 0,
+          "lines": [
+            "BR"
+          ]
+        },
+        {
+          "minutes": 25.63968205,
+          "walking_meters": 472.02731462143095,
+          "transfers": 0,
+          "lines": [
+            "San miguel"
+          ]
+        },
+        {
+          "minutes": 26.18497453333333,
+          "walking_meters": 471.9196806593617,
+          "transfers": 0,
+          "lines": [
+            "11 de Mayo"
+          ]
+        },
+        {
+          "minutes": 28.751634166666665,
+          "walking_meters": 458.95289003004143,
+          "transfers": 1,
+          "lines": [
+            "09",
+            "BR"
+          ]
+        },
+        {
+          "minutes": 29.2207121,
+          "walking_meters": 454.21134135449824,
+          "transfers": 1,
+          "lines": [
+            "BR",
+            "Olivos"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Plaza de Armas → Terminal",
+      "mode": "leaveAt",
+      "milliseconds": 147.803,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 25.0060029,
+          "walking_meters": 544.8532851553834,
+          "transfers": 0,
+          "lines": [
+            "BR"
+          ]
+        },
+        {
+          "minutes": 25.63968205,
+          "walking_meters": 472.02731462143095,
+          "transfers": 0,
+          "lines": [
+            "San miguel"
+          ]
+        },
+        {
+          "minutes": 26.18497453333333,
+          "walking_meters": 471.9196806593617,
+          "transfers": 0,
+          "lines": [
+            "11 de Mayo"
+          ]
+        },
+        {
+          "minutes": 28.751634166666665,
+          "walking_meters": 458.95289003004143,
+          "transfers": 1,
+          "lines": [
+            "09",
+            "BR"
+          ]
+        },
+        {
+          "minutes": 29.2207121,
+          "walking_meters": 454.21134135449824,
+          "transfers": 1,
+          "lines": [
+            "BR",
+            "Olivos"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Plaza de Armas → Terminal",
+      "mode": "leaveAt",
+      "milliseconds": 149.649,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 25.0060029,
+          "walking_meters": 544.8532851553834,
+          "transfers": 0,
+          "lines": [
+            "BR"
+          ]
+        },
+        {
+          "minutes": 25.63968205,
+          "walking_meters": 472.02731462143095,
+          "transfers": 0,
+          "lines": [
+            "San miguel"
+          ]
+        },
+        {
+          "minutes": 26.18497453333333,
+          "walking_meters": 471.9196806593617,
+          "transfers": 0,
+          "lines": [
+            "11 de Mayo"
+          ]
+        },
+        {
+          "minutes": 28.751634166666665,
+          "walking_meters": 458.95289003004143,
+          "transfers": 1,
+          "lines": [
+            "09",
+            "BR"
+          ]
+        },
+        {
+          "minutes": 29.2207121,
+          "walking_meters": 454.21134135449824,
+          "transfers": 1,
+          "lines": [
+            "BR",
+            "Olivos"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Plaza de Armas → Terminal",
+      "mode": "leaveAt",
+      "milliseconds": 142.526,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 25.0060029,
+          "walking_meters": 544.8532851553834,
+          "transfers": 0,
+          "lines": [
+            "BR"
+          ]
+        },
+        {
+          "minutes": 25.63968205,
+          "walking_meters": 472.02731462143095,
+          "transfers": 0,
+          "lines": [
+            "San miguel"
+          ]
+        },
+        {
+          "minutes": 26.18497453333333,
+          "walking_meters": 471.9196806593617,
+          "transfers": 0,
+          "lines": [
+            "11 de Mayo"
+          ]
+        },
+        {
+          "minutes": 28.751634166666665,
+          "walking_meters": 458.95289003004143,
+          "transfers": 1,
+          "lines": [
+            "09",
+            "BR"
+          ]
+        },
+        {
+          "minutes": 29.2207121,
+          "walking_meters": 454.21134135449824,
+          "transfers": 1,
+          "lines": [
+            "BR",
+            "Olivos"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Plaza de Armas → Terminal",
+      "mode": "leaveAt",
+      "milliseconds": 141.47,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 25.0060029,
+          "walking_meters": 544.8532851553834,
+          "transfers": 0,
+          "lines": [
+            "BR"
+          ]
+        },
+        {
+          "minutes": 25.63968205,
+          "walking_meters": 472.02731462143095,
+          "transfers": 0,
+          "lines": [
+            "San miguel"
+          ]
+        },
+        {
+          "minutes": 26.18497453333333,
+          "walking_meters": 471.9196806593617,
+          "transfers": 0,
+          "lines": [
+            "11 de Mayo"
+          ]
+        },
+        {
+          "minutes": 28.751634166666665,
+          "walking_meters": 458.95289003004143,
+          "transfers": 1,
+          "lines": [
+            "09",
+            "BR"
+          ]
+        },
+        {
+          "minutes": 29.2207121,
+          "walking_meters": 454.21134135449824,
+          "transfers": 1,
+          "lines": [
+            "BR",
+            "Olivos"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Plaza de Armas → Terminal",
+      "mode": "arriveBy",
+      "milliseconds": 192.441,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 25.0060029,
+          "walking_meters": 544.8532851553834,
+          "transfers": 0,
+          "lines": [
+            "BR"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Yanahuara → Cerro Colorado",
+      "mode": "leaveAt",
+      "milliseconds": 224.076,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 23.680112216666668,
+          "walking_meters": 238.20018809912673,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "A"
+          ]
+        },
+        {
+          "minutes": 23.694545766666668,
+          "walking_meters": 754.2412249069012,
+          "transfers": 0,
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "minutes": 27.609325966666667,
+          "walking_meters": 131.24948059211908,
+          "transfers": 2,
+          "lines": [
+            "Cotaspa 4",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "minutes": 53.046555266666665,
+          "walking_meters": 117.43542759211907,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Yanahuara → Cerro Colorado",
+      "mode": "leaveAt",
+      "milliseconds": 233.578,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 23.680112216666668,
+          "walking_meters": 238.20018809912673,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "A"
+          ]
+        },
+        {
+          "minutes": 23.694545766666668,
+          "walking_meters": 754.2412249069012,
+          "transfers": 0,
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "minutes": 27.609325966666667,
+          "walking_meters": 131.24948059211908,
+          "transfers": 2,
+          "lines": [
+            "Cotaspa 4",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "minutes": 53.046555266666665,
+          "walking_meters": 117.43542759211907,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Yanahuara → Cerro Colorado",
+      "mode": "leaveAt",
+      "milliseconds": 237.548,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 23.680112216666668,
+          "walking_meters": 238.20018809912673,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "A"
+          ]
+        },
+        {
+          "minutes": 23.694545766666668,
+          "walking_meters": 754.2412249069012,
+          "transfers": 0,
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "minutes": 27.609325966666667,
+          "walking_meters": 131.24948059211908,
+          "transfers": 2,
+          "lines": [
+            "Cotaspa 4",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "minutes": 53.046555266666665,
+          "walking_meters": 117.43542759211907,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Yanahuara → Cerro Colorado",
+      "mode": "leaveAt",
+      "milliseconds": 258.179,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 23.680112216666668,
+          "walking_meters": 238.20018809912673,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "A"
+          ]
+        },
+        {
+          "minutes": 23.694545766666668,
+          "walking_meters": 754.2412249069012,
+          "transfers": 0,
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "minutes": 27.609325966666667,
+          "walking_meters": 131.24948059211908,
+          "transfers": 2,
+          "lines": [
+            "Cotaspa 4",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "minutes": 53.046555266666665,
+          "walking_meters": 117.43542759211907,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Yanahuara → Cerro Colorado",
+      "mode": "leaveAt",
+      "milliseconds": 347.43,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 23.680112216666668,
+          "walking_meters": 238.20018809912673,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "A"
+          ]
+        },
+        {
+          "minutes": 23.694545766666668,
+          "walking_meters": 754.2412249069012,
+          "transfers": 0,
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "minutes": 27.609325966666667,
+          "walking_meters": 131.24948059211908,
+          "transfers": 2,
+          "lines": [
+            "Cotaspa 4",
+            "A",
+            "C"
+          ]
+        },
+        {
+          "minutes": 53.046555266666665,
+          "walking_meters": 117.43542759211907,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Yanahuara → Cerro Colorado",
+      "mode": "arriveBy",
+      "milliseconds": 393.125,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 23.680112216666668,
+          "walking_meters": 238.20018809912673,
+          "transfers": 1,
+          "lines": [
+            "Cotaspa 4",
+            "A"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:0:5402840814→1264348887",
+      "mode": "leaveAt",
+      "milliseconds": 191.425,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 64.00957455,
+          "walking_meters": 137.22359823064735,
+          "transfers": 1,
+          "lines": [
+            "Alto Libertad",
+            "Chapi"
+          ]
+        },
+        {
+          "minutes": 68.18040908333333,
+          "walking_meters": 0.0,
+          "transfers": 2,
+          "lines": [
+            "Monterrey Corbacho",
+            "Alto Libertad",
+            "Chapi"
+          ]
+        },
+        {
+          "minutes": 78.69593195,
+          "walking_meters": 1020.3520222730384,
+          "transfers": 0,
+          "lines": [
+            "Cotaspa 4"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:1:11013021342→5394254300",
+      "mode": "leaveAt",
+      "milliseconds": 178.327,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 41.032825116666665,
+          "walking_meters": 65.08904881529926,
+          "transfers": 1,
+          "lines": [
+            "13",
+            "7-04"
+          ]
+        },
+        {
+          "minutes": 41.032825116666665,
+          "walking_meters": 65.08904881529926,
+          "transfers": 1,
+          "lines": [
+            "M Upis",
+            "7-04"
+          ]
+        },
+        {
+          "minutes": 43.570338383333336,
+          "walking_meters": 112.20335990434154,
+          "transfers": 0,
+          "lines": [
+            "A"
+          ]
+        },
+        {
+          "minutes": 46.02742298333333,
+          "walking_meters": 11.220049,
+          "transfers": 2,
+          "lines": [
+            "Avelino",
+            "13",
+            "7-04"
+          ]
+        },
+        {
+          "minutes": 46.02742298333333,
+          "walking_meters": 11.220049,
+          "transfers": 2,
+          "lines": [
+            "Avelino",
+            "M Upis",
+            "7-04"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:2:5393350134→11404800588",
+      "mode": "leaveAt",
+      "milliseconds": 141.096,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 62.93933,
+          "walking_meters": 0.0,
+          "transfers": 1,
+          "lines": [
+            "Alto Selva Alegre",
+            "BR"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:3:5462815461→1264303601",
+      "mode": "leaveAt",
+      "milliseconds": 80.963,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 19.0110896,
+          "walking_meters": 210.568532,
+          "transfers": 0,
+          "lines": [
+            "C"
+          ]
+        },
+        {
+          "minutes": 23.200518533333334,
+          "walking_meters": 0.0,
+          "transfers": 1,
+          "lines": [
+            "C",
+            "C"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:4:5396155609→5757393836",
+      "mode": "leaveAt",
+      "milliseconds": 155.769,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 44.707911116666665,
+          "walking_meters": 69.33593378379805,
+          "transfers": 1,
+          "lines": [
+            "7 de Junio",
+            "D"
+          ]
+        },
+        {
+          "minutes": 48.54245838333333,
+          "walking_meters": 26.056655783798064,
+          "transfers": 2,
+          "lines": [
+            "7 de Junio",
+            "LB Cerrillos",
+            "D"
+          ]
+        },
+        {
+          "minutes": 71.49470696666667,
+          "walking_meters": 13.030561,
+          "transfers": 2,
+          "lines": [
+            "Tahuaycani",
+            "P30",
+            "D"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:5:1264294299→257571532",
+      "mode": "leaveAt",
+      "milliseconds": 180.757,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 52.26995828333333,
+          "walking_meters": 233.445471,
+          "transfers": 1,
+          "lines": [
+            "C",
+            "05"
+          ]
+        },
+        {
+          "minutes": 58.0363321,
+          "walking_meters": 228.976554,
+          "transfers": 2,
+          "lines": [
+            "C",
+            "05",
+            "4D"
+          ]
+        },
+        {
+          "minutes": 69.79328223333333,
+          "walking_meters": 0.0,
+          "transfers": 2,
+          "lines": [
+            "C",
+            "02",
+            "4D"
+          ]
+        },
+        {
+          "minutes": 71.48732531666667,
+          "walking_meters": 107.000703,
+          "transfers": 1,
+          "lines": [
+            "Royal Bus B",
+            "4D"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:6:5381354369→5489001114",
+      "mode": "leaveAt",
+      "milliseconds": 191.759,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 40.351050666666666,
+          "walking_meters": 335.552796131954,
+          "transfers": 0,
+          "lines": [
+            "Chapi"
+          ]
+        },
+        {
+          "minutes": 42.68126913333333,
+          "walking_meters": 133.63658413195398,
+          "transfers": 1,
+          "lines": [
+            "Embajada",
+            "Cotaspa 4"
+          ]
+        },
+        {
+          "minutes": 42.68126913333333,
+          "walking_meters": 133.63658413195398,
+          "transfers": 1,
+          "lines": [
+            "Chapi",
+            "Cotaspa 4"
+          ]
+        },
+        {
+          "minutes": 43.62650861666667,
+          "walking_meters": 56.006153,
+          "transfers": 1,
+          "lines": [
+            "B",
+            "Cotaspa 4"
+          ]
+        },
+        {
+          "minutes": 43.62650861666667,
+          "walking_meters": 56.006153,
+          "transfers": 1,
+          "lines": [
+            "A",
+            "Cotaspa 4"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:7:341553164→4544071578",
+      "mode": "leaveAt",
+      "milliseconds": 142.661,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 56.0919962,
+          "walking_meters": 0.0,
+          "transfers": 1,
+          "lines": [
+            "Chapi",
+            "San Jeronimo"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:8:12081986927→2778445873",
+      "mode": "leaveAt",
+      "milliseconds": 195.363,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 72.1687153,
+          "walking_meters": 0.0,
+          "transfers": 2,
+          "lines": [
+            "CIMA Bustamante",
+            "05",
+            "13"
+          ]
+        },
+        {
+          "minutes": 73.9286333,
+          "walking_meters": 362.2489016513826,
+          "transfers": 1,
+          "lines": [
+            "BR",
+            "13"
+          ]
+        },
+        {
+          "minutes": 95.06031048333334,
+          "walking_meters": 16.900135,
+          "transfers": 1,
+          "lines": [
+            "CIMA Bustamante",
+            "38"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "seed42:9:531251888→5394130228",
+      "mode": "leaveAt",
+      "milliseconds": 230.227,
+      "status": "success",
+      "routes": [
+        {
+          "minutes": 31.779086616666667,
+          "walking_meters": 242.94688107106066,
+          "transfers": 1,
+          "lines": [
+            "07",
+            "Atalaya"
+          ]
+        },
+        {
+          "minutes": 31.81323065,
+          "walking_meters": 89.27222007106066,
+          "transfers": 1,
+          "lines": [
+            "Chapi",
+            "Atalaya"
+          ]
+        },
+        {
+          "minutes": 31.81323065,
+          "walking_meters": 89.27222007106066,
+          "transfers": 1,
+          "lines": [
+            "Casimiro",
+            "Atalaya"
+          ]
+        },
+        {
+          "minutes": 34.134300616666664,
+          "walking_meters": 831.0831724879592,
+          "transfers": 0,
+          "lines": [
+            "C"
+          ]
+        },
+        {
+          "minutes": 36.6333938,
+          "walking_meters": 78.317163,
+          "transfers": 2,
+          "lines": [
+            "Alto Selva Alegre",
+            "Chapi",
+            "Atalaya"
+          ]
+        }
+      ]
+    }
+  ]
+}

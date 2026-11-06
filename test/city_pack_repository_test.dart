@@ -179,7 +179,7 @@ void main() {
       final fixtureBytes = await fixture.readAsBytes();
       final manifest = jsonDecode(manifestSource) as Map<String, dynamic>;
       final hash = sha256.convert(fixtureBytes).toString();
-      manifest['version'] = 2;
+      manifest['version'] = repository.manifest.version + 1;
       manifest['sha256'] = hash;
       manifest['size_bytes'] = fixtureBytes.length;
       manifest['files']['pack.sqlite'] = {
@@ -280,10 +280,12 @@ void main() {
 
       expect(repository.compareVersion(local), CityPackVersionStatus.current);
       expect(
-        repository.compareVersion(variant((m) => m['version'] = 2)),
+        repository.compareVersion(
+          variant((m) => m['version'] = local.version + 1),
+        ),
         CityPackVersionStatus.updateAvailable,
       );
-      final newer = variant((m) => m['version'] = 2);
+      final newer = variant((m) => m['version'] = local.version + 1);
       expect(newer.compare(local), CityPackVersionStatus.localNewer);
       expect(
         repository.compareVersion(
@@ -334,7 +336,7 @@ void main() {
 
   test('bad incoming hash leaves last good installation usable', () async {
     final changed = jsonDecode(manifestSource) as Map<String, dynamic>;
-    changed['version'] = 3;
+    changed['version'] = repository.manifest.version + 2;
     changed['sha256'] = '0' * 64;
     changed['files']['pack.sqlite']['sha256'] = '0' * 64;
     final bad = RecordingBundle()

@@ -59,6 +59,18 @@ def validate_config(config: dict) -> None:
     if set(frequencies)!={"peak","off_peak","night"} or any(type(v) not in (int,float)
             or not math.isfinite(v) or v<=0 for v in frequencies.values()):
         raise ValueError("Expected positive peak, off_peak and night frequencies")
+    frequency_bands=config.get("frequency_bands")
+    if frequency_bands is not None:
+        for band in frequency_bands:
+            if minute(band["start"])==minute(band["end"]) or band["period"] not in (*frequencies,None):
+                raise ValueError("Invalid frequency band")
+        for value in range(1440):
+            active=[band for band in frequency_bands if band_contains(band,value)]
+            if len(active)!=1:
+                raise ValueError("Frequency bands must cover each minute once")
+            speed=next(band["speed_kmh"] for band in bands if band_contains(band,value))
+            if (active[0]["period"] is None)!=(speed is None):
+                raise ValueError("Frequency and speed service hours disagree")
     fare=config["default_fare"]
     amounts=[fare["amount"],*config["line_fare_overrides"].values()]
     if fare["currency"]!="PEN" or any(type(v) not in (int,float) or not math.isfinite(v) or v<0 for v in amounts):

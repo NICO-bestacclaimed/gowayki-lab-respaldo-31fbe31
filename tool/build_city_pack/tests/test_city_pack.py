@@ -87,6 +87,19 @@ class ConfigurationTests(unittest.TestCase):
         config=deepcopy(self.config);config['default_fare']['amount']=-1
         with self.assertRaises(ValueError):city_pack.validate_config(config)
 
+    def test_approved_frequency_hours_and_service_are_validated(self):
+        bands=self.config['frequency_bands']
+        for clock,period in [('05:00','off_peak'),('07:00','peak'),('09:00','off_peak'),
+                             ('17:00','peak'),('20:00','night'),('23:00',None),('04:59',None)]:
+            self.assertEqual(next(b['period'] for b in bands if city_pack.band_contains(b,city_pack.minute(clock))),period)
+        for mutation in ('gap','overlap','period','service'):
+            config=deepcopy(self.config)
+            if mutation=='gap':config['frequency_bands'].pop()
+            elif mutation=='overlap':config['frequency_bands'][1]['start']='06:00'
+            elif mutation=='period':config['frequency_bands'][0]['period']='unknown'
+            else:config['frequency_bands'][-1]['period']='night'
+            with self.subTest(mutation=mutation),self.assertRaises(ValueError):city_pack.validate_config(config)
+
     def test_invalid_clock_values_are_rejected(self):
         for clock in ('24:00','05:60','5:00','-1:00'):
             with self.subTest(clock=clock),self.assertRaises(ValueError):city_pack.minute(clock)
@@ -101,7 +114,7 @@ class ActualPackTests(unittest.TestCase):
         cls.source,cls.shapes,_,cls.projection,_=build.load_source(build.DEFAULT_INPUT)
 
     def test_manifest_checks_hashes_sizes_version_and_geometry(self):
-        self.assertEqual(self.manifest['version'],1)
+        self.assertEqual(self.manifest['version'],json.loads(city_pack.DEFAULT_CONFIG.read_text(encoding='utf-8'))['data_version'])
         self.assertEqual(self.manifest['schema_version'],1)
         self.assertEqual(self.manifest['size_bytes'],(self.directory/'pack.sqlite').stat().st_size)
         self.assertEqual(self.manifest['sha256'],hashlib.sha256((self.directory/'pack.sqlite').read_bytes()).hexdigest())

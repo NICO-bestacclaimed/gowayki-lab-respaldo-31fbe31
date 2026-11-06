@@ -1,6 +1,6 @@
 {
-  "stage": "Parte 1 completada (1A–1D); STOP esperando instrucciones para Parte 2",
-  "last_tests": "75 Python passed in 1C; 12 Flutter tests passed in final 1D; analyze no issues; Android debug APK and payload/native verification passed",
+  "stage": "Parte 2 implementada y verificada en Windows; Android rendimiento pendiente; continuando 3A",
+  "last_tests": "45 Flutter tests passed; analyze no issues; 28 AOT Windows samples median152.709ms worst393.125ms; 76 Python passed in 2A",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,13 +13,13 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "STOP. Esperar instrucciones del usuario para Parte 2 y acordar horas de frecuencias punta/valle/noche antes del planificador. No comenzar otra parte automáticamente.",
+  "next_action": "Continuar 3A: Riverpod, go_router y cuatro pestañas, con pruebas. No marcar Android de gama media validado. Detener solo ante conflicto o aviso/señal de límite.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
   ],
-  "pack_sha256": "f031c47f5bb52eb484671c2bb79240ef90b97ee70c91fd38f13f1334b76a8151",
-  "python_tests_passed": 75,
+  "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
+  "python_tests_passed": 76,
   "csv_asset_backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.-csv-assets",
   "moved_csv_files": [
     "routes.txt",
@@ -27,11 +27,82 @@
     "stops.txt",
     "shapes.txt"
   ],
-  "flutter_validation": "passed",
-  "verified_at": "2026-11-06T20:49:47.481661+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte1-completa-20261106T204947Z.zip",
+  "flutter_validation": "passed for source/assets v2; last built APK is Part1 data v1",
+  "verified_at": "2026-11-06T22:39:13.672021+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte2-implementada-20261106T223913Z.zip",
   "quota_warning_observed": false,
   "checks": {
+    "python_tests": 76,
+    "flutter_total_tests": 45,
+    "planner_new_tests": 14,
+    "flutter_analyze": "No issues found",
+    "source_hashes_verified": 5,
+    "pack_manifest_hashes": "passed",
+    "pure_dart_domain": "verified",
+    "real_network_loaded_in_isolate": true,
+    "toy_three_lines_minutes": 49,
+    "toy_walking_minutes": 8,
+    "toy_waiting_minutes": 15,
+    "toy_vehicle_minutes": 26,
+    "toy_transfers": 2,
+    "toy_fare_pen": 3,
+    "android_apk": "not rebuilt in 2A; Part1 APK contains dataVersion1",
+    "device_runtime": "not tested",
+    "real_trips_and_benchmark": "deferred to 2D",
+    "real_trips": "3 passed, each with transit 10–90 minutes",
+    "windows_aot_benchmark": {
+      "samples": 28,
+      "median_ms": 152.709,
+      "worst_ms": 393.125,
+      "host_under_400_ms": true
+    },
+    "android_midrange_validated": false,
+    "benchmark_results_match_reference": true
+  },
+  "known_limits": [
+    "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
+    "Ruta 17684887 sin asociación de línea/sentido; conservada pero no habilitada para patrones",
+    "Avisos de compatibilidad futura Firebase/Kotlin, Java y metadatos SDK Android",
+    "Planificador actual sigue siendo demo hasta Parte 2; prueba manual en teléfono pendiente",
+    "Horarios de frecuencia aprobados e incluidos en revisión 2",
+    "Parte2 completa funcionalmente en Windows; rendimiento Android de gama media pendiente por disponibilidad de dispositivo"
+  ],
+  "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
+  "local_pub_cache_verified": true,
+  "base_verified_commit": "346ff8f29042a090a29a9bf20de0b775ecd4b62a",
+  "approved_frequency_hours": [
+    {
+      "start": "05:00",
+      "end": "07:00",
+      "period": "off_peak"
+    },
+    {
+      "start": "07:00",
+      "end": "09:00",
+      "period": "peak"
+    },
+    {
+      "start": "09:00",
+      "end": "17:00",
+      "period": "off_peak"
+    },
+    {
+      "start": "17:00",
+      "end": "20:00",
+      "period": "peak"
+    },
+    {
+      "start": "20:00",
+      "end": "23:00",
+      "period": "night"
+    },
+    {
+      "start": "23:00",
+      "end": "05:00",
+      "period": null
+    }
+  ],
+  "previous_part1_checks": {
     "python_tests": 75,
     "flutter_analyze": "No issues found",
     "flutter_widget_tests": 1,
@@ -51,19 +122,7 @@
     "apk_sqlite_matches_gradle_stripped_output": true,
     "native_fts5_compile_option": "present on all three ABIs"
   },
-  "known_limits": [
-    "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
-    "Ruta 17684887 sin asociación de línea/sentido; conservada pero no habilitada para patrones",
-    "Definir horas de franjas de frecuencia antes de Parte 2",
-    "Avisos de compatibilidad futura Firebase/Kotlin, Java y metadatos SDK Android",
-    "Planificador actual sigue siendo demo hasta Parte 2; prueba manual en teléfono pendiente"
-  ],
-  "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
-  "local_pub_cache_verified": true,
-  "base_verified_commit": "c1a774e",
-  "completion_commit_message": "feat: integrar paquete offline de Arequipa con SQLite",
-  "completion_commit_lookup": "git log -1 --format=%H",
-  "apk_verification": {
+  "previous_part1_apk_verification": {
     "apk_bytes": 229190245,
     "apk_sha256": "c12aba8105b20a39fe7103428f3990d6ca40bd13f656f6624e87e0baf0212f6e",
     "pack_sha256": "f031c47f5bb52eb484671c2bb79240ef90b97ee70c91fd38f13f1334b76a8151",
@@ -90,5 +149,10 @@
       }
     },
     "device_runtime": "not tested"
-  }
+  },
+  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte2A-verificada-20261106T220438Z.zip",
+  "data_version": 2,
+  "continue_between_sections_authorized": true,
+  "android_available": false,
+  "completion_commit_message": "feat: implementar planificador offline con horarios y rutas Pareto"
 }
