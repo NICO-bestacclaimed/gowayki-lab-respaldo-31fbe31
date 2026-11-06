@@ -1,0 +1,94 @@
+{
+  "stage": "Parte 1 completada (1A–1D); STOP esperando instrucciones para Parte 2",
+  "last_tests": "75 Python passed in 1C; 12 Flutter tests passed in final 1D; analyze no issues; Android debug APK and payload/native verification passed",
+  "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
+  "source_sha256": {
+    "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
+    "trips.txt": "804b9c033afbb8c82c8662069a11cee35b5c07b00a15ab2209b12404ebe4c7b5",
+    "stops.txt": "0f086e29083d2a6c658fc13971631e57d06e689350cc709f0a3861fb38a7e2cd",
+    "shapes.txt": "1c4e4f5086162b8fcc2e3c750c5eb277104def210610b80b0069e944b09297e9",
+    "network.json": "0fc334e987905850e0f92e6e812ec526725b6b5a80260c87f5e293e0b069939e"
+  },
+  "raw_copies_ready": true,
+  "original_assets_removed": true,
+  "published_pack": true,
+  "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
+  "next_action": "STOP. Esperar instrucciones del usuario para Parte 2 y acordar horas de frecuencias punta/valle/noche antes del planificador. No comenzar otra parte automáticamente.",
+  "resume_commands": [
+    "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
+    "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
+  ],
+  "pack_sha256": "f031c47f5bb52eb484671c2bb79240ef90b97ee70c91fd38f13f1334b76a8151",
+  "python_tests_passed": 75,
+  "csv_asset_backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.-csv-assets",
+  "moved_csv_files": [
+    "routes.txt",
+    "trips.txt",
+    "stops.txt",
+    "shapes.txt"
+  ],
+  "flutter_validation": "passed",
+  "verified_at": "2026-11-06T20:49:47.481661+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte1-completa-20261106T204947Z.zip",
+  "quota_warning_observed": false,
+  "checks": {
+    "python_tests": 75,
+    "flutter_analyze": "No issues found",
+    "flutter_widget_tests": 1,
+    "android_debug_build": "passed",
+    "apk_pack_geojson_manifest_hashes": "passed",
+    "apk_raw_csv_absent": true,
+    "apk_legacy_catalog_preserved": false,
+    "source_hashes_verified": 5,
+    "csv_backup_hashes_verified": 4,
+    "sqlite_integrity": "ok",
+    "gradle_daemon": "stopped",
+    "physical_device": "not tested",
+    "ios_build": "not tested",
+    "flutter_total_tests": 12,
+    "apk_legacy_gtfs_assets": "absent",
+    "native_sqlite_official_hashes_before_symbol_stripping": "passed for ARM/ARM64/x64",
+    "apk_sqlite_matches_gradle_stripped_output": true,
+    "native_fts5_compile_option": "present on all three ABIs"
+  },
+  "known_limits": [
+    "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
+    "Ruta 17684887 sin asociación de línea/sentido; conservada pero no habilitada para patrones",
+    "Definir horas de franjas de frecuencia antes de Parte 2",
+    "Avisos de compatibilidad futura Firebase/Kotlin, Java y metadatos SDK Android",
+    "Planificador actual sigue siendo demo hasta Parte 2; prueba manual en teléfono pendiente"
+  ],
+  "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
+  "local_pub_cache_verified": true,
+  "base_verified_commit": "c1a774e",
+  "completion_commit_message": "feat: integrar paquete offline de Arequipa con SQLite",
+  "completion_commit_lookup": "git log -1 --format=%H",
+  "apk_verification": {
+    "apk_bytes": 229190245,
+    "apk_sha256": "c12aba8105b20a39fe7103428f3990d6ca40bd13f656f6624e87e0baf0212f6e",
+    "pack_sha256": "f031c47f5bb52eb484671c2bb79240ef90b97ee70c91fd38f13f1334b76a8151",
+    "payload_hashes": "passed",
+    "legacy_gtfs_assets": "absent",
+    "native_libraries": {
+      "armeabi-v7a": {
+        "official_sha256_before_symbol_stripping": "f33868d94e80992af137c7cf046a99406800f15434e289733cf472346be00ed4",
+        "apk_sha256": "3dcb95dd6d0e19a280a3b6cfebbad870b313b739ad67ebba4f98dd0575a2b3f3",
+        "matches_gradle_stripped_output": true,
+        "fts5_compile_option": true
+      },
+      "arm64-v8a": {
+        "official_sha256_before_symbol_stripping": "e684ef8646ffd48b95bae58bf29c55ffd85acebac2a7118ffde9fd02df37d629",
+        "apk_sha256": "4d586f7b1920f226030b1c93e9bc8cb7986813c3e7bea28f71fa8873299d7b3d",
+        "matches_gradle_stripped_output": true,
+        "fts5_compile_option": true
+      },
+      "x86_64": {
+        "official_sha256_before_symbol_stripping": "ff28e78c5b790b3eafc15ceface32c3f5626ef80f622a726c60b0b802825699a",
+        "apk_sha256": "87a7dbdbd0b11b7053abf9d9cec5f789de6180053f03ab2476082b94620ac360",
+        "matches_gradle_stripped_output": true,
+        "fts5_compile_option": true
+      }
+    },
+    "device_runtime": "not tested"
+  }
+}

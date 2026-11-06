@@ -1,0 +1,23 @@
+{
+  "city_code": "arequipa",
+  "city_name": "Arequipa",
+  "data_version": 1,
+  "timezone": "America/Lima",
+  "geometry_tolerance_m": 8,
+  "speed_bands": [
+    {"start": "05:00", "end": "07:00", "speed_kmh": 22},
+    {"start": "07:00", "end": "09:00", "speed_kmh": 14},
+    {"start": "09:00", "end": "12:00", "speed_kmh": 18},
+    {"start": "12:00", "end": "14:00", "speed_kmh": 15},
+    {"start": "14:00", "end": "17:00", "speed_kmh": 18},
+    {"start": "17:00", "end": "20:00", "speed_kmh": 13},
+    {"start": "20:00", "end": "23:00", "speed_kmh": 22},
+    {"start": "23:00", "end": "05:00", "speed_kmh": null}
+  ],
+  "frequency_minutes_by_period": {"peak": 6, "off_peak": 10, "night": 15},
+  "walking_speed_m_per_min": 75,
+  "access_max_m": 800,
+  "access_fallback_max_m": 1500,
+  "default_fare": {"currency": "PEN", "amount": 1.00},
+  "line_fare_overrides": {}
+}

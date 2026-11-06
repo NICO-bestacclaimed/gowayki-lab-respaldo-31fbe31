@@ -19,6 +19,9 @@ dependencies:
   maplibre_gl: ^0.27.1
   path_provider: ^2.1.5
   geolocator: ^14.1.1
+  sqlite3: 3.9.0
+  crypto: 3.0.8
+  path: 1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -32,4 +35,4 @@ flutter:
     - assets/map/fonts/Noto Sans Bold/
     - assets/map/fonts/Noto Sans Italic/
     - assets/map/fonts/Noto Sans Regular/
-    - assets/gtfs/
+    - assets/city/arequipa/
