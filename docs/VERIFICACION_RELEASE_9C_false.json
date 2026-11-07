@@ -1,0 +1,14 @@
+{
+  "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-release-offline.apk",
+  "bytes": 110229573,
+  "sha256": "e6e6ce1e8d3dc568f8f439710b415a9a84246c35153dd8f7581151e52dc7b1ef",
+  "package": "pe.edu.tecsup.gowayki_lab",
+  "name": "GoWayki",
+  "version": "1.0.0+1",
+  "debuggable": false,
+  "signer_sha256": "5e28dc2ab4b8efedf5aea1d06004e0f8b03402195d82a3f40e8c0a57eb1657c9",
+  "signature": "verified against local upload certificate",
+  "telemetry_defaults": "disabled",
+  "firebase_init_provider": "removed",
+  "device_runtime": "not tested"
+}

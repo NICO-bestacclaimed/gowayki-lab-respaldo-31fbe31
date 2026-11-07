@@ -1,0 +1,16 @@
+{
+  "ios_static_configuration": "verified, not compiled on Windows",
+  "ios_minimum": "15.0",
+  "ios_name": "GoWayki",
+  "bundle_id": "pe.edu.tecsup.mobilityLab",
+  "ios_native_runtime": "not tested",
+  "audit_terms": [
+    "TODO",
+    "stub",
+    "tiempo real",
+    "en vivo",
+    "old product names"
+  ],
+  "findings": [],
+  "audit_note": "TODO as uppercase marker with word boundaries; stub and live-data claims case-insensitive. Avoid false positives in toDouble, todos and método."
+}

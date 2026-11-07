@@ -1,0 +1,14 @@
+{
+  "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-release-firebase.apk",
+  "bytes": 111163461,
+  "sha256": "9c18ec78ffe679b0f8913020ba3d18073bea8c65e7600933548148f078eac7e5",
+  "package": "pe.edu.tecsup.gowayki_lab",
+  "name": "GoWayki",
+  "version": "1.0.0+1",
+  "debuggable": false,
+  "signer_sha256": "5e28dc2ab4b8efedf5aea1d06004e0f8b03402195d82a3f40e8c0a57eb1657c9",
+  "signature": "verified against local upload certificate",
+  "telemetry_defaults": "disabled",
+  "firebase_init_provider": "removed",
+  "device_runtime": "not tested"
+}

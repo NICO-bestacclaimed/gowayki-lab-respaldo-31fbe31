@@ -30,6 +30,6 @@ El borrador describe las coordenadas en datos privados, reportes visibles durant
 
 Pruebas con el paquete real copiado y una revisión simulada v3: descarga/activación/reinicio, lector anterior usable, reversión, SHA anunciado incorrecto, payload corrupto, truncado, versión mínima, HTTPS/redirección insegura, cancelación y rechazo durante viaje. La prueba de la aplicación completa comprueba la recarga y la conservación del invitado. El hash y la versión 2 de los assets originales permanecen intactos.
 
-No se ha creado la base Firestore real, desplegado reglas/Hosting ni probado una actualización pública en Android. Las compilaciones APK se vuelven a generar al terminar la integración nativa de observabilidad y release. Los APK del punto de control 8E corresponden a ese punto anterior.
+No se ha creado la base Firestore real, desplegado reglas/Hosting ni probado una actualización pública en Android. Los APK se volvieron a generar y verificar en 9B/9C; el informe de Parte 9 y los JSON de 9C contienen las evidencias actuales. Los APK e informes de 8E corresponden a ese punto anterior.
 
 Resultado: 199 pruebas Flutter de la suite completa aprobadas y análisis sin incidencias. Evidencias locales: `.tools/logs/parte9A-all-tests.log` y `.tools/logs/parte9A-analyze.log` en `C:\Proyecto_001`. Preparación de Hosting verificada y rechazo de publicación del borrador comprobado sin conectarse a Firebase.

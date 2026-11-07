@@ -53,3 +53,6 @@ tool/firebase/node_modules/
 
 # Generated local Hosting candidate (contains unpublished drafts)
 /hosting/
+
+# Gradle diagnostics generated beside the Android project
+/android/build/

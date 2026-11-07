@@ -1,6 +1,6 @@
 {
-  "stage": "Parte 9B verificada localmente; continuar 9C",
-  "last_tests": "203 Flutter completos; 18 dirigidos + 4 finales observabilidad; analyze limpio; APK debug Firebase con assets y permisos verificados",
+  "stage": "Partes 0–9 implementadas; 9C verificada localmente. Pendientes externos de lanzamiento documentados.",
+  "last_tests": "203 Flutter completos y 4 dirigidos finales; analyze limpio; APK debug 9B y dos release 9C firmados y verificados; Hosting local con descarga/headers aprobado",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "9C integrar firma release local, nombre GoWayki, permisos finales, compilar/verificar Android release y cerrar documentación. iOS requiere Mac; Firebase real/legales/despliegue pendientes.",
+  "next_action": "Completar responsable/correo y revisión legal, crear/configurar Firestore real y registrar huella release cuando el usuario lo prepare; pruebas Android físico y compilación iOS en Mac. No publicar ni subir automáticamente.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -27,9 +27,9 @@
     "stops.txt",
     "shapes.txt"
   ],
-  "flutter_validation": "Part5 source tests/analyze and debug APK verified",
-  "verified_at": "2026-11-07T19:27:42.581405+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte9B-verificada.zip",
+  "flutter_validation": "203 pruebas completas; cuatro finales dirigidas; análisis limpio; releases Android offline/Firebase firmados y verificados",
+  "verified_at": "2026-11-07T19:46:47.218920+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte9C-verificada.zip",
   "quota_warning_observed": true,
   "checks": {
     "python_tests": 76,
@@ -46,7 +46,7 @@
     "toy_vehicle_minutes": 26,
     "toy_transfers": 2,
     "toy_fare_pen": 3,
-    "android_apk": "Part5 debug built and payloads verified",
+    "android_apk": "9C offline/Firebase release: signature, assets, permissions, telemetry defaults verified",
     "device_runtime": "not tested",
     "real_trips_and_benchmark": "deferred to 2D",
     "real_trips": "3 passed, each with transit 10–90 minutes",
@@ -93,7 +93,9 @@
     "part8_dual_apk": "passed",
     "deleted_account_marker": "empty immutable UID marker; stale-session resurrection blocked; disclosed in product/docs",
     "city_pack_update_tests": 10,
-    "observability_tests": 4
+    "observability_tests": 4,
+    "hosting_http": "passed on loopback demo emulator; no deployment",
+    "ios_static": "passed; build/runtime require Mac"
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -278,14 +280,46 @@
     "generated": true,
     "legal_status": "draft",
     "deployed": false,
-    "origin_verified": false
+    "origin_verified": false,
+    "apk_attached": "verified offline release, unpublished"
   },
-  "apk_source_checkpoint": "9B debug con Firebase y observabilidad desactivada; release por generar",
-  "checkpoint_base_commit": "764aa02",
+  "apk_source_checkpoint": "9C: app-release-offline.apk y app-release-firebase.apk verificados",
+  "checkpoint_base_commit": "9fc300c",
   "observability": {
     "integrated": true,
     "collection_default": false,
     "live_received": false,
     "app_distribution_uploaded": false
-  }
+  },
+  "release_apks": {
+    "offline": {
+      "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-release-offline.apk",
+      "bytes": 110229573,
+      "sha256": "e6e6ce1e8d3dc568f8f439710b415a9a84246c35153dd8f7581151e52dc7b1ef",
+      "package": "pe.edu.tecsup.gowayki_lab",
+      "name": "GoWayki",
+      "version": "1.0.0+1",
+      "debuggable": false,
+      "signer_sha256": "5e28dc2ab4b8efedf5aea1d06004e0f8b03402195d82a3f40e8c0a57eb1657c9",
+      "signature": "verified against local upload certificate",
+      "telemetry_defaults": "disabled",
+      "firebase_init_provider": "removed",
+      "device_runtime": "not tested"
+    },
+    "firebase": {
+      "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-release-firebase.apk",
+      "bytes": 111163461,
+      "sha256": "9c18ec78ffe679b0f8913020ba3d18073bea8c65e7600933548148f078eac7e5",
+      "package": "pe.edu.tecsup.gowayki_lab",
+      "name": "GoWayki",
+      "version": "1.0.0+1",
+      "debuggable": false,
+      "signer_sha256": "5e28dc2ab4b8efedf5aea1d06004e0f8b03402195d82a3f40e8c0a57eb1657c9",
+      "signature": "verified against local upload certificate",
+      "telemetry_defaults": "disabled",
+      "firebase_init_provider": "removed",
+      "device_runtime": "not tested"
+    }
+  },
+  "release_google_sha1_registration_pending": true
 }

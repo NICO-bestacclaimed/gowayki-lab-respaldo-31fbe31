@@ -1,0 +1,10 @@
+{
+  "keystore": "C:\\Proyecto_001\\.tools\\signing\\gowayki-upload.p12",
+  "properties": "C:\\Proyecto_001\\gowayki_lab\\android\\key.properties",
+  "alias": "gowayki-upload",
+  "certificate": {
+    "SHA1": "14:89:4E:B1:D0:53:93:C8:9B:1B:45:3E:56:17:43:1A:85:4F:6D:C2",
+    "SHA256": "5E:28:DC:2A:B4:B8:EF:ED:F5:AE:A1:D0:60:04:E0:F8:B0:34:02:19:5D:82:A3:F4:0E:8C:0A:57:EB:16:57:C9"
+  },
+  "usage": "Local upload-signing candidate. Not registered or distributed. Owner must preserve key and passwords."
+}
