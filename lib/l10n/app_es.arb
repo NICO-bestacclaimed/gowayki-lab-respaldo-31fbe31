@@ -358,5 +358,82 @@
   "favoriteStops": "Paraderos favoritos",
   "unset": "Sin configurar",
   "saved": "Guardados",
-  "savedTripNote": "Los viajes guardados se recalculan al abrirlos."
+  "savedTripNote": "Los viajes guardados se recalculan al abrirlos.",
+  "activeTrip": "Viaje en curso",
+  "noActiveTrip": "No hay un viaje activo.",
+  "tripNotificationBody": "Ubicación activa hasta llegar o tocar Terminar. Toca para volver a GoWayki.",
+  "alightAlertTitle": "GoWayki · Prepárate para bajar",
+  "alightAlertBody": "Bájate en el próximo paradero: {name}",
+  "@alightAlertBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "transferAlertTitle": "GoWayki · Zona de transbordo",
+  "transferAlertBody": "Llegaste a {name}. Revisa el siguiente tramo antes de subir.",
+  "@transferAlertBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "tripCompleted": "Llegaste a tu destino. Seguimiento terminado.",
+  "tripStopped": "Seguimiento terminado.",
+  "tripTrackingFailed": "El seguimiento se detuvo. Revisa el GPS y los permisos antes de iniciar otro viaje.",
+  "activeWalk": "Camina al siguiente punto",
+  "activeBoard": "Espera y sube a {name}",
+  "@activeBoard": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "activeRide": "Continúa en {name}",
+  "@activeRide": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "alightAt": "Baja en: {name}",
+  "@alightAt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "activeDistance": "Distancia aproximada al siguiente punto: ~{meters} m",
+  "@activeDistance": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "remainingStops": "Paraderos restantes: ~{count}",
+  "@remainingStops": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tripLocationUncertain": "Esperando una ubicación reciente y precisa. La distancia y las alertas pueden no estar disponibles.",
+  "tripAlertFailed": "No se pudo emitir una alerta. Revisa las notificaciones del sistema.",
+  "confirmBoarded": "Ya subí",
+  "confirmAlighted": "Ya bajé",
+  "confirmArrived": "Ya llegué a este punto",
+  "manualStepNote": "Confirma solo cuando hayas completado el paso. El GPS aproxima tu posición; no detecta el vehículo.",
+  "endTrip": "Terminar viaje",
+  "tripPermissionDisclosure": "Usaremos tu ubicación durante este viaje para indicar el paso actual y avisarte dónde bajar, también al minimizar la app. Android mostrará una notificación persistente. Te pediremos ubicación y notificaciones; el seguimiento termina al llegar, tocar Terminar o cerrar la app desde el sistema. Las alertas son aproximadas y dependen del GPS y de tus ajustes de sonido.",
+  "tripPermissionRequired": "Permite la ubicación para iniciar el viaje.",
+  "tripNotificationsRequired": "Activa las notificaciones de GoWayki en los ajustes del sistema para iniciar el seguimiento.",
+  "tripStartVisible": "Vuelve a GoWayki y toca Iniciar viaje para activar el seguimiento.",
+  "cancelTripStart": "Cancelar"
 }

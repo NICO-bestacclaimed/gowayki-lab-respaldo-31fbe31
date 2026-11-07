@@ -634,4 +634,112 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get savedTripNote =>
       'Saved trips are recalculated when you open them.';
+
+  @override
+  String get activeTrip => 'Trip in progress';
+
+  @override
+  String get noActiveTrip => 'There is no active trip.';
+
+  @override
+  String get tripNotificationBody =>
+      'Location stays active until arrival or End trip. Tap to return to GoWayki.';
+
+  @override
+  String get alightAlertTitle => 'GoWayki · Get ready to alight';
+
+  @override
+  String alightAlertBody(String name) {
+    return 'Alight at the next stop: $name';
+  }
+
+  @override
+  String get transferAlertTitle => 'GoWayki · Transfer area';
+
+  @override
+  String transferAlertBody(String name) {
+    return 'You reached $name. Check the next leg before boarding.';
+  }
+
+  @override
+  String get tripCompleted =>
+      'You reached your destination. Tracking has ended.';
+
+  @override
+  String get tripStopped => 'Tracking has ended.';
+
+  @override
+  String get tripTrackingFailed =>
+      'Tracking stopped. Check GPS and permissions before starting another trip.';
+
+  @override
+  String get activeWalk => 'Walk to the next point';
+
+  @override
+  String activeBoard(String name) {
+    return 'Wait and board $name';
+  }
+
+  @override
+  String activeRide(String name) {
+    return 'Continue on $name';
+  }
+
+  @override
+  String alightAt(String name) {
+    return 'Alight at: $name';
+  }
+
+  @override
+  String activeDistance(String meters) {
+    return 'Approximate distance to the next point: ~$meters m';
+  }
+
+  @override
+  String remainingStops(int count) {
+    return 'Stops remaining: ~$count';
+  }
+
+  @override
+  String get tripLocationUncertain =>
+      'Waiting for a recent, accurate location. Distance and alerts may be unavailable.';
+
+  @override
+  String get tripAlertFailed =>
+      'An alert could not be sent. Check system notifications.';
+
+  @override
+  String get confirmBoarded => 'I boarded';
+
+  @override
+  String get confirmAlighted => 'I alighted';
+
+  @override
+  String get confirmArrived => 'I reached this point';
+
+  @override
+  String get manualStepNote =>
+      'Confirm only when you have completed the step. GPS estimates your position; it does not detect the vehicle.';
+
+  @override
+  String get endTrip => 'End trip';
+
+  @override
+  String get tripPermissionDisclosure =>
+      'We will use your location during this trip to show the current step and alert you where to alight, including while the app is minimized. Android will show an ongoing notification. We will request location and notification access; tracking ends on arrival, End trip, or closing the app through the system. Alerts are approximate and depend on GPS and your sound settings.';
+
+  @override
+  String get tripPermissionRequired =>
+      'Allow location access to start the trip.';
+
+  @override
+  String get tripNotificationsRequired =>
+      'Enable GoWayki notifications in system settings to start tracking.';
+
+  @override
+  String get tripStartVisible =>
+      'Return to GoWayki and tap Start trip to enable tracking.';
+
+  @override
+  String get cancelTripStart => 'Cancel';
 }

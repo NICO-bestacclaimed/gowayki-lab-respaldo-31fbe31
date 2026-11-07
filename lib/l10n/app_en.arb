@@ -289,5 +289,82 @@
   "favoriteStops": "Favorite stops",
   "unset": "Not set",
   "saved": "Saved",
-  "savedTripNote": "Saved trips are recalculated when you open them."
+  "savedTripNote": "Saved trips are recalculated when you open them.",
+  "activeTrip": "Trip in progress",
+  "noActiveTrip": "There is no active trip.",
+  "tripNotificationBody": "Location stays active until arrival or End trip. Tap to return to GoWayki.",
+  "alightAlertTitle": "GoWayki · Get ready to alight",
+  "alightAlertBody": "Alight at the next stop: {name}",
+  "@alightAlertBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "transferAlertTitle": "GoWayki · Transfer area",
+  "transferAlertBody": "You reached {name}. Check the next leg before boarding.",
+  "@transferAlertBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "tripCompleted": "You reached your destination. Tracking has ended.",
+  "tripStopped": "Tracking has ended.",
+  "tripTrackingFailed": "Tracking stopped. Check GPS and permissions before starting another trip.",
+  "activeWalk": "Walk to the next point",
+  "activeBoard": "Wait and board {name}",
+  "@activeBoard": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "activeRide": "Continue on {name}",
+  "@activeRide": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "alightAt": "Alight at: {name}",
+  "@alightAt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "activeDistance": "Approximate distance to the next point: ~{meters} m",
+  "@activeDistance": {
+    "placeholders": {
+      "meters": {
+        "type": "String"
+      }
+    }
+  },
+  "remainingStops": "Stops remaining: ~{count}",
+  "@remainingStops": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tripLocationUncertain": "Waiting for a recent, accurate location. Distance and alerts may be unavailable.",
+  "tripAlertFailed": "An alert could not be sent. Check system notifications.",
+  "confirmBoarded": "I boarded",
+  "confirmAlighted": "I alighted",
+  "confirmArrived": "I reached this point",
+  "manualStepNote": "Confirm only when you have completed the step. GPS estimates your position; it does not detect the vehicle.",
+  "endTrip": "End trip",
+  "tripPermissionDisclosure": "We will use your location during this trip to show the current step and alert you where to alight, including while the app is minimized. Android will show an ongoing notification. We will request location and notification access; tracking ends on arrival, End trip, or closing the app through the system. Alerts are approximate and depend on GPS and your sound settings.",
+  "tripPermissionRequired": "Allow location access to start the trip.",
+  "tripNotificationsRequired": "Enable GoWayki notifications in system settings to start tracking.",
+  "tripStartVisible": "Return to GoWayki and tap Start trip to enable tracking.",
+  "cancelTripStart": "Cancel"
 }

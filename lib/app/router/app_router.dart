@@ -19,6 +19,7 @@ import '../features/profile/presentation/screens/profile_screen.dart';
 import '../features/settings/presentation/screens/settings_screen.dart';
 import '../features/sign_in/presentation/screens/sign_in_screen.dart';
 import 'app_root.dart';
+import '../features/active_trip/active_trip_screen.dart';
 import '../features/location/presentation/screens/location_disclosure_screen.dart';
 
 final explorePageBuilderProvider = Provider<WidgetBuilder>(
@@ -119,6 +120,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/viaje',
+        builder: (context, state) => const ActiveTripScreen(),
       ),
       GoRoute(
         path: '/planificar',

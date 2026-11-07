@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import '../../../../../core/models/transit_line.dart';
@@ -71,14 +72,14 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
     }
     if (oldWidget.showTransit != widget.showTransit ||
         oldWidget.showStops != widget.showStops ||
-        oldWidget.journeys != widget.journeys ||
+        !listEquals(oldWidget.journeys, widget.journeys) ||
         oldWidget.selectedJourney != widget.selectedJourney ||
         oldWidget.focusedLineId != widget.focusedLineId ||
         oldWidget.focusedDirection != widget.focusedDirection ||
         !_samePoint(oldWidget.origin, widget.origin) ||
         !_samePoint(oldWidget.destination, widget.destination)) {
       _redraw();
-      if (oldWidget.journeys != widget.journeys) _fitJourneys();
+      if (!listEquals(oldWidget.journeys, widget.journeys)) _fitJourneys();
       if (oldWidget.focusedLineId != widget.focusedLineId ||
           oldWidget.focusedDirection != widget.focusedDirection) {
         _fitFocusedLine();

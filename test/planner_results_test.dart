@@ -263,6 +263,8 @@ void main() {
         find.byKey(const ValueKey('trip.save')),
         300,
       );
+      await tester.ensureVisible(find.byKey(const ValueKey('trip.save')));
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('trip.save')));
       await tester.pumpAndSettle();
       final stored = container

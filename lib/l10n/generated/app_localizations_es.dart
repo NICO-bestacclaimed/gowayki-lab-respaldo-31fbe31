@@ -634,4 +634,111 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get savedTripNote => 'Los viajes guardados se recalculan al abrirlos.';
+
+  @override
+  String get activeTrip => 'Viaje en curso';
+
+  @override
+  String get noActiveTrip => 'No hay un viaje activo.';
+
+  @override
+  String get tripNotificationBody =>
+      'Ubicación activa hasta llegar o tocar Terminar. Toca para volver a GoWayki.';
+
+  @override
+  String get alightAlertTitle => 'GoWayki · Prepárate para bajar';
+
+  @override
+  String alightAlertBody(String name) {
+    return 'Bájate en el próximo paradero: $name';
+  }
+
+  @override
+  String get transferAlertTitle => 'GoWayki · Zona de transbordo';
+
+  @override
+  String transferAlertBody(String name) {
+    return 'Llegaste a $name. Revisa el siguiente tramo antes de subir.';
+  }
+
+  @override
+  String get tripCompleted => 'Llegaste a tu destino. Seguimiento terminado.';
+
+  @override
+  String get tripStopped => 'Seguimiento terminado.';
+
+  @override
+  String get tripTrackingFailed =>
+      'El seguimiento se detuvo. Revisa el GPS y los permisos antes de iniciar otro viaje.';
+
+  @override
+  String get activeWalk => 'Camina al siguiente punto';
+
+  @override
+  String activeBoard(String name) {
+    return 'Espera y sube a $name';
+  }
+
+  @override
+  String activeRide(String name) {
+    return 'Continúa en $name';
+  }
+
+  @override
+  String alightAt(String name) {
+    return 'Baja en: $name';
+  }
+
+  @override
+  String activeDistance(String meters) {
+    return 'Distancia aproximada al siguiente punto: ~$meters m';
+  }
+
+  @override
+  String remainingStops(int count) {
+    return 'Paraderos restantes: ~$count';
+  }
+
+  @override
+  String get tripLocationUncertain =>
+      'Esperando una ubicación reciente y precisa. La distancia y las alertas pueden no estar disponibles.';
+
+  @override
+  String get tripAlertFailed =>
+      'No se pudo emitir una alerta. Revisa las notificaciones del sistema.';
+
+  @override
+  String get confirmBoarded => 'Ya subí';
+
+  @override
+  String get confirmAlighted => 'Ya bajé';
+
+  @override
+  String get confirmArrived => 'Ya llegué a este punto';
+
+  @override
+  String get manualStepNote =>
+      'Confirma solo cuando hayas completado el paso. El GPS aproxima tu posición; no detecta el vehículo.';
+
+  @override
+  String get endTrip => 'Terminar viaje';
+
+  @override
+  String get tripPermissionDisclosure =>
+      'Usaremos tu ubicación durante este viaje para indicar el paso actual y avisarte dónde bajar, también al minimizar la app. Android mostrará una notificación persistente. Te pediremos ubicación y notificaciones; el seguimiento termina al llegar, tocar Terminar o cerrar la app desde el sistema. Las alertas son aproximadas y dependen del GPS y de tus ajustes de sonido.';
+
+  @override
+  String get tripPermissionRequired =>
+      'Permite la ubicación para iniciar el viaje.';
+
+  @override
+  String get tripNotificationsRequired =>
+      'Activa las notificaciones de GoWayki en los ajustes del sistema para iniciar el seguimiento.';
+
+  @override
+  String get tripStartVisible =>
+      'Vuelve a GoWayki y toca Iniciar viaje para activar el seguimiento.';
+
+  @override
+  String get cancelTripStart => 'Cancelar';
 }

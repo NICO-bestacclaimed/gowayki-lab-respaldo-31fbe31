@@ -1,6 +1,6 @@
 # GoWayki Lab
 
-Aplicación Flutter de transporte para Arequipa: MapLibre offline, búsqueda local, planificador estimado, fichas y favoritos. El funcionamiento principal usa archivos del dispositivo; no necesita un servidor de rutas. La ciudad instalada es Arequipa.
+Aplicación Flutter de transporte para Arequipa: MapLibre offline, búsqueda local, planificador estimado, fichas, favoritos y seguimiento de un viaje iniciado por el usuario. El funcionamiento principal usa archivos del dispositivo; no necesita un servidor de rutas. La ciudad instalada es Arequipa.
 
 ## Ejecutar y verificar
 
@@ -59,4 +59,4 @@ El APK debug se genera en `build/app/outputs/flutter-apk/app-debug.apk`. Sus dat
 - `test/`: pruebas de datos, cálculo, persistencia y UI con servicios nativos sustituibles.
 - `docs/ESTADO_TRABAJO.json`: último punto de control y pendientes.
 
-Privacidad y términos aún no están publicados. Sus botones están desactivados; se configuran cuando existan con `PRIVACY_URL` y `TERMS_URL`. Las actualizaciones remotas del paquete, seguimiento activo, alarmas, juego y Firebase se completan en sus partes respectivas. No se hizo push ni despliegue automático.
+Privacidad y términos aún no están publicados. Sus botones están desactivados; se configuran cuando existan con `PRIVACY_URL` y `TERMS_URL`. El viaje activo usa un servicio Android de ubicación con notificación persistente, confirmación de subida y alarmas locales configurables. Solo se inicia con consentimiento y la app visible; termina al llegar, finalizar o cerrar la tarea. No se restaura automáticamente después de que el sistema cierre el proceso. Juego, actualizaciones remotas y Firebase se completan en sus partes respectivas. No se hizo push ni despliegue automático.

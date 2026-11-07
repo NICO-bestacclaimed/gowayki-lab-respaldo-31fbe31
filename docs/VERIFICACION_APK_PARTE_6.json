@@ -1,0 +1,28 @@
+{
+  "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
+  "apk_bytes": 241519395,
+  "apk_sha256": "628f4d5f78cbc4d6bc8799f27e976bb13e160ead36fa1f7a3301843ef20e8779",
+  "data_version": 2,
+  "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
+  "artwork_files_verified": 16,
+  "map_files_verified": 12,
+  "payloads": "verified",
+  "legacy_gtfs_assets": "absent",
+  "sqlite_native": {
+    "armeabi-v7a": {
+      "official_merged_hash": "f33868d94e80992af137c7cf046a99406800f15434e289733cf472346be00ed4",
+      "apk_hash": "3dcb95dd6d0e19a280a3b6cfebbad870b313b739ad67ebba4f98dd0575a2b3f3",
+      "fts5": true
+    },
+    "arm64-v8a": {
+      "official_merged_hash": "e684ef8646ffd48b95bae58bf29c55ffd85acebac2a7118ffde9fd02df37d629",
+      "apk_hash": "4d586f7b1920f226030b1c93e9bc8cb7986813c3e7bea28f71fa8873299d7b3d",
+      "fts5": true
+    },
+    "x86_64": {
+      "official_merged_hash": "ff28e78c5b790b3eafc15ceface32c3f5626ef80f622a726c60b0b802825699a",
+      "apk_hash": "87a7dbdbd0b11b7053abf9d9cec5f789de6180053f03ab2476082b94620ac360",
+      "fts5": true
+    }
+  }
+}

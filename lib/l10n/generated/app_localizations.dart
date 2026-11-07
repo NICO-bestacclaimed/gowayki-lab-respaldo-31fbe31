@@ -1201,6 +1201,174 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Los viajes guardados se recalculan al abrirlos.'**
   String get savedTripNote;
+
+  /// No description provided for @activeTrip.
+  ///
+  /// In es, this message translates to:
+  /// **'Viaje en curso'**
+  String get activeTrip;
+
+  /// No description provided for @noActiveTrip.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay un viaje activo.'**
+  String get noActiveTrip;
+
+  /// No description provided for @tripNotificationBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Ubicación activa hasta llegar o tocar Terminar. Toca para volver a GoWayki.'**
+  String get tripNotificationBody;
+
+  /// No description provided for @alightAlertTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'GoWayki · Prepárate para bajar'**
+  String get alightAlertTitle;
+
+  /// No description provided for @alightAlertBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Bájate en el próximo paradero: {name}'**
+  String alightAlertBody(String name);
+
+  /// No description provided for @transferAlertTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'GoWayki · Zona de transbordo'**
+  String get transferAlertTitle;
+
+  /// No description provided for @transferAlertBody.
+  ///
+  /// In es, this message translates to:
+  /// **'Llegaste a {name}. Revisa el siguiente tramo antes de subir.'**
+  String transferAlertBody(String name);
+
+  /// No description provided for @tripCompleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Llegaste a tu destino. Seguimiento terminado.'**
+  String get tripCompleted;
+
+  /// No description provided for @tripStopped.
+  ///
+  /// In es, this message translates to:
+  /// **'Seguimiento terminado.'**
+  String get tripStopped;
+
+  /// No description provided for @tripTrackingFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'El seguimiento se detuvo. Revisa el GPS y los permisos antes de iniciar otro viaje.'**
+  String get tripTrackingFailed;
+
+  /// No description provided for @activeWalk.
+  ///
+  /// In es, this message translates to:
+  /// **'Camina al siguiente punto'**
+  String get activeWalk;
+
+  /// No description provided for @activeBoard.
+  ///
+  /// In es, this message translates to:
+  /// **'Espera y sube a {name}'**
+  String activeBoard(String name);
+
+  /// No description provided for @activeRide.
+  ///
+  /// In es, this message translates to:
+  /// **'Continúa en {name}'**
+  String activeRide(String name);
+
+  /// No description provided for @alightAt.
+  ///
+  /// In es, this message translates to:
+  /// **'Baja en: {name}'**
+  String alightAt(String name);
+
+  /// No description provided for @activeDistance.
+  ///
+  /// In es, this message translates to:
+  /// **'Distancia aproximada al siguiente punto: ~{meters} m'**
+  String activeDistance(String meters);
+
+  /// No description provided for @remainingStops.
+  ///
+  /// In es, this message translates to:
+  /// **'Paraderos restantes: ~{count}'**
+  String remainingStops(int count);
+
+  /// No description provided for @tripLocationUncertain.
+  ///
+  /// In es, this message translates to:
+  /// **'Esperando una ubicación reciente y precisa. La distancia y las alertas pueden no estar disponibles.'**
+  String get tripLocationUncertain;
+
+  /// No description provided for @tripAlertFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo emitir una alerta. Revisa las notificaciones del sistema.'**
+  String get tripAlertFailed;
+
+  /// No description provided for @confirmBoarded.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya subí'**
+  String get confirmBoarded;
+
+  /// No description provided for @confirmAlighted.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya bajé'**
+  String get confirmAlighted;
+
+  /// No description provided for @confirmArrived.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya llegué a este punto'**
+  String get confirmArrived;
+
+  /// No description provided for @manualStepNote.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirma solo cuando hayas completado el paso. El GPS aproxima tu posición; no detecta el vehículo.'**
+  String get manualStepNote;
+
+  /// No description provided for @endTrip.
+  ///
+  /// In es, this message translates to:
+  /// **'Terminar viaje'**
+  String get endTrip;
+
+  /// No description provided for @tripPermissionDisclosure.
+  ///
+  /// In es, this message translates to:
+  /// **'Usaremos tu ubicación durante este viaje para indicar el paso actual y avisarte dónde bajar, también al minimizar la app. Android mostrará una notificación persistente. Te pediremos ubicación y notificaciones; el seguimiento termina al llegar, tocar Terminar o cerrar la app desde el sistema. Las alertas son aproximadas y dependen del GPS y de tus ajustes de sonido.'**
+  String get tripPermissionDisclosure;
+
+  /// No description provided for @tripPermissionRequired.
+  ///
+  /// In es, this message translates to:
+  /// **'Permite la ubicación para iniciar el viaje.'**
+  String get tripPermissionRequired;
+
+  /// No description provided for @tripNotificationsRequired.
+  ///
+  /// In es, this message translates to:
+  /// **'Activa las notificaciones de GoWayki en los ajustes del sistema para iniciar el seguimiento.'**
+  String get tripNotificationsRequired;
+
+  /// No description provided for @tripStartVisible.
+  ///
+  /// In es, this message translates to:
+  /// **'Vuelve a GoWayki y toca Iniciar viaje para activar el seguimiento.'**
+  String get tripStartVisible;
+
+  /// No description provided for @cancelTripStart.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get cancelTripStart;
 }
 
 class _AppLocalizationsDelegate

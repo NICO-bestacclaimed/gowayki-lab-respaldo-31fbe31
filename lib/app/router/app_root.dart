@@ -1,13 +1,30 @@
 import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/active_trip_provider.dart';
 
-class AppRoot extends StatelessWidget {
+class AppRoot extends ConsumerWidget {
   const AppRoot({super.key, required this.navigationShell});
   final StatefulNavigationShell navigationShell;
   @override
-  Widget build(BuildContext context) => Scaffold(
-    body: navigationShell,
+  Widget build(BuildContext context, WidgetRef ref) => Scaffold(
+    body: Column(
+      children: [
+        if (ref.watch(activeTripProvider)?.running ?? false)
+          SafeArea(
+            bottom: false,
+            child: ListTile(
+              key: const ValueKey('active.resume'),
+              leading: const Icon(Icons.navigation),
+              title: Text(context.l10n.activeTrip),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.push('/viaje'),
+            ),
+          ),
+        Expanded(child: navigationShell),
+      ],
+    ),
     bottomNavigationBar: NavigationBar(
       selectedIndex: navigationShell.currentIndex,
       onDestinationSelected: (index) => navigationShell.goBranch(

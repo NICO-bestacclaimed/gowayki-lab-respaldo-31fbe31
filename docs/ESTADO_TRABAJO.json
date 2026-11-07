@@ -1,6 +1,6 @@
 {
-  "stage": "Parte5 implementada y verificada en Windows; siguiente Parte6",
-  "last_tests": "104 Flutter passed; analyze no issues; Part5 debug APK and payloads verified",
+  "stage": "Parte6 implementada y verificada en Windows; siguiente Parte7",
+  "last_tests": "126 Flutter passed; analyze clean; debug APK assets and compiled permissions verified",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "6A–6C: seguimiento solo durante viaje activo, servicio Android en primer plano, alarma de bajada, permisos previos y pruebas de umbrales. Después juego ligero en Parte7; detenerse ante faltantes de Firebase en Parte8.",
+  "next_action": "7A–7C: juego Canvas offline <150000 bytes con copias pequeñas locales, integración WebView y récord local. Después detenerse en Parte8 si faltan archivos/proyecto Firebase.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -28,12 +28,12 @@
     "shapes.txt"
   ],
   "flutter_validation": "Part5 source tests/analyze and debug APK verified",
-  "verified_at": "2026-11-07T01:25:47.833198+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte5-verificada-20261107T012547Z.zip",
+  "verified_at": "2026-11-07T01:56:18.773777+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte6-verificada-20261107T015618Z.zip",
   "quota_warning_observed": true,
   "checks": {
     "python_tests": 76,
-    "flutter_total_tests": 104,
+    "flutter_total_tests": 126,
     "planner_new_tests": 14,
     "flutter_analyze": "No issues found",
     "source_hashes_verified": 5,
@@ -69,7 +69,10 @@
     "planner_preferences_worker_replacement": true,
     "planner_ui_worker_end_to_end_real_cases": 3,
     "native_snapshot_close_waits": true,
-    "local_library_persistence": true
+    "local_library_persistence": true,
+    "active_trip_new_tests": 22,
+    "android_foreground_manifest_verified": true,
+    "background_location_permission": false
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -77,7 +80,7 @@
     "Avisos de compatibilidad futura Firebase/Kotlin, Java y metadatos SDK Android",
     "Horarios de frecuencia aprobados e incluidos en revisión 2",
     "Parte2 completa funcionalmente en Windows; rendimiento Android de gama media pendiente por disponibilidad de dispositivo",
-    "Parte5 implementada; renderizado, GPS y compartir físicos pendientes. Inicio de viaje oculto hasta Parte6. Firebase real sigue sin configurar."
+    "Parte6: GPS, notificaciones, audio/vibración y mapa físicos pendientes; iOS no compilado en Windows. Firebase real sigue sin configurar."
   ],
   "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
   "local_pub_cache_verified": true,
@@ -162,19 +165,19 @@
     },
     "device_runtime": "not tested"
   },
-  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte5A-verificada-20261107T002755Z.zip",
+  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte5-verificada-20261107T012547Z.zip",
   "data_version": 2,
   "continue_between_sections_authorized": true,
   "android_available": false,
-  "completion_commit_message": "feat: conectar viajes reales, fichas y favoritos locales",
+  "completion_commit_message": "feat: agregar viaje activo y alarmas locales de bajada",
   "provided_images_directory": "C:\\Proyecto_001\\Imagenes- Proyecto001",
   "provided_original_images_copied": 16,
   "artwork_integrity": "SHA-256 copies verified",
   "legal_urls_exist": false,
   "current_apk_verification": {
     "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
-    "apk_bytes": 241215645,
-    "apk_sha256": "9ba31f8d1d74467d8e4ea9206985ae03c2b5cc4876aa95d4becf8f1eb8580266",
+    "apk_bytes": 241519395,
+    "apk_sha256": "628f4d5f78cbc4d6bc8799f27e976bb13e160ead36fa1f7a3301843ef20e8779",
     "data_version": 2,
     "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
     "artwork_files_verified": 16,

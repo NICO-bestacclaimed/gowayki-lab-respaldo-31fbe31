@@ -67,6 +67,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>GoWayki usa tu ubicación mientras utilizas la app para sugerir puntos de subida cercanos.</string>
+	<string>GoWayki usa tu ubicación para sugerir paraderos y, si inicias un viaje, avisarte dónde bajar hasta que termine.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Durante un viaje iniciado por ti, GoWayki mantiene la ubicación para avisarte dónde bajar aunque cambies de app. Se detiene al terminar.</string>
+	<key>UIBackgroundModes</key>
+	<array><string>location</string></array>
 </dict>
 </plist>

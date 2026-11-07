@@ -4,6 +4,7 @@ import '../../domain/repositories/location_permission_repository.dart';
 import '../../domain/repositories/position_repository.dart';
 import '../../infra/location/geolocator_position_repository.dart';
 import 'app_providers.dart';
+import 'location_ownership_provider.dart';
 
 enum LocationStatus { idle, loading, ready, gpsOff, permission, error }
 
@@ -35,12 +36,21 @@ class ExplorerLocationController extends Notifier<ExplorerLocation> {
         unawaited(subscription.cancel().catchError((Object error) {}));
       }
     });
+    ref.listen(tripOwnsLocationProvider, (before, owned) {
+      if (!owned && _active) {
+        unawaited(start(refresh: true));
+      }
+    });
     return const ExplorerLocation(LocationStatus.idle);
   }
 
   Future<void> start({bool refresh = false}) async {
     if (_active && !refresh) return;
     _active = true;
+    if (ref.read(tripOwnsLocationProvider)) {
+      await suspend();
+      return;
+    }
     final generation = ++_generation;
     bool current() => ref.mounted && _active && generation == _generation;
     final subscription = _subscription;
@@ -84,6 +94,14 @@ class ExplorerLocationController extends Notifier<ExplorerLocation> {
     } on Object {
       if (current()) state = const ExplorerLocation(LocationStatus.error);
     }
+  }
+
+  Future<void> suspend() async {
+    ++_generation;
+    final subscription = _subscription;
+    _subscription = null;
+    await subscription?.cancel();
+    if (ref.mounted) state = const ExplorerLocation(LocationStatus.idle);
   }
 
   Future<void> stop() async {
