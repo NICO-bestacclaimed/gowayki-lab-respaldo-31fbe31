@@ -42,7 +42,7 @@ Proyecto `gowayki-lab`; Android `pe.edu.tecsup.gowayki_lab`; iOS `pe.edu.tecsup.
 
 Authentication integra correo/contraseña, Google y anónimo. Google requiere las huellas de cada certificado distribuido. La huella debug fue facilitada; el certificado release local está en `docs/ANDROID_RELEASE_SIGNING.json` y necesita su propio registro en Firebase y un `google-services.json` actualizado antes de validar Google en release. Si Google Play firma el APK, registrar también la huella del certificado de firma de Play.
 
-El usuario aplazó crear Cloud Firestore Standard. Las reglas/índices están preparados y probados localmente, pero las funciones de datos en la nube siguen pendientes de crear/configurar la base, desplegar, cargar metadatos reales y probar en dispositivo. No confundir un APK compilado con esa validación.
+La base Cloud Firestore `(default)` de `gowayki-lab` ya está creada en edición Standard y modo Native. Por autorización del usuario se desplegaron las reglas probadas y los cinco índices ya están `READY`. La verificación remota confirmó que el contenido de las reglas activas coincide exactamente con el archivo local. Quedan pendientes cargar los metadatos reales de ciudad y probar los flujos en dispositivo. No confundir las comprobaciones de configuración con una validación funcional completa de la app.
 
 ```powershell
 .\tool\test_firebase.ps1 -IncludeAuth
@@ -51,13 +51,15 @@ El usuario aplazó crear Cloud Firestore Standard. Las reglas/índices están pr
 
 Estos comandos se restringen a emuladores loopback y proyecto `demo-gowayki-lab`; no despliegan ni necesitan credenciales de administración. La instalación local de herramientas usa `tool/firebase/package-lock.json` y `npm ci` con el entorno activado. Reglas: propietarios en datos privados; reportes reales y confirmaciones únicas; feedback solo creación; ranking acotado; excepción de borrado de cuenta con reducción exacta de confirmaciones. Tras borrar una cuenta se conserva una marca técnica privada y vacía por UID para impedir recreación con tokens antiguos. Detalles y límites: `docs/CIERRE_PARTE8.md`.
 
-Para un futuro despliegue revisado, después de crear la base y autenticar la CLI del equipo:
+Para volver a desplegar cambios revisados, con una sesión autorizada de la CLI:
 
 ```powershell
+$env:XDG_CONFIG_HOME='C:\Proyecto_001\.tools\firebase-config'
+$env:XDG_CACHE_HOME='C:\Proyecto_001\.tools\firebase-cache'
 node tool/firebase/node_modules/firebase-tools/lib/bin/firebase.js deploy --project gowayki-lab --only firestore:rules,firestore:indexes
 ```
 
-Ese comando modifica el proyecto remoto; está documentado y no se ha ejecutado. El seed incluido permanece limitado al emulador y no debe apuntarse a producción.
+Ese comando modifica el proyecto remoto. El primer despliegue de reglas e índices se ejecutó con autorización del usuario el 2026-11-07; la comprobación y su respaldo se registran en `docs/FIRESTORE_DESPLIEGUE.json`. El seed incluido permanece limitado al emulador y no debe apuntarse a producción. La sesión autorizada de la CLI está en el directorio de configuración indicado; si en otro entorno se necesita iniciarla, usar `login --interactive` sin compartir códigos ni tokens por el chat. `node tool/verify_firestore_live.cjs` comprueba reglas e índices mediante consultas de solo lectura con esas mismas variables.
 
 ## Actualización y Hosting
 
@@ -110,4 +112,4 @@ Wayki Combi ocupa 67.045 bytes con 15 sprites pequeños; los originales se conse
 
 Pendientes físicos: fluidez de mapa, GPS, notificación persistente, alarmas y permisos Android/iOS, rendimiento menor de 400 ms en Android de gama media, autenticación/sincronización y recepción de observabilidad reales. La medición Windows AOT de 28 muestras tuvo mediana 152,709 ms y máximo 393,125 ms; no equivale al criterio Android.
 
-Código y pruebas se organizan en `lib/domain`, `lib/infra`, `lib/app`, `lib/shared`, `lib/l10n` y `test`. `docs/ESTADO_TRABAJO.json` indica el último punto verificado. Todos los cambios y respaldos son locales; no se ha hecho push ni publicación automática.
+Código y pruebas se organizan en `lib/domain`, `lib/infra`, `lib/app`, `lib/shared`, `lib/l10n` y `test`. `docs/ESTADO_TRABAJO.json` indica el último punto verificado. El código, APK y respaldos permanecen locales; no se ha hecho push, publicado Hosting ni distribuido apps. Las reglas e índices de Firestore sí se desplegaron con autorización del usuario.

@@ -1,5 +1,5 @@
 {
-  "stage": "Partes 0–9 implementadas; 9C verificada localmente. Pendientes externos de lanzamiento documentados.",
+  "stage": "Primer despliegue real de Firestore verificado: reglas idénticas y cinco índices READY.",
   "last_tests": "203 Flutter completos y 4 dirigidos finales; analyze limpio; APK debug 9B y dos release 9C firmados y verificados; Hosting local con descarga/headers aprobado",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "Completar responsable/correo y revisión legal, crear/configurar Firestore real y registrar huella release cuando el usuario lo prepare; pruebas Android físico y compilación iOS en Mac. No publicar ni subir automáticamente.",
+  "next_action": "Paso 2 pendiente: inicializar cities/arequipa con los metadatos reales cuando el usuario indique continuar. Google release y pruebas reales de app siguen pendientes; Hosting y legales sin publicar.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -28,8 +28,8 @@
     "shapes.txt"
   ],
   "flutter_validation": "203 pruebas completas; cuatro finales dirigidas; análisis limpio; releases Android offline/Firebase firmados y verificados",
-  "verified_at": "2026-11-07T19:46:47.218920+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte9C-verificada.zip",
+  "verified_at": "2026-11-07T20:25:05.518Z",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\firestore-primer-despliegue-verificado.zip",
   "quota_warning_observed": true,
   "checks": {
     "python_tests": 76,
@@ -95,7 +95,9 @@
     "city_pack_update_tests": 10,
     "observability_tests": 4,
     "hosting_http": "passed on loopback demo emulator; no deployment",
-    "ios_static": "passed; build/runtime require Mac"
+    "ios_static": "passed; build/runtime require Mac",
+    "firestore_live_configuration": "Rules source SHA-256 matched; five configured composite indexes READY",
+    "firestore_live_app_runtime": "not tested"
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -268,11 +270,12 @@
     "placeholders": false,
     "same_project": true,
     "new_oauth_files_detected": true,
-    "deployed": false,
-    "new_oauth_files_imported": true
+    "new_oauth_files_imported": true,
+    "firestore_rules_and_indexes_deployed": true,
+    "hosting_deployed": false
   },
   "cloud_firestore_user_reply": "tengo lo demas menos el cloud firestore , podemos continuar asi?",
-  "cloud_firestore_live_deferred": true,
+  "cloud_firestore_live_deferred": false,
   "account_erasure_decision": "Se borran datos propios y Auth; confirmaciones reducen contador solo durante erasure. Por seguridad se conserva un marcador vacío por UID, privado e inmutable, para impedir recreación con tokens antiguos. Avisado en confirmación y documentación.",
   "legal_identity_user_reply": "todavia no esta definido",
   "legal_drafts_publish": false,
@@ -284,7 +287,7 @@
     "apk_attached": "verified offline release, unpublished"
   },
   "apk_source_checkpoint": "9C: app-release-offline.apk y app-release-firebase.apk verificados",
-  "checkpoint_base_commit": "9fc300c",
+  "checkpoint_base_commit": "ff274c4",
   "observability": {
     "integrated": true,
     "collection_default": false,
@@ -321,5 +324,18 @@
       "device_runtime": "not tested"
     }
   },
-  "release_google_sha1_registration_pending": true
+  "release_google_sha1_registration_pending": true,
+  "cloud_firestore_database_created": true,
+  "firestore_deployment": {
+    "project": "gowayki-lab",
+    "database": "(default)",
+    "rules_deployed": true,
+    "rules_match_local": true,
+    "rules_sha256": "318245ff5191ae1409bceeac755695bdaa50b7565613a3bb85a9407e3834200f",
+    "indexes_ready": 5,
+    "verified_at": "2026-11-07T20:25:05.518Z",
+    "backup": "C:\\Proyecto_001\\.tools\\backups\\firestore-before-2026-11-07T20-19-40-571Z",
+    "application_documents_written": false,
+    "app_runtime_verified": false
+  }
 }

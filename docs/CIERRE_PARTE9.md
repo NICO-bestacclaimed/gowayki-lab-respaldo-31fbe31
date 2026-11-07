@@ -1,6 +1,6 @@
 # Cierre de la Parte 9 · GoWayki
 
-Estado: implementación y verificación local completadas, incluidos dos APK release firmados. Validación remota y en dispositivos pendiente. Sin publicación ni push.
+Estado: implementación y verificación local completadas, incluidos dos APK release firmados. Validación remota y en dispositivos pendiente. Hosting y aplicaciones sin publicar; sin push. Las reglas e índices de Firestore se desplegaron posteriormente con autorización del usuario, según el comprobante de despliegue.
 
 ## Cambios y comprobaciones
 
@@ -34,13 +34,13 @@ Prueba adicional de Hosting: emulador exclusivo en 127.0.0.1:5005 con proyecto d
 ## Pendientes de lanzamiento
 
 1. Definir responsable y correo, revisar/aprobar privacidad y términos, y configurar URL reales. Mantener los borradores sin publicar hasta entonces.
-2. Crear Firestore Standard en el proyecto real y revisar/desplegar reglas e índices. Cargar metadatos/datos reales. El seed de pruebas sigue limitado al emulador.
+2. Firestore Standard real ya creado; reglas e índices desplegados y verificados (cinco READY). Falta cargar los metadatos de ciudad y comprobar los flujos reales. El seed de pruebas sigue limitado al emulador.
 3. Registrar la SHA-1 release `14:89:4E:B1:D0:53:93:C8:9B:1B:45:3E:56:17:43:1A:85:4F:6D:C2` en Firebase y actualizar el archivo Android antes de validar Google con esta firma; si Play vuelve a firmar, registrar también su certificado.
 4. Comprobar Auth, sincronización, reportes, ranking y eliminación en el proyecto real, con la app y reglas finalmente desplegadas. Los emuladores no sustituyen esa comprobación.
 5. Probar Android físico: mapa y modo avión, GPS, servicio/notificaciones, alarmas, WebView/sonido/vibración y rendimiento en gama media. Prueba visual de juego aplazada por el usuario.
 6. Compilar/firmar y probar iOS en Mac y dispositivo Apple. Revisar símbolos/dSYM al habilitar observabilidad.
 7. Revisar la ficha de tienda, icono de lanzamiento, licencias, políticas y declaraciones de datos antes de cualquier publicación. Habilitar observabilidad solo después de revisar su información/recepción y conservación; las builds actuales la mantienen apagada.
-8. Autorizar y ejecutar por separado Hosting, reglas/datos y distribución a testers. No se ha realizado ninguna publicación externa ni push de Git.
+8. Reglas e índices de Firestore ya desplegados por autorización del usuario. Restan inicialización de metadatos, Hosting y distribución a testers en sus pasos correspondientes. No se publicó Hosting, distribuyeron apps ni se hizo push de Git.
 
 Los pasos locales y comandos están en README, `docs/ACTUALIZACIONES_9A.md` y `docs/OBSERVABILIDAD_9B.md`. Estos pendientes son límites conocidos y entradas externas; no hay credenciales ni datos legales inventados para omitirlos.
 

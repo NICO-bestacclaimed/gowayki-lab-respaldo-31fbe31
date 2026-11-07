@@ -1,0 +1,125 @@
+{
+  "project": "gowayki-lab",
+  "database": "(default)",
+  "database_type": "FIRESTORE_NATIVE",
+  "edition": "STANDARD",
+  "location": "nam5",
+  "verified_at": "2026-11-07T20:25:05.518Z",
+  "ruleset": "projects/gowayki-lab/rulesets/67b439e0-4637-4f2e-8eec-36bcb04dcf64",
+  "rules_sha256": "318245ff5191ae1409bceeac755695bdaa50b7565613a3bb85a9407e3834200f",
+  "rules_match": true,
+  "indexes": [
+    {
+      "name": "projects/gowayki-lab/databases/(default)/collectionGroups/reports/indexes/CICAgOjXh4EK",
+      "collectionGroup": "reports",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cityCode",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "state": "READY"
+    },
+    {
+      "name": "projects/gowayki-lab/databases/(default)/collectionGroups/reports/indexes/CICAgJiUpoMK",
+      "collectionGroup": "reports",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cityCode",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "stopId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "state": "READY"
+    },
+    {
+      "name": "projects/gowayki-lab/databases/(default)/collectionGroups/reports/indexes/CICAgJim14AK",
+      "collectionGroup": "reports",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cityCode",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "lineId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "state": "READY"
+    },
+    {
+      "name": "projects/gowayki-lab/databases/(default)/collectionGroups/reports/indexes/CICAgJiUsZIK",
+      "collectionGroup": "reports",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "uid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "state": "READY"
+    },
+    {
+      "name": "projects/gowayki-lab/databases/(default)/collectionGroups/scores/indexes/CICAgJjF9oIK",
+      "collectionGroup": "scores",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "score",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "updatedAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "state": "READY"
+    }
+  ],
+  "indexes_ready": 5,
+  "backup": "C:\\Proyecto_001\\.tools\\backups\\firestore-before-2026-11-07T20-19-40-571Z",
+  "verification": "Read-only API checks; no application documents read or written.",
+  "scope": "Firestore rules and indexes. No Hosting, app distribution, collection seeding or authentication-provider changes."
+}
