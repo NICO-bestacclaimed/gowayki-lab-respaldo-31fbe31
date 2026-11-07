@@ -12,7 +12,20 @@
           "package_name": "pe.edu.tecsup.gowayki_lab"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "959294066022-22rkmg0uckro12toi2lpe92k38p8t0qm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.tecsup.gowayki_lab",
+            "certificate_hash": "9fb33aa324e4f5799b67afb7c7a95be478e4149f"
+          }
+        },
+        {
+          "client_id": "959294066022-7jl40t2irpfk5p9f2nn9j5b4og4es583.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDuCpGsXMXrsMzG_CvGiERL0m-8A2VF7ec"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959294066022-7jl40t2irpfk5p9f2nn9j5b4og4es583.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "959294066022-esk3p3la0al73lrnbhspk5h6608mtb6m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pe.edu.tecsup.mobilityLab"
+              }
+            }
+          ]
         }
       }
     }

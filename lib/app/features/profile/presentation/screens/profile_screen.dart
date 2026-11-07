@@ -1,4 +1,5 @@
 import 'package:gowayki_lab/shared/l10n/l10n.dart';
+import 'package:gowayki_lab/shared/l10n/auth_error_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +14,7 @@ class ProfileScreen extends ConsumerWidget {
     final user =
         ref.watch(authStateProvider).asData?.value ??
         ref.read(authRepositoryProvider).currentUser;
-    final guest = user?.id == 'demo-anon';
+    final guest = user?.isAnonymous ?? false;
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.profile)),
       body: ListView(
@@ -33,7 +34,11 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             FilledButton(
               onPressed: () => context.push('/acceso'),
-              child: Text(context.l10n.signIn),
+              child: Text(
+                ref.watch(useFirebaseProvider)
+                    ? context.l10n.signIn
+                    : context.l10n.guestEntry,
+              ),
             ),
           ] else ...[
             Text(
@@ -41,11 +46,27 @@ class ProfileScreen extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
             if (!guest) Text(user.email, textAlign: TextAlign.center),
+            if (guest && ref.watch(useFirebaseProvider))
+              OutlinedButton(
+                key: const ValueKey('auth.upgrade'),
+                onPressed: () => context.push('/acceso'),
+                child: Text(context.l10n.authUpgrade),
+              ),
             const SizedBox(height: 16),
             OutlinedButton(
               onPressed: () async {
-                await ref.read(authRepositoryProvider).signOut();
-                if (context.mounted) context.go('/perfil');
+                try {
+                  await ref.read(authRepositoryProvider).signOut();
+                  if (context.mounted) context.go('/perfil');
+                } on Object catch (error) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(authErrorText(error, context.l10n)),
+                      ),
+                    );
+                  }
+                }
               },
               child: Text(context.l10n.signOut),
             ),

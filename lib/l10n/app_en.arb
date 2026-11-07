@@ -378,5 +378,30 @@
       }
     }
   },
-  "gameWhileWaiting": "Waiting for your combi? Play"
+  "gameWhileWaiting": "Waiting for your combi? Play",
+  "authInvalidCredentials": "Check your email and password and try again.",
+  "authInvalidEmail": "Enter a valid email address.",
+  "authWeakPassword": "The password does not meet security requirements. Try a stronger one.",
+  "authEmailInUse": "That email already has an account. Sign in to continue.",
+  "authDisabled": "This account is disabled. Contact the GoWayki team.",
+  "authMethodUnavailable": "This sign-in method is unavailable. Try another or continue as a guest.",
+  "authNetwork": "We could not connect. Check your connection and try again.",
+  "authTooMany": "Too many attempts. Wait a while before trying again.",
+  "authDifferentProvider": "Use the method you originally used to register this account.",
+  "authLocalHelp": "Continue without an account. Your favorites and trips will be stored on this device.",
+  "authProfileWarning": "Your account was created; the name could not be saved. You can continue using GoWayki.",
+  "authResetSent": "If an account exists for that email, you will receive password reset instructions. Check your spam folder too.",
+  "authAccountHelp": "Use your account or continue as a guest. You can plan routes without signing in.",
+  "authName": "Your name",
+  "authNameInvalid": "Enter between 2 and 60 characters.",
+  "authShowPassword": "Show password",
+  "authHidePassword": "Hide password",
+  "authPasswordRequired": "Enter your password.",
+  "authPasswordLength": "Use between 8 and 128 characters when creating your account.",
+  "authConfirmPassword": "Confirm your password",
+  "authPasswordsDiffer": "Passwords do not match.",
+  "authHaveAccount": "I already have an account",
+  "authForgotPassword": "Forgot your password?",
+  "authGoogle": "Continue with Google",
+  "authUpgrade": "Connect or create my account"
 }

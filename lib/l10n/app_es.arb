@@ -447,5 +447,30 @@
       }
     }
   },
-  "gameWhileWaiting": "¿Esperando tu combi? Juega"
+  "gameWhileWaiting": "¿Esperando tu combi? Juega",
+  "authInvalidCredentials": "Revisa tu correo y contraseña e inténtalo de nuevo.",
+  "authInvalidEmail": "Escribe un correo válido.",
+  "authWeakPassword": "La contraseña no cumple los requisitos de seguridad. Prueba una más segura.",
+  "authEmailInUse": "Ese correo ya tiene una cuenta. Inicia sesión para continuar.",
+  "authDisabled": "Esta cuenta está deshabilitada. Contacta con el equipo de GoWayki.",
+  "authMethodUnavailable": "Este método de acceso no está disponible. Prueba otro o continúa como invitado.",
+  "authNetwork": "No pudimos conectar. Revisa tu conexión e inténtalo de nuevo.",
+  "authTooMany": "Hubo demasiados intentos. Espera un momento antes de volver a probar.",
+  "authDifferentProvider": "Usa el método con el que registraste esa cuenta.",
+  "authLocalHelp": "Continúa sin cuenta. Tus favoritos y viajes se guardarán en este dispositivo.",
+  "authProfileWarning": "Tu cuenta está creada; no se pudo guardar el nombre. Puedes seguir usando GoWayki.",
+  "authResetSent": "Si existe una cuenta con ese correo, recibirás instrucciones para cambiar tu contraseña. Revisa también el correo no deseado.",
+  "authAccountHelp": "Usa tu cuenta o continúa como invitado. Puedes planificar rutas sin iniciar sesión.",
+  "authName": "Tu nombre",
+  "authNameInvalid": "Escribe entre 2 y 60 caracteres.",
+  "authShowPassword": "Mostrar contraseña",
+  "authHidePassword": "Ocultar contraseña",
+  "authPasswordRequired": "Escribe tu contraseña.",
+  "authPasswordLength": "Usa entre 8 y 128 caracteres al crear tu cuenta.",
+  "authConfirmPassword": "Confirma tu contraseña",
+  "authPasswordsDiffer": "Las contraseñas no coinciden.",
+  "authHaveAccount": "Ya tengo una cuenta",
+  "authForgotPassword": "¿Olvidaste tu contraseña?",
+  "authGoogle": "Continuar con Google",
+  "authUpgrade": "Conectar o crear mi cuenta"
 }

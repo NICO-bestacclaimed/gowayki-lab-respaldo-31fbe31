@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/models/auth_user.dart';
+import '../../domain/auth/auth_failure.dart';
 import '../../core/models/city.dart';
 import '../../core/models/feedback_item.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -29,13 +30,7 @@ class DemoAuthRepository implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    await Future<void>.delayed(const Duration(milliseconds: 350));
-    _user = AuthUser(
-      id: 'demo-${email.hashCode}',
-      email: email,
-      displayName: email.split('@').first,
-    );
-    _controller.add(_user);
+    throw const AuthFailure(AuthFailureCode.localOnly);
   }
 
   @override
@@ -43,15 +38,23 @@ class DemoAuthRepository implements AuthRepository {
     required String email,
     required String password,
     String? displayName,
-  }) => signInWithEmail(email: email, password: password);
+  }) async {
+    throw const AuthFailure(AuthFailureCode.localOnly);
+  }
+
+  @override
+  Future<void> signInWithGoogle() async {
+    throw const AuthFailure(AuthFailureCode.localOnly);
+  }
+
+  @override
+  Future<void> sendPasswordReset({required String email}) async {
+    throw const AuthFailure(AuthFailureCode.localOnly);
+  }
 
   @override
   Future<void> signInAnonymously() async {
-    _user = const AuthUser(
-      id: 'demo-anon',
-      email: 'wayki@gowayki.lab',
-      displayName: 'Wayki',
-    );
+    _user = const AuthUser(id: 'demo-anon', email: '', isAnonymous: true);
     _controller.add(_user);
   }
 

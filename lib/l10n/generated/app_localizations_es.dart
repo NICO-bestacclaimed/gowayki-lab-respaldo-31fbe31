@@ -761,4 +761,92 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get gameWhileWaiting => '¿Esperando tu combi? Juega';
+
+  @override
+  String get authInvalidCredentials =>
+      'Revisa tu correo y contraseña e inténtalo de nuevo.';
+
+  @override
+  String get authInvalidEmail => 'Escribe un correo válido.';
+
+  @override
+  String get authWeakPassword =>
+      'La contraseña no cumple los requisitos de seguridad. Prueba una más segura.';
+
+  @override
+  String get authEmailInUse =>
+      'Ese correo ya tiene una cuenta. Inicia sesión para continuar.';
+
+  @override
+  String get authDisabled =>
+      'Esta cuenta está deshabilitada. Contacta con el equipo de GoWayki.';
+
+  @override
+  String get authMethodUnavailable =>
+      'Este método de acceso no está disponible. Prueba otro o continúa como invitado.';
+
+  @override
+  String get authNetwork =>
+      'No pudimos conectar. Revisa tu conexión e inténtalo de nuevo.';
+
+  @override
+  String get authTooMany =>
+      'Hubo demasiados intentos. Espera un momento antes de volver a probar.';
+
+  @override
+  String get authDifferentProvider =>
+      'Usa el método con el que registraste esa cuenta.';
+
+  @override
+  String get authLocalHelp =>
+      'Continúa sin cuenta. Tus favoritos y viajes se guardarán en este dispositivo.';
+
+  @override
+  String get authProfileWarning =>
+      'Tu cuenta está creada; no se pudo guardar el nombre. Puedes seguir usando GoWayki.';
+
+  @override
+  String get authResetSent =>
+      'Si existe una cuenta con ese correo, recibirás instrucciones para cambiar tu contraseña. Revisa también el correo no deseado.';
+
+  @override
+  String get authAccountHelp =>
+      'Usa tu cuenta o continúa como invitado. Puedes planificar rutas sin iniciar sesión.';
+
+  @override
+  String get authName => 'Tu nombre';
+
+  @override
+  String get authNameInvalid => 'Escribe entre 2 y 60 caracteres.';
+
+  @override
+  String get authShowPassword => 'Mostrar contraseña';
+
+  @override
+  String get authHidePassword => 'Ocultar contraseña';
+
+  @override
+  String get authPasswordRequired => 'Escribe tu contraseña.';
+
+  @override
+  String get authPasswordLength =>
+      'Usa entre 8 y 128 caracteres al crear tu cuenta.';
+
+  @override
+  String get authConfirmPassword => 'Confirma tu contraseña';
+
+  @override
+  String get authPasswordsDiffer => 'Las contraseñas no coinciden.';
+
+  @override
+  String get authHaveAccount => 'Ya tengo una cuenta';
+
+  @override
+  String get authForgotPassword => '¿Olvidaste tu contraseña?';
+
+  @override
+  String get authGoogle => 'Continuar con Google';
+
+  @override
+  String get authUpgrade => 'Conectar o crear mi cuenta';
 }

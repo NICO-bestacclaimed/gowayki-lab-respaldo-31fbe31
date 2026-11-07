@@ -1399,6 +1399,156 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'¿Esperando tu combi? Juega'**
   String get gameWhileWaiting;
+
+  /// No description provided for @authInvalidCredentials.
+  ///
+  /// In es, this message translates to:
+  /// **'Revisa tu correo y contraseña e inténtalo de nuevo.'**
+  String get authInvalidCredentials;
+
+  /// No description provided for @authInvalidEmail.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe un correo válido.'**
+  String get authInvalidEmail;
+
+  /// No description provided for @authWeakPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'La contraseña no cumple los requisitos de seguridad. Prueba una más segura.'**
+  String get authWeakPassword;
+
+  /// No description provided for @authEmailInUse.
+  ///
+  /// In es, this message translates to:
+  /// **'Ese correo ya tiene una cuenta. Inicia sesión para continuar.'**
+  String get authEmailInUse;
+
+  /// No description provided for @authDisabled.
+  ///
+  /// In es, this message translates to:
+  /// **'Esta cuenta está deshabilitada. Contacta con el equipo de GoWayki.'**
+  String get authDisabled;
+
+  /// No description provided for @authMethodUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Este método de acceso no está disponible. Prueba otro o continúa como invitado.'**
+  String get authMethodUnavailable;
+
+  /// No description provided for @authNetwork.
+  ///
+  /// In es, this message translates to:
+  /// **'No pudimos conectar. Revisa tu conexión e inténtalo de nuevo.'**
+  String get authNetwork;
+
+  /// No description provided for @authTooMany.
+  ///
+  /// In es, this message translates to:
+  /// **'Hubo demasiados intentos. Espera un momento antes de volver a probar.'**
+  String get authTooMany;
+
+  /// No description provided for @authDifferentProvider.
+  ///
+  /// In es, this message translates to:
+  /// **'Usa el método con el que registraste esa cuenta.'**
+  String get authDifferentProvider;
+
+  /// No description provided for @authLocalHelp.
+  ///
+  /// In es, this message translates to:
+  /// **'Continúa sin cuenta. Tus favoritos y viajes se guardarán en este dispositivo.'**
+  String get authLocalHelp;
+
+  /// No description provided for @authProfileWarning.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu cuenta está creada; no se pudo guardar el nombre. Puedes seguir usando GoWayki.'**
+  String get authProfileWarning;
+
+  /// No description provided for @authResetSent.
+  ///
+  /// In es, this message translates to:
+  /// **'Si existe una cuenta con ese correo, recibirás instrucciones para cambiar tu contraseña. Revisa también el correo no deseado.'**
+  String get authResetSent;
+
+  /// No description provided for @authAccountHelp.
+  ///
+  /// In es, this message translates to:
+  /// **'Usa tu cuenta o continúa como invitado. Puedes planificar rutas sin iniciar sesión.'**
+  String get authAccountHelp;
+
+  /// No description provided for @authName.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre'**
+  String get authName;
+
+  /// No description provided for @authNameInvalid.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe entre 2 y 60 caracteres.'**
+  String get authNameInvalid;
+
+  /// No description provided for @authShowPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar contraseña'**
+  String get authShowPassword;
+
+  /// No description provided for @authHidePassword.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocultar contraseña'**
+  String get authHidePassword;
+
+  /// No description provided for @authPasswordRequired.
+  ///
+  /// In es, this message translates to:
+  /// **'Escribe tu contraseña.'**
+  String get authPasswordRequired;
+
+  /// No description provided for @authPasswordLength.
+  ///
+  /// In es, this message translates to:
+  /// **'Usa entre 8 y 128 caracteres al crear tu cuenta.'**
+  String get authPasswordLength;
+
+  /// No description provided for @authConfirmPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirma tu contraseña'**
+  String get authConfirmPassword;
+
+  /// No description provided for @authPasswordsDiffer.
+  ///
+  /// In es, this message translates to:
+  /// **'Las contraseñas no coinciden.'**
+  String get authPasswordsDiffer;
+
+  /// No description provided for @authHaveAccount.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya tengo una cuenta'**
+  String get authHaveAccount;
+
+  /// No description provided for @authForgotPassword.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Olvidaste tu contraseña?'**
+  String get authForgotPassword;
+
+  /// No description provided for @authGoogle.
+  ///
+  /// In es, this message translates to:
+  /// **'Continuar con Google'**
+  String get authGoogle;
+
+  /// No description provided for @authUpgrade.
+  ///
+  /// In es, this message translates to:
+  /// **'Conectar o crear mi cuenta'**
+  String get authUpgrade;
 }
 
 class _AppLocalizationsDelegate

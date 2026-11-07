@@ -761,4 +761,92 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gameWhileWaiting => 'Waiting for your combi? Play';
+
+  @override
+  String get authInvalidCredentials =>
+      'Check your email and password and try again.';
+
+  @override
+  String get authInvalidEmail => 'Enter a valid email address.';
+
+  @override
+  String get authWeakPassword =>
+      'The password does not meet security requirements. Try a stronger one.';
+
+  @override
+  String get authEmailInUse =>
+      'That email already has an account. Sign in to continue.';
+
+  @override
+  String get authDisabled =>
+      'This account is disabled. Contact the GoWayki team.';
+
+  @override
+  String get authMethodUnavailable =>
+      'This sign-in method is unavailable. Try another or continue as a guest.';
+
+  @override
+  String get authNetwork =>
+      'We could not connect. Check your connection and try again.';
+
+  @override
+  String get authTooMany =>
+      'Too many attempts. Wait a while before trying again.';
+
+  @override
+  String get authDifferentProvider =>
+      'Use the method you originally used to register this account.';
+
+  @override
+  String get authLocalHelp =>
+      'Continue without an account. Your favorites and trips will be stored on this device.';
+
+  @override
+  String get authProfileWarning =>
+      'Your account was created; the name could not be saved. You can continue using GoWayki.';
+
+  @override
+  String get authResetSent =>
+      'If an account exists for that email, you will receive password reset instructions. Check your spam folder too.';
+
+  @override
+  String get authAccountHelp =>
+      'Use your account or continue as a guest. You can plan routes without signing in.';
+
+  @override
+  String get authName => 'Your name';
+
+  @override
+  String get authNameInvalid => 'Enter between 2 and 60 characters.';
+
+  @override
+  String get authShowPassword => 'Show password';
+
+  @override
+  String get authHidePassword => 'Hide password';
+
+  @override
+  String get authPasswordRequired => 'Enter your password.';
+
+  @override
+  String get authPasswordLength =>
+      'Use between 8 and 128 characters when creating your account.';
+
+  @override
+  String get authConfirmPassword => 'Confirm your password';
+
+  @override
+  String get authPasswordsDiffer => 'Passwords do not match.';
+
+  @override
+  String get authHaveAccount => 'I already have an account';
+
+  @override
+  String get authForgotPassword => 'Forgot your password?';
+
+  @override
+  String get authGoogle => 'Continue with Google';
+
+  @override
+  String get authUpgrade => 'Connect or create my account';
 }

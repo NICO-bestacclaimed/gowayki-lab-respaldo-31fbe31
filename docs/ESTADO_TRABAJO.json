@@ -1,6 +1,6 @@
 {
-  "stage": "8A verificada: configuración real, reglas locales, seed y dos APK. Siguiente8B con nuevos archivos OAuth detectados.",
-  "last_tests": "133 Flutter passed; 28 Firestore rules tests passed; analyze clean; Firebase true/false APK verified",
+  "stage": "8B validado; continuar8C–8E",
+  "last_tests": "149 Flutter;32 emulador (28reglas+4auth);analyze limpio;APK Firebase8B compilado y recursos OAuth/payloads verificados",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "Guardar8A e importar google-services (1).json y GoogleService-Info (1).plist del mismo proyecto para8B. Autenticación correo/Google/anónimo y migración de invitado; luego8C–8E. Usuario prepara proveedores y Firestore.",
+  "next_action": "8C sincronización local-first con aislamiento de cuentas; luego8D reportes/ayuda y8E perfil/ranking/eliminación completa autorizada. Firestore real pendiente por decisión del usuario.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -28,12 +28,12 @@
     "shapes.txt"
   ],
   "flutter_validation": "Part5 source tests/analyze and debug APK verified",
-  "verified_at": "2026-11-07T15:42:25.338185+00:00",
+  "verified_at": "2026-11-07T16:33:03.059351+00:00",
   "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte8A-verificada-20261107T154225Z.zip",
   "quota_warning_observed": true,
   "checks": {
     "python_tests": 76,
-    "flutter_total_tests": 133,
+    "flutter_total_tests": 149,
     "planner_new_tests": 14,
     "flutter_analyze": "No issues found",
     "source_hashes_verified": 5,
@@ -82,7 +82,9 @@
     "firestore_rules_tests": 28,
     "firebase_seed_local": "passed",
     "firebase_dual_apk": "passed",
-    "emulators": "stopped"
+    "emulators": "stopped",
+    "firebase_auth_emulator_tests": 4,
+    "firebase_auth_form_tests": 7
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -90,11 +92,11 @@
     "Avisos de compatibilidad futura Firebase/Kotlin, Java y metadatos SDK Android",
     "Horarios de frecuencia aprobados e incluidos en revisión 2",
     "Parte2 completa funcionalmente en Windows; rendimiento Android de gama media pendiente por disponibilidad de dispositivo",
-    "GPS, notificaciones, audio/vibración y mapa físicos pendientes. Juego sin prueba visual por bloqueo file:// del navegador y aplazamiento del usuario. iOS no compilado en Windows. Parte8 bloqueada por Firebase faltante."
+    "GPS, notificaciones, audio/vibración y mapa físicos pendientes. Juego sin prueba visual por bloqueo file:// del navegador y aplazamiento del usuario. iOS no compilado en Windows. Configuración Firebase suministrada; Cloud Firestore real pendiente, continuar con emuladores."
   ],
   "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
   "local_pub_cache_verified": true,
-  "base_verified_commit": "e5e77dd",
+  "base_verified_commit": "690e368",
   "approved_frequency_hours": [
     {
       "start": "05:00",
@@ -220,8 +222,8 @@
   "browser_test_user_reply": "se puede realizar la prueba despues?",
   "firebase_apk_verification": {
     "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
-    "apk_bytes": 233298356,
-    "apk_sha256": "e04ed5475d8614e81a943a43859e8f2d4cfe91915e52e76ae80bd22e9d4e694e",
+    "apk_bytes": 271040931,
+    "apk_sha256": "e25c057c5370b53dbe4e7825a761b3e278eccb7a4810289584e7fa3482ff305b",
     "data_version": 2,
     "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
     "artwork_files_verified": 16,
@@ -255,6 +257,10 @@
     "placeholders": false,
     "same_project": true,
     "new_oauth_files_detected": true,
-    "deployed": false
-  }
+    "deployed": false,
+    "new_oauth_files_imported": true
+  },
+  "cloud_firestore_user_reply": "tengo lo demas menos el cloud firestore , podemos continuar asi?",
+  "cloud_firestore_live_deferred": true,
+  "account_erasure_decision": "Usuario delega opción óptima: borrar feedback/confirmaciones propios y decrementar contadores solo durante eliminación de cuenta; implementar/probar8E."
 }

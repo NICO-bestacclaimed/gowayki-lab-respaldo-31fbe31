@@ -71,6 +71,25 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Durante un viaje iniciado por ti, GoWayki mantiene la ubicación para avisarte dónde bajar aunque cambies de app. Se detiene al terminar.</string>
 	<key>UIBackgroundModes</key>
-	<array><string>location</string></array>
+	<array>
+		<string>location</string>
+	</array>
+	<key>GIDClientID</key>
+	<string>959294066022-esk3p3la0al73lrnbhspk5h6608mtb6m.apps.googleusercontent.com</string>
+	<key>GIDServerClientID</key>
+	<string>959294066022-7jl40t2irpfk5p9f2nn9j5b4og4es583.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>GoogleSignIn</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.959294066022-esk3p3la0al73lrnbhspk5h6608mtb6m</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

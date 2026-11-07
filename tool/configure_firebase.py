@@ -7,8 +7,9 @@ def literal(value):return json.dumps(str(value),ensure_ascii=False).replace('$',
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--android',type=Path,default=ROOT.parent/'google-services.json')
-    parser.add_argument('--ios',type=Path,default=ROOT.parent/'GoogleService-Info.plist')
+    parser.add_argument('--android',type=Path,default=(ROOT/'android/app/google-services.json' if (ROOT/'android/app/google-services.json').exists() else ROOT.parent/'google-services.json'))
+    parser.add_argument('--ios',type=Path,default=(ROOT/'ios/Runner/GoogleService-Info.plist' if (ROOT/'ios/Runner/GoogleService-Info.plist').exists() else ROOT.parent/'GoogleService-Info.plist'))
+    parser.add_argument('--require-google',action='store_true')
     args=parser.parse_args()
     android=json.loads(args.android.read_text(encoding='utf-8-sig'))
     ios=plistlib.loads(args.ios.read_bytes())
@@ -23,6 +24,28 @@ def main():
     ios_id=ios['GOOGLE_APP_ID']
     assert android_id.split(':')[2]=='android' and ios_id.split(':')[2]=='ios'
     assert not any('REEMPLAZAR' in str(v) for v in [project,android_id,ios_id,ios['API_KEY'],client['api_key'][0]['current_key']])
+    web_clients=list({c['client_id'] for c in client.get('oauth_client',[]) if c.get('client_type')==3})
+    if args.require_google:
+        assert len(web_clients)==1 and ios.get('CLIENT_ID') and ios.get('REVERSED_CLIENT_ID'),'Google OAuth incomplete or ambiguous'
+    server_client=web_clients[0] if len(web_clients)==1 else None
+    if server_client:assert server_client.endswith('.apps.googleusercontent.com'),'Invalid Google web client'
+    if ios.get('CLIENT_ID'):
+        assert ios['CLIENT_ID'].endswith('.apps.googleusercontent.com'),'Invalid Google iOS client'
+        assert ios.get('REVERSED_CLIENT_ID')=='com.googleusercontent.apps.'+ios['CLIENT_ID'].removesuffix('.apps.googleusercontent.com'),'iOS return URL does not match client'
+    google_text="// Generated from the supplied Google OAuth clients.\nclass GoogleOAuthOptions {\n"
+    for key,value in {'serverClientId':server_client,'iosClientId':ios.get('CLIENT_ID'),'iosReversedClientId':ios.get('REVERSED_CLIENT_ID')}.items():
+        google_text+=f'  static const {key} = '+(literal(value) if value else 'null')+';\n'
+    google_text+='}\n'
+    (ROOT/'lib/google_oauth_options.dart').write_text(google_text,encoding='utf-8')
+    if ios.get('REVERSED_CLIENT_ID'):
+        plist_path=ROOT/'ios/Runner/Info.plist'
+        info=plistlib.loads(plist_path.read_bytes())
+        info['GIDClientID']=ios['CLIENT_ID']
+        if server_client:info['GIDServerClientID']=server_client
+        entries=[e for e in info.get('CFBundleURLTypes',[]) if e.get('CFBundleURLName')!='GoogleSignIn']
+        entries.append({'CFBundleURLName':'GoogleSignIn','CFBundleTypeRole':'Editor','CFBundleURLSchemes':[ios['REVERSED_CLIENT_ID']]})
+        info['CFBundleURLTypes']=entries
+        plist_path.write_bytes(plistlib.dumps(info,sort_keys=False))
     for source,target in [(args.android,ROOT/'android/app/google-services.json'),(args.ios,ROOT/'ios/Runner/GoogleService-Info.plist')]:
         if source.resolve()!=target.resolve():shutil.copyfile(source,target)
         assert sha(source)==sha(target)

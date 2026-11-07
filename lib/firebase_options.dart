@@ -29,5 +29,7 @@ class DefaultFirebaseOptions {
     projectId: "gowayki-lab",
     storageBucket: "gowayki-lab.firebasestorage.app",
     iosBundleId: "pe.edu.tecsup.mobilityLab",
+    iosClientId:
+        "959294066022-esk3p3la0al73lrnbhspk5h6608mtb6m.apps.googleusercontent.com",
   );
 }
