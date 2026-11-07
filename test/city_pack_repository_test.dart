@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/services.dart';
+import 'package:gowayki_lab/domain/models/navigation_search.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gowayki_lab/infra/city_pack/city_pack_installer.dart';
 import 'package:gowayki_lab/infra/city_pack/city_pack_manifest.dart';
@@ -360,6 +361,57 @@ void main() {
       isFalse,
     );
   });
+
+  test(
+    'FTS de navegación encuentra grupos, ignora tildes y no altera el pack',
+    () async {
+      final before = sha256
+          .convert(await File(repository.installed.databasePath).readAsBytes())
+          .toString();
+      final tecsup = await repository.searchNavigation('tecsup');
+      expect(
+        tecsup.any(
+          (r) =>
+              r.group == NavigationSearchGroup.place &&
+              r.name.toLowerCase().contains('tecsup'),
+        ),
+        isTrue,
+      );
+      final line = await repository.searchNavigation('enace');
+      expect(
+        line.any(
+          (r) =>
+              r.group == NavigationSearchGroup.line &&
+              r.name == 'Enace' &&
+              r.point == null,
+        ),
+        isTrue,
+      );
+      final stops = await repository.searchNavigation('ronda');
+      expect(
+        stops.any(
+          (r) => r.group == NavigationSearchGroup.stop && r.point != null,
+        ),
+        isTrue,
+      );
+      final plain = await repository.searchNavigation('peru');
+      final accents = await repository.searchNavigation('perú');
+      expect(
+        plain.map((r) => '${r.group}:${r.id}').toSet(),
+        accents.map((r) => '${r.group}:${r.id}').toSet(),
+      );
+      expect(plain.any((r) => r.group == NavigationSearchGroup.street), isTrue);
+      expect(
+        await repository.searchNavigation('" OR *'),
+        isA<List<NavigationSearchResult>>(),
+      );
+      expect(await repository.searchNavigation(''), isEmpty);
+      final after = sha256
+          .convert(await File(repository.installed.databasePath).readAsBytes())
+          .toString();
+      expect(after, before);
+    },
+  );
 
   test('repairs corrupt local files and close rejects later queries', () async {
     // Close before replacing the file, including on Windows.

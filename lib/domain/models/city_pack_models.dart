@@ -104,3 +104,21 @@ class CityPackInfo {
   final int version;
   final DateTime generatedAt;
 }
+
+class CityStopService {
+  const CityStopService({
+    required this.lineId,
+    required this.patternId,
+    required this.routeId,
+    required this.direction,
+    required this.headsign,
+  });
+  final String lineId, patternId, routeId, direction, headsign;
+}
+
+class CityMapStop {
+  CityMapStop({required this.stop, required List<CityStopService> services})
+    : services = List.unmodifiable(services);
+  final CityStop stop;
+  final List<CityStopService> services;
+}

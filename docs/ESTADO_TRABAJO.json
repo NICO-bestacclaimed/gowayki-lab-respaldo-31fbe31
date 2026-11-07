@@ -1,6 +1,6 @@
 {
-  "stage": "Parte 3 completa y verificada; siguiente Parte 4A",
-  "last_tests": "63 Flutter passed; analyze no issues; debug APK built and payload hashes verified",
+  "stage": "Parte4 offline implementada y verificada; siguiente Parte5",
+  "last_tests": "84 Flutter passed; analyze no issues; Part4 debug APK data2 + 16 artwork + 12 map files and 3 native SQLite ABIs verified",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "Parte 4A: mapa offline Android, overzoom z18, tema oscuro y documentación; pendiente respuesta sobre URL PMTiles web.",
+  "next_action": "5A: sustituir planificación demo por PlannerWorker y resultados reales con mapas. Seguir 5B–5E salvo conflicto.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -27,13 +27,13 @@
     "stops.txt",
     "shapes.txt"
   ],
-  "flutter_validation": "source/assets v2 and Part3 debug APK verified",
-  "verified_at": "2026-11-06T23:40:46.353391+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte3-verificada-20261106T234046Z.zip",
+  "flutter_validation": "source/assets v2 and Part4 offline debug APK verified",
+  "verified_at": "2026-11-07T00:10:49.661933+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte4-offline-verificada-20261107T001049Z.zip",
   "quota_warning_observed": false,
   "checks": {
     "python_tests": 76,
-    "flutter_total_tests": 63,
+    "flutter_total_tests": 84,
     "planner_new_tests": 14,
     "flutter_analyze": "No issues found",
     "source_hashes_verified": 5,
@@ -46,7 +46,7 @@
     "toy_vehicle_minutes": 26,
     "toy_transfers": 2,
     "toy_fare_pen": 3,
-    "android_apk": "Part3 debug built, dataVersion2 and 16 artworks verified",
+    "android_apk": "Part4 offline debug built and payloads verified",
     "device_runtime": "not tested",
     "real_trips_and_benchmark": "deferred to 2D",
     "real_trips": "3 passed, each with transit 10–90 minutes",
@@ -58,7 +58,13 @@
     },
     "android_midrange_validated": false,
     "benchmark_results_match_reference": true,
-    "gradle_daemon": "stopped"
+    "gradle_daemon": "stopped",
+    "map_native_tests": 5,
+    "map_web_compiled": false,
+    "map_device_rendering": false,
+    "navigation_fts_groups": 4,
+    "map_used_stops": 6128,
+    "map_lines": 98
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -66,11 +72,11 @@
     "Avisos de compatibilidad futura Firebase/Kotlin, Java y metadatos SDK Android",
     "Horarios de frecuencia aprobados e incluidos en revisión 2",
     "Parte2 completa funcionalmente en Windows; rendimiento Android de gama media pendiente por disponibilidad de dispositivo",
-    "Pantalla de resultados demo hasta integración de Parte5; cartografía oscura y soporte web pendientes de Parte4."
+    "MapLibre nativo, modo avión, overzoom visual y FPS no comprobados en dispositivo; variante web aplazada por decisión offline. Pantalla final de resultados pendiente de Parte5."
   ],
   "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
   "local_pub_cache_verified": true,
-  "base_verified_commit": "a45b97c",
+  "base_verified_commit": "9e6e28d",
   "approved_frequency_hours": [
     {
       "start": "05:00",
@@ -151,22 +157,23 @@
     },
     "device_runtime": "not tested"
   },
-  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte3B-verificada-20261106T231952Z.zip",
+  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte4A-offline-verificada-20261106T234925Z.zip",
   "data_version": 2,
   "continue_between_sections_authorized": true,
   "android_available": false,
-  "completion_commit_message": "feat: implementar planificador offline con horarios y rutas Pareto",
+  "completion_commit_message": "feat: completar mapa offline y búsqueda de origen y destino",
   "provided_images_directory": "C:\\Proyecto_001\\Imagenes- Proyecto001",
   "provided_original_images_copied": 16,
   "artwork_integrity": "SHA-256 copies verified",
   "legal_urls_exist": false,
   "current_apk_verification": {
     "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
-    "apk_bytes": 240903110,
-    "apk_sha256": "76c9655869bf68a2d9793d5d346df15f70d03b9b7a0fabaa9ff51f706386505f",
+    "apk_bytes": 240970007,
+    "apk_sha256": "706ed81dd75cfb2b427068a4be8abd6f1fbc2f04a8e1c84a9074f454ce3f1a2f",
     "data_version": 2,
     "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
     "artwork_files_verified": 16,
+    "map_files_verified": 12,
     "payloads": "verified",
     "legacy_gtfs_assets": "absent",
     "sqlite_native": {
@@ -186,5 +193,6 @@
         "fts5": true
       }
     }
-  }
+  },
+  "map_scope": "Usuario: Que use el maplibre Offline. Continuar nativo con MBTiles local; web/PMTiles aplazado."
 }

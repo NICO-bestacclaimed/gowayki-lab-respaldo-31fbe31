@@ -3,6 +3,7 @@ from pathlib import Path
 import hashlib
 import json
 import zipfile
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 APK = ROOT / 'build/app/outputs/flutter-apk/app-debug.apk'
@@ -12,6 +13,7 @@ def sha(data):
 def main():
     manifest = json.loads((ROOT / 'assets/city/arequipa/manifest.json').read_text(encoding='utf-8'))
     artwork = json.loads((ROOT / 'tool/data/artwork_sources.json').read_text(encoding='utf-8'))
+    map_manifest = json.loads((ROOT / 'assets/map/manifest.json').read_text(encoding='utf-8'))
     official = {
         'armeabi-v7a': 'f33868d94e80992af137c7cf046a99406800f15434e289733cf472346be00ed4',
         'arm64-v8a': 'e684ef8646ffd48b95bae58bf29c55ffd85acebac2a7118ffde9fd02df37d629',
@@ -25,6 +27,11 @@ def main():
             assert len(data) == info['bytes'] and sha(data) == info['sha256'], filename
         for entry in artwork['files']:
             assert sha(apk.read(prefix+entry['asset'])) == entry['sha256'], entry['asset']
+        assert apk.read(prefix+'assets/map/manifest.json') == (ROOT/'assets/map/manifest.json').read_bytes()
+        for name, info in map_manifest['files'].items():
+            # Flutter stores asset paths as URI paths (font directories contain spaces).
+            data = apk.read(prefix+quote('assets/map/'+name, safe='/'))
+            assert len(data) == info['bytes'] and sha(data) == info['sha256'], name
         assert not any('/assets/gtfs/' in name for name in apk.namelist())
         libraries = {}
         for abi, expected in official.items():
@@ -37,7 +44,7 @@ def main():
             libraries[abi] = {'official_merged_hash': expected, 'apk_hash': sha(native), 'fts5': True}
     print(json.dumps({'apk': str(APK), 'apk_bytes': APK.stat().st_size, 'apk_sha256': sha(APK.read_bytes()),
         'data_version': manifest['version'], 'pack_sha256': manifest['sha256'], 'artwork_files_verified': len(artwork['files']),
-        'payloads': 'verified', 'legacy_gtfs_assets': 'absent', 'sqlite_native': libraries}, ensure_ascii=False, indent=2))
+        'map_files_verified': len(map_manifest['files']), 'payloads': 'verified', 'legacy_gtfs_assets': 'absent', 'sqlite_native': libraries}, ensure_ascii=False, indent=2))
 
 if __name__ == '__main__':
     main()

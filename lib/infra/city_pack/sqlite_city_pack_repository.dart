@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'dart:isolate';
+import 'sqlite_map_reader.dart';
 
 import 'package:sqlite3/sqlite3.dart';
 
 import '../../core/models/transit_line.dart';
+import '../../core/models/place_result.dart';
+import '../../domain/models/navigation_search.dart';
 import '../../domain/models/city_pack_models.dart';
 import '../../domain/repositories/city_pack_repository.dart';
 import 'city_pack_installer.dart';
@@ -33,6 +37,13 @@ class SqliteCityPackRepository implements CityPackRepository {
       generatedAt: manifest.generatedAt,
       sha256: manifest.sha256,
     );
+  }
+
+  @override
+  Future<List<CityMapStop>> mapStops() async {
+    _ensureOpen();
+    final path = installed.databasePath;
+    return Isolate.run(() => readMapStops(path));
   }
 
   CityPackManifest get manifest => installed.manifest;
@@ -104,6 +115,97 @@ class SqliteCityPackRepository implements CityPackRepository {
     needsReview: row['needs_review'] == 1,
     usedInPatterns: row['used_in_patterns'] == 1,
   );
+
+  bool _searchIndexReady = false;
+  void _ensureSearchIndex() {
+    if (_searchIndexReady) return;
+    // TEMP lives only on this connection; bundled SQLite stays read-only.
+    _db.execute('DROP TABLE IF EXISTS temp.navigation_fts');
+    _db.execute(
+      '''CREATE VIRTUAL TABLE temp.navigation_fts USING fts5(kind UNINDEXED,ref UNINDEXED,name,detail,tokenize="unicode61 remove_diacritics 2")''',
+    );
+    _db.execute('''INSERT INTO temp.navigation_fts(kind,ref,name,detail)
+      SELECT 'stop',stop_id,name,'' FROM stops WHERE used_in_patterns=1''');
+    _db.execute('''INSERT INTO temp.navigation_fts(kind,ref,name,detail)
+      SELECT 'line',l.line_id,l.name,COALESCE(group_concat(p.headsign,' '),'')
+      FROM lines l LEFT JOIN patterns p USING(line_id) GROUP BY l.line_id''');
+    _searchIndexReady = true;
+  }
+
+  @override
+  Future<List<NavigationSearchResult>> searchNavigation(String query) async {
+    _ensureOpen();
+    if (query.length > 512) throw ArgumentError('Query too long');
+    final expression = RegExp(
+      r'[\p{L}\p{N}]+',
+      unicode: true,
+    ).allMatches(query).take(12).map((m) => '"${m[0]}"*').join(' AND ');
+    if (expression.isEmpty) return const [];
+    _ensureSearchIndex();
+    final results = <NavigationSearchResult>[];
+    for (final place in await searchPlaces(query, limit: 100)) {
+      final group = place.category == 'street'
+          ? NavigationSearchGroup.street
+          : NavigationSearchGroup.place;
+      if (results.where((r) => r.group == group).length >= 20) continue;
+      results.add(
+        NavigationSearchResult(
+          id: place.id,
+          name: place.name,
+          detail: place.address,
+          group: group,
+          point: PlaceResult(
+            id: place.id,
+            name: place.name,
+            address: place.address,
+            latitude: place.latitude,
+            longitude: place.longitude,
+          ),
+        ),
+      );
+    }
+    for (final kind in ['stop', 'line']) {
+      final rows = _db.select(
+        '''SELECT kind,ref,name,detail FROM temp.navigation_fts
+        WHERE navigation_fts MATCH ? AND kind=? ORDER BY bm25(navigation_fts,0,0,5,1),ref LIMIT 20''',
+        [expression, kind],
+      );
+      for (final row in rows) {
+        final id = row['ref'] as String;
+        if (kind == 'line') {
+          results.add(
+            NavigationSearchResult(
+              id: id,
+              name: row['name'] as String,
+              detail: row['detail'] as String,
+              group: NavigationSearchGroup.line,
+            ),
+          );
+        } else {
+          final value = await stop(id);
+          if (value != null) {
+            results.add(
+              NavigationSearchResult(
+                id: id,
+                name: value.name,
+                detail: '',
+                group: NavigationSearchGroup.stop,
+                needsReview: value.needsReview,
+                point: PlaceResult(
+                  id: id,
+                  name: value.name,
+                  address: '',
+                  latitude: value.latitude,
+                  longitude: value.longitude,
+                ),
+              ),
+            );
+          }
+        }
+      }
+    }
+    return List.unmodifiable(results);
+  }
 
   @override
   Future<List<CityStop>> stops({int limit = 100, int offset = 0}) async {

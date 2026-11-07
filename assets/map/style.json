@@ -10,7 +10,15 @@
   "openmaptiles": {
    "type": "vector",
    "url": "mbtiles://{MAP_DIR}/arequipa.mbtiles",
-   "attribution": "© OpenMapTiles © OpenStreetMap contributors"
+   "attribution": "© OpenMapTiles © OpenStreetMap contributors",
+   "minzoom": 0,
+   "maxzoom": 14,
+   "bounds": [
+    -71.72,
+    -16.6,
+    -71.4,
+    -16.26
+   ]
   }
  },
  "glyphs": "file://{MAP_DIR}/fonts/{fontstack}/{range}.pbf",

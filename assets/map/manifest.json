@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "city_code": "arequipa",
+  "files": {
+    "arequipa.mbtiles": {
+      "bytes": 3444736,
+      "sha256": "36ac8fe067161b6bd2bd2a0209e01f72883b71db5db662804f976c1a4ccffe80"
+    },
+    "fonts/Noto Sans Bold/0-255.pbf": {
+      "bytes": 81170,
+      "sha256": "f60ce4cb899455c2203bd8293b550394ade53ffce8032bf9cc7f59255e49259c"
+    },
+    "fonts/Noto Sans Bold/256-511.pbf": {
+      "bytes": 134545,
+      "sha256": "77c830f114b84a58f8829ca1eac4627a6a688bbce4bdb6a04de00f98fa74bb52"
+    },
+    "fonts/Noto Sans Bold/8192-8447.pbf": {
+      "bytes": 35678,
+      "sha256": "f31c3c9dcacbd7f9760462c0af5017d9c9f2a9543ab4938476f7a13ffabf0acf"
+    },
+    "fonts/Noto Sans Italic/0-255.pbf": {
+      "bytes": 79907,
+      "sha256": "ae9c8894b4d2b6297da76a2e875685046f1f037f1a571ae006160a5540406086"
+    },
+    "fonts/Noto Sans Italic/256-511.pbf": {
+      "bytes": 132406,
+      "sha256": "82be737a8568cc3ef2beaa3f137d8698740ffef1b880076f21c2796c9e0c8c00"
+    },
+    "fonts/Noto Sans Italic/8192-8447.pbf": {
+      "bytes": 34787,
+      "sha256": "da51f9be11f7bddc1c5ea052c1305eb9440790ad7cb79bf27e57f7a04c952427"
+    },
+    "fonts/Noto Sans Regular/0-255.pbf": {
+      "bytes": 76580,
+      "sha256": "ef1f38a3f1978591e846e9eaddf8a54f7047f546fc6aaed7872cc53151a5de78"
+    },
+    "fonts/Noto Sans Regular/256-511.pbf": {
+      "bytes": 127219,
+      "sha256": "992557f9e2574cfb9a75e16c7b52832578849772b7c9a6e480d6213fb008fe5d"
+    },
+    "fonts/Noto Sans Regular/8192-8447.pbf": {
+      "bytes": 34070,
+      "sha256": "f061e5b4e42e5925228534d8822b423a029569263db09f5ce44573600d45295f"
+    },
+    "style-dark.json": {
+      "bytes": 16363,
+      "sha256": "d59cb1cc849583e181fe88ddf1e721a5e2dbe29f616c2f4b56eb35c4014027d3"
+    },
+    "style.json": {
+      "bytes": 16363,
+      "sha256": "8fbf0cd903794d342020a9603a4c04a622028318fd20bcd9567423102b07e6ea"
+    }
+  }
+}

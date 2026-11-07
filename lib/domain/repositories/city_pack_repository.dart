@@ -1,4 +1,5 @@
 import '../models/city_pack_models.dart';
+import '../models/navigation_search.dart';
 import 'transit_network_repository.dart';
 
 abstract interface class CityPackRepository
@@ -13,5 +14,7 @@ abstract interface class CityPackRepository
   Future<Map<String, Object?>> configuration();
   Future<CityFare?> fareForLine(String lineId);
   Future<CityPackInfo> packageInfo();
+  Future<List<CityMapStop>> mapStops();
+  Future<List<NavigationSearchResult>> searchNavigation(String query);
   Future<void> close();
 }

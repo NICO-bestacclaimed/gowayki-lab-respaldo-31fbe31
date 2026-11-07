@@ -192,5 +192,33 @@
         "type": "String"
       }
     }
+  },
+  "nearbyStops": "Paraderos cerca de ti",
+  "estimatedName": "Nombre estimado · pendiente de revisión",
+  "home": "Casa",
+  "work": "Trabajo",
+  "goHere": "Ir aquí",
+  "leaveHere": "Salir desde aquí",
+  "selectedPoint": "Punto elegido en el mapa",
+  "origin": "Origen",
+  "destination": "Destino",
+  "choosePoints": "Elegir puntos del viaje",
+  "usePoints": "Usar estos puntos",
+  "swapPoints": "Intercambiar origen y destino",
+  "myLocation": "Mi ubicación",
+  "recent": "Recientes",
+  "places": "Lugares",
+  "stops": "Paraderos",
+  "streets": "Calles",
+  "chooseStop": "Selecciona un paradero de esta línea",
+  "showRoutes": "Mostrar rutas",
+  "hideRoutes": "Ocultar rutas",
+  "approxWalk": "~{meters} m a pie",
+  "@approxWalk": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
   }
 }

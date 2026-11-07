@@ -123,5 +123,33 @@
   "walkingLimit": "Up to {meters} m",
   "automaticWalking": "Automatic ({initial}–{fallback} m)",
   "dataVersion": "Data version: {version}",
-  "dataBuiltAt": "Package built on {date}"
+  "dataBuiltAt": "Package built on {date}",
+  "nearbyStops": "Stops near you",
+  "estimatedName": "Estimated name · awaiting review",
+  "home": "Home",
+  "work": "Work",
+  "goHere": "Go here",
+  "leaveHere": "Leave from here",
+  "selectedPoint": "Point selected on the map",
+  "origin": "Origin",
+  "destination": "Destination",
+  "choosePoints": "Choose trip points",
+  "usePoints": "Use these points",
+  "swapPoints": "Swap origin and destination",
+  "myLocation": "My location",
+  "recent": "Recent",
+  "places": "Places",
+  "stops": "Stops",
+  "streets": "Streets",
+  "chooseStop": "Select a stop on this line",
+  "showRoutes": "Show routes",
+  "hideRoutes": "Hide routes",
+  "approxWalk": "~{meters} m on foot",
+  "@approxWalk": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -841,6 +841,132 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Paquete compilado el {date}'**
   String dataBuiltAt(String date);
+
+  /// No description provided for @nearbyStops.
+  ///
+  /// In es, this message translates to:
+  /// **'Paraderos cerca de ti'**
+  String get nearbyStops;
+
+  /// No description provided for @estimatedName.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre estimado · pendiente de revisión'**
+  String get estimatedName;
+
+  /// No description provided for @home.
+  ///
+  /// In es, this message translates to:
+  /// **'Casa'**
+  String get home;
+
+  /// No description provided for @work.
+  ///
+  /// In es, this message translates to:
+  /// **'Trabajo'**
+  String get work;
+
+  /// No description provided for @goHere.
+  ///
+  /// In es, this message translates to:
+  /// **'Ir aquí'**
+  String get goHere;
+
+  /// No description provided for @leaveHere.
+  ///
+  /// In es, this message translates to:
+  /// **'Salir desde aquí'**
+  String get leaveHere;
+
+  /// No description provided for @selectedPoint.
+  ///
+  /// In es, this message translates to:
+  /// **'Punto elegido en el mapa'**
+  String get selectedPoint;
+
+  /// No description provided for @origin.
+  ///
+  /// In es, this message translates to:
+  /// **'Origen'**
+  String get origin;
+
+  /// No description provided for @destination.
+  ///
+  /// In es, this message translates to:
+  /// **'Destino'**
+  String get destination;
+
+  /// No description provided for @choosePoints.
+  ///
+  /// In es, this message translates to:
+  /// **'Elegir puntos del viaje'**
+  String get choosePoints;
+
+  /// No description provided for @usePoints.
+  ///
+  /// In es, this message translates to:
+  /// **'Usar estos puntos'**
+  String get usePoints;
+
+  /// No description provided for @swapPoints.
+  ///
+  /// In es, this message translates to:
+  /// **'Intercambiar origen y destino'**
+  String get swapPoints;
+
+  /// No description provided for @myLocation.
+  ///
+  /// In es, this message translates to:
+  /// **'Mi ubicación'**
+  String get myLocation;
+
+  /// No description provided for @recent.
+  ///
+  /// In es, this message translates to:
+  /// **'Recientes'**
+  String get recent;
+
+  /// No description provided for @places.
+  ///
+  /// In es, this message translates to:
+  /// **'Lugares'**
+  String get places;
+
+  /// No description provided for @stops.
+  ///
+  /// In es, this message translates to:
+  /// **'Paraderos'**
+  String get stops;
+
+  /// No description provided for @streets.
+  ///
+  /// In es, this message translates to:
+  /// **'Calles'**
+  String get streets;
+
+  /// No description provided for @chooseStop.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona un paradero de esta línea'**
+  String get chooseStop;
+
+  /// No description provided for @showRoutes.
+  ///
+  /// In es, this message translates to:
+  /// **'Mostrar rutas'**
+  String get showRoutes;
+
+  /// No description provided for @hideRoutes.
+  ///
+  /// In es, this message translates to:
+  /// **'Ocultar rutas'**
+  String get hideRoutes;
+
+  /// No description provided for @approxWalk.
+  ///
+  /// In es, this message translates to:
+  /// **'~{meters} m a pie'**
+  String approxWalk(int meters);
 }
 
 class _AppLocalizationsDelegate

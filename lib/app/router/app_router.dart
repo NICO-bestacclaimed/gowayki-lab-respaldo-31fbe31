@@ -1,3 +1,4 @@
+import '../features/search/presentation/search_screen.dart';
 import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,11 +20,7 @@ import '../features/location/presentation/screens/location_disclosure_screen.dar
 
 final explorePageBuilderProvider = Provider<WidgetBuilder>(
   (ref) =>
-      (context) => ExplorerScreen(
-        onPlanTrip: (destination) =>
-            context.push('/planificar', extra: destination),
-        onOpenMenu: () => context.push('/menu'),
-      ),
+      (context) => ExplorerScreen(onOpenMenu: () => context.push('/menu')),
 );
 final initialLocationProvider = Provider<String?>((ref) => null);
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -132,6 +129,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             body: Center(child: Text(context.l10n.chooseDestination)),
           );
         },
+      ),
+      GoRoute(
+        path: '/buscar',
+        builder: (context, state) => SearchScreen(
+          arguments: state.extra is SearchArguments
+              ? state.extra as SearchArguments
+              : const SearchArguments(),
+        ),
       ),
       GoRoute(
         path: '/menu',

@@ -427,4 +427,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String dataBuiltAt(String date) {
     return 'Package built on $date';
   }
+
+  @override
+  String get nearbyStops => 'Stops near you';
+
+  @override
+  String get estimatedName => 'Estimated name · awaiting review';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get work => 'Work';
+
+  @override
+  String get goHere => 'Go here';
+
+  @override
+  String get leaveHere => 'Leave from here';
+
+  @override
+  String get selectedPoint => 'Point selected on the map';
+
+  @override
+  String get origin => 'Origin';
+
+  @override
+  String get destination => 'Destination';
+
+  @override
+  String get choosePoints => 'Choose trip points';
+
+  @override
+  String get usePoints => 'Use these points';
+
+  @override
+  String get swapPoints => 'Swap origin and destination';
+
+  @override
+  String get myLocation => 'My location';
+
+  @override
+  String get recent => 'Recent';
+
+  @override
+  String get places => 'Places';
+
+  @override
+  String get stops => 'Stops';
+
+  @override
+  String get streets => 'Streets';
+
+  @override
+  String get chooseStop => 'Select a stop on this line';
+
+  @override
+  String get showRoutes => 'Show routes';
+
+  @override
+  String get hideRoutes => 'Hide routes';
+
+  @override
+  String approxWalk(int meters) {
+    return '~$meters m on foot';
+  }
 }
