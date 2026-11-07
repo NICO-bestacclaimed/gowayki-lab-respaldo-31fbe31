@@ -1,6 +1,6 @@
 {
-  "stage": "8B validado; continuar8C–8E",
-  "last_tests": "149 Flutter;32 emulador (28reglas+4auth);analyze limpio;APK Firebase8B compilado y recursos OAuth/payloads verificados",
+  "stage": "8C verificado; continuar8D–8E",
+  "last_tests": "158 suite completa Flutter +17 dirigidas finales;36 emulador;analyze limpio;ambos APK8C compilados/payloads verificados",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "8C sincronización local-first con aislamiento de cuentas; luego8D reportes/ayuda y8E perfil/ranking/eliminación completa autorizada. Firestore real pendiente por decisión del usuario.",
+  "next_action": "8D reportes72h, confirmaciones únicas y ayuda con metadatos reales; después8E perfil/ranking y eliminación completa según excepción autorizada. Continuar con emulador: Firestore real aplazada por usuario.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -28,7 +28,7 @@
     "shapes.txt"
   ],
   "flutter_validation": "Part5 source tests/analyze and debug APK verified",
-  "verified_at": "2026-11-07T16:33:03.059351+00:00",
+  "verified_at": "2026-11-07T16:55:22.202481+00:00",
   "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte8A-verificada-20261107T154225Z.zip",
   "quota_warning_observed": true,
   "checks": {
@@ -79,12 +79,14 @@
     "game_sprite_bytes": 47734,
     "game_browser_visual": "deferred by user after file URL blocked",
     "game_android_runtime": "not tested",
-    "firestore_rules_tests": 28,
+    "firestore_rules_tests": 32,
     "firebase_seed_local": "passed",
     "firebase_dual_apk": "passed",
     "emulators": "stopped",
     "firebase_auth_emulator_tests": 4,
-    "firebase_auth_form_tests": 7
+    "firebase_auth_form_tests": 7,
+    "personal_sync_new_tests": 10,
+    "personal_sync_dual_apk": "passed"
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -96,7 +98,7 @@
   ],
   "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
   "local_pub_cache_verified": true,
-  "base_verified_commit": "690e368",
+  "base_verified_commit": "f49071e",
   "approved_frequency_hours": [
     {
       "start": "05:00",
@@ -188,8 +190,8 @@
   "legal_urls_exist": false,
   "current_apk_verification": {
     "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
-    "apk_bytes": 270919188,
-    "apk_sha256": "2bd27a8a3e64d3983e174d638fd19a29709b06a3520273878592e5d3c05ef7b8",
+    "apk_bytes": 271072121,
+    "apk_sha256": "1a99f83900fa99a6f8dd6f555b4d8246b51919a6b6b1e90dffcb60108f0a8af3",
     "data_version": 2,
     "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
     "artwork_files_verified": 16,
@@ -222,8 +224,8 @@
   "browser_test_user_reply": "se puede realizar la prueba despues?",
   "firebase_apk_verification": {
     "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
-    "apk_bytes": 271040931,
-    "apk_sha256": "e25c057c5370b53dbe4e7825a761b3e278eccb7a4810289584e7fa3482ff305b",
+    "apk_bytes": 271071242,
+    "apk_sha256": "7982a729f222411a83c16f0715149226c88cc4dd57e267f21e61bd8eb84b9332",
     "data_version": 2,
     "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
     "artwork_files_verified": 16,

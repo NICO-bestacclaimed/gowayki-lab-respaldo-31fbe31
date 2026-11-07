@@ -849,4 +849,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authUpgrade => 'Connect or create my account';
+
+  @override
+  String get syncTitle => 'Your data';
+
+  @override
+  String get syncLocal => 'Saved on this device.';
+
+  @override
+  String get syncNeedsSession =>
+      'Sign in to sync your favorites and saved trips.';
+
+  @override
+  String get syncWaiting => 'Saved on this device. Waiting to sync…';
+
+  @override
+  String get syncWorking => 'Syncing…';
+
+  @override
+  String get syncDone => 'Synced with your account.';
+
+  @override
+  String get syncUnavailable => 'Saved on this device. Sync is unavailable.';
+
+  @override
+  String get syncRetry => 'Retry sync';
 }

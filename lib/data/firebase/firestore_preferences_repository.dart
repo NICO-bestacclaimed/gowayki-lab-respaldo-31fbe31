@@ -7,8 +7,8 @@ class FirestorePreferencesRepository implements PreferencesRepository {
   FirestorePreferencesRepository({
     FirebaseFirestore? firestore,
     FirebaseAuth? auth,
-  })  : _db = firestore ?? FirebaseFirestore.instance,
-        _auth = auth ?? FirebaseAuth.instance;
+  }) : _db = firestore ?? FirebaseFirestore.instance,
+       _auth = auth ?? FirebaseAuth.instance;
 
   final FirebaseFirestore _db;
   final FirebaseAuth _auth;
@@ -16,7 +16,11 @@ class FirestorePreferencesRepository implements PreferencesRepository {
   DocumentReference<Map<String, dynamic>>? get _doc {
     final uid = _auth.currentUser?.uid;
     if (uid == null) return null;
-    return _db.collection('profiles').doc(uid);
+    return _db
+        .collection('users')
+        .doc(uid)
+        .collection('preferences')
+        .doc('settings');
   }
 
   @override

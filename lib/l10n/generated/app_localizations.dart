@@ -1549,6 +1549,54 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Conectar o crear mi cuenta'**
   String get authUpgrade;
+
+  /// No description provided for @syncTitle.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus datos'**
+  String get syncTitle;
+
+  /// No description provided for @syncLocal.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardados en este equipo.'**
+  String get syncLocal;
+
+  /// No description provided for @syncNeedsSession.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicia sesión para sincronizar tus favoritos y viajes.'**
+  String get syncNeedsSession;
+
+  /// No description provided for @syncWaiting.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardados en este equipo. Esperando sincronización…'**
+  String get syncWaiting;
+
+  /// No description provided for @syncWorking.
+  ///
+  /// In es, this message translates to:
+  /// **'Sincronizando…'**
+  String get syncWorking;
+
+  /// No description provided for @syncDone.
+  ///
+  /// In es, this message translates to:
+  /// **'Sincronizados con tu cuenta.'**
+  String get syncDone;
+
+  /// No description provided for @syncUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardados en este equipo. No se pudo sincronizar.'**
+  String get syncUnavailable;
+
+  /// No description provided for @syncRetry.
+  ///
+  /// In es, this message translates to:
+  /// **'Reintentar sincronización'**
+  String get syncRetry;
 }
 
 class _AppLocalizationsDelegate

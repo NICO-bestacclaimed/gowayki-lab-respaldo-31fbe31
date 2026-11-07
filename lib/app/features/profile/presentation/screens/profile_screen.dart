@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../providers/app_providers.dart';
 import '../../../game/game_screen.dart';
 import '../../../../game/game_preferences.dart';
+import '../../../../sync/personal_sync_tile.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -72,6 +73,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
           ],
           const SizedBox(height: 24),
+          const PersonalSyncTile(),
           if (ref.watch(gameSupportedProvider))
             ListTile(
               key: const ValueKey('game.profile'),

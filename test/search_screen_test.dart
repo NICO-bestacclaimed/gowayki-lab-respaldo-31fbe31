@@ -2,6 +2,7 @@ import 'package:gowayki_lab/app/providers/location_providers.dart';
 import 'package:gowayki_lab/domain/repositories/position_repository.dart';
 import 'package:gowayki_lab/domain/planner/itinerary.dart';
 import 'dart:async';
+import 'package:gowayki_lab/app/sync/personal_data.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -58,6 +59,7 @@ void main() {
     tecsup = (await services.cityPack.searchNavigation(
       'tecsup',
     )).firstWhere((r) => r.group == NavigationSearchGroup.place).point!;
+    await container.read(personalDataProvider.future);
     container.read(recentPlacesProvider);
   });
   tearDown(() async {

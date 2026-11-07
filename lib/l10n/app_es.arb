@@ -472,5 +472,13 @@
   "authHaveAccount": "Ya tengo una cuenta",
   "authForgotPassword": "¿Olvidaste tu contraseña?",
   "authGoogle": "Continuar con Google",
-  "authUpgrade": "Conectar o crear mi cuenta"
+  "authUpgrade": "Conectar o crear mi cuenta",
+  "syncTitle": "Tus datos",
+  "syncLocal": "Guardados en este equipo.",
+  "syncNeedsSession": "Inicia sesión para sincronizar tus favoritos y viajes.",
+  "syncWaiting": "Guardados en este equipo. Esperando sincronización…",
+  "syncWorking": "Sincronizando…",
+  "syncDone": "Sincronizados con tu cuenta.",
+  "syncUnavailable": "Guardados en este equipo. No se pudo sincronizar.",
+  "syncRetry": "Reintentar sincronización"
 }

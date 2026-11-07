@@ -849,4 +849,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get authUpgrade => 'Conectar o crear mi cuenta';
+
+  @override
+  String get syncTitle => 'Tus datos';
+
+  @override
+  String get syncLocal => 'Guardados en este equipo.';
+
+  @override
+  String get syncNeedsSession =>
+      'Inicia sesión para sincronizar tus favoritos y viajes.';
+
+  @override
+  String get syncWaiting =>
+      'Guardados en este equipo. Esperando sincronización…';
+
+  @override
+  String get syncWorking => 'Sincronizando…';
+
+  @override
+  String get syncDone => 'Sincronizados con tu cuenta.';
+
+  @override
+  String get syncUnavailable =>
+      'Guardados en este equipo. No se pudo sincronizar.';
+
+  @override
+  String get syncRetry => 'Reintentar sincronización';
 }

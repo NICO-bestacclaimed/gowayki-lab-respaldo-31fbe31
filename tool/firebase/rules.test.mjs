@@ -2,7 +2,7 @@ import {readFileSync} from 'node:fs';
 import {before,after,beforeEach,test} from 'node:test';
 import assert from 'node:assert/strict';
 import {initializeTestEnvironment,assertSucceeds,assertFails} from '@firebase/rules-unit-testing';
-import {doc,setDoc,getDoc,updateDoc,deleteDoc,writeBatch,serverTimestamp,Timestamp,collection,getDocs,query,where} from 'firebase/firestore';
+import {doc,setDoc,getDoc,updateDoc,deleteDoc,writeBatch,serverTimestamp,Timestamp,collection,getDocs,query,where,runTransaction} from 'firebase/firestore';
 import {seedCity,cityDocument} from './seed.mjs';
 let env;
 const project=process.env.GCLOUD_PROJECT;
@@ -134,4 +134,35 @@ test('leaderboard rejects impossible scores, invalid durations and wrong paths',
 test('unknown collections are denied by default',async()=>{
   await assertFails(setDoc(doc(real('alice'),'admin/settings'),{owner:'alice'}));
   await assertFails(getDoc(doc(publicDb(),'admin/settings')));
+});
+
+// Sync protocol: each item has an independent revision and deletion marker.
+const personal=(key,stamp,value,device='test')=>({key,stamp,device,value});
+async function pushPersonal(db,path,local) {
+ return runTransaction(db,async tx=>{
+  const ref=doc(db,path),snapshot=await tx.get(ref),remote=snapshot.data();
+  if(!remote || local.stamp>remote.stamp || (local.stamp===remote.stamp && local.device>remote.device)) { tx.set(ref,local);return local; }
+  return remote;
+ });
+}
+test('personal state transaction writes own item and rejects a different uid',async()=>{
+ const db=real('alice'),path='users/alice/state/item';
+ await assertSucceeds(pushPersonal(db,path,personal('line:a',1,true)));
+ await assertFails(pushPersonal(real('bob'),path,personal('line:a',2,null)));
+ await assertFails(getDocs(collection(real('bob'),'users/alice/state')));
+});
+test('late offline revision cannot overwrite a newer server deletion',async()=>{
+ const db=real('alice'),path='users/alice/state/item';
+ await pushPersonal(db,path,personal('line:a',3,null));
+ const result=await pushPersonal(db,path,personal('line:a',2,true));
+ assert.equal(result.value,null);assert.equal((await getDoc(doc(db,path))).data().stamp,3);
+});
+test('independent devices retain independent favorites and saved journeys',async()=>{
+ const db=real('alice');
+ await Promise.all([pushPersonal(db,'users/alice/state/line',personal('line:a',1,true,'one')),pushPersonal(db,'users/alice/state/trip',personal('library:trip',1,{fixture:true},'two'))]);
+ assert.equal((await getDocs(collection(db,'users/alice/state'))).size,2);
+});
+test('anonymous state supports transaction sync and remains private',async()=>{
+ const db=anon('guest');await assertSucceeds(pushPersonal(db,'users/guest/state/item',personal('line:a',1,true)));
+ await assertFails(getDoc(doc(real('alice'),'users/guest/state/item')));
 });

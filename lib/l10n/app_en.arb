@@ -403,5 +403,13 @@
   "authHaveAccount": "I already have an account",
   "authForgotPassword": "Forgot your password?",
   "authGoogle": "Continue with Google",
-  "authUpgrade": "Connect or create my account"
+  "authUpgrade": "Connect or create my account",
+  "syncTitle": "Your data",
+  "syncLocal": "Saved on this device.",
+  "syncNeedsSession": "Sign in to sync your favorites and saved trips.",
+  "syncWaiting": "Saved on this device. Waiting to sync…",
+  "syncWorking": "Syncing…",
+  "syncDone": "Synced with your account.",
+  "syncUnavailable": "Saved on this device. Sync is unavailable.",
+  "syncRetry": "Retry sync"
 }

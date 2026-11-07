@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../sync/personal_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/models/auth_user.dart';
@@ -83,41 +84,40 @@ final favoriteLineIdsProvider = NotifierProvider<FavoriteLineIds, Set<String>>(
 
 class FavoriteLineIds extends Notifier<Set<String>> {
   static const storageKey = 'favorites.line_ids';
-  Future<void>? _pending;
   @override
-  Set<String> build() => Set.unmodifiable(
-    ref
-            .watch(appServicesProvider)
-            .requireValue
-            .localPreferences
-            .getStringList(storageKey) ??
-        const <String>[],
-  );
-  Future<void> _change(Set<String> Function(Set<String>) change) async {
-    final previous = _pending;
-    final turn = Completer<void>();
-    _pending = turn.future;
-    if (previous != null) await previous;
-    try {
-      if (!ref.mounted) throw StateError('El proveedor está cerrado.');
-      final prefs = ref.read(appServicesProvider).requireValue.localPreferences;
-      final next = change(state.toSet());
-      final saved = await prefs.setStringList(
-        storageKey,
-        next.toList()..sort(),
-      );
-      if (!saved) throw StateError('No se pudo guardar el favorito.');
-      if (ref.mounted) state = Set.unmodifiable(next);
-    } finally {
-      turn.complete();
+  Set<String> build() {
+    final syncedState = ref.watch(personalDataProvider);
+    final synced = syncedState.isLoading ? null : syncedState.asData?.value;
+    if (synced != null) return linesFrom(synced);
+    if (ref.watch(useFirebaseProvider)) return const {};
+    return Set.unmodifiable(
+      ref
+              .watch(appServicesProvider)
+              .requireValue
+              .localPreferences
+              .getStringList(storageKey) ??
+          <String>[],
+    );
+  }
+
+  Future<void> _edit(String id, bool? selected) async {
+    final scope = ref.read(personalScopeProvider);
+    await ref
+        .read(personalDataProvider.notifier)
+        .edit(
+          (current) => {
+            'line:$id': (selected ?? !linesFrom(current).contains(id))
+                ? true
+                : null,
+          },
+        );
+    if (ref.mounted && ref.read(personalScopeProvider) == scope) {
+      state = linesFrom(ref.read(personalDataProvider).requireValue);
     }
   }
 
-  Future<void> toggle(String id) => _change((next) {
-    if (!next.add(id)) next.remove(id);
-    return next;
-  });
-  Future<void> remove(String id) => _change((next) => next..remove(id));
+  Future<void> toggle(String id) => _edit(id, null);
+  Future<void> remove(String id) => _edit(id, false);
 }
 
 final locationPermissionRepositoryProvider =
