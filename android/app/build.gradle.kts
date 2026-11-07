@@ -1,6 +1,9 @@
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -42,4 +45,12 @@ dependencies {
 
 flutter {
     source = "../.."
+}
+
+// Builds remain local: uploading mappings/symbols needs a separate explicit action.
+android.buildTypes.configureEach {
+    configure<CrashlyticsExtension> {
+        mappingFileUploadEnabled = false
+        nativeSymbolUploadEnabled = false
+    }
 }

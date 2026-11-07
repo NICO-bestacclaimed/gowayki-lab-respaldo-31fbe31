@@ -1,3 +1,5 @@
+import 'dart:async';
+import '../../infra/observability/app_telemetry.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/firebase/firestore_city_update_repository.dart';
 import '../../domain/updates/city_update.dart';
@@ -182,8 +184,16 @@ class CityUpdateController extends Notifier<CityUpdateState> {
       }
       if (ref.mounted) {
         state = CityUpdateState(phase: UpdatePhase.complete, version: loaded);
+        unawaited(
+          ref.read(appTelemetryProvider).event(AppEvent.cityUpdateApplied),
+        );
       }
     } on Object catch (error) {
+      if (ref.mounted) {
+        unawaited(
+          ref.read(appTelemetryProvider).event(AppEvent.cityUpdateRejected),
+        );
+      }
       if (activated) {
         if (ref.mounted) {
           state = const CityUpdateState(phase: UpdatePhase.restoring);

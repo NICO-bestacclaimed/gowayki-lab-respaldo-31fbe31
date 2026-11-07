@@ -1,3 +1,5 @@
+import 'dart:async';
+import '../../../infra/observability/app_telemetry.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +72,11 @@ class _GameScreenState extends ConsumerState<GameScreen>
             );
             if (result is GameScore) {
               await ref.read(weeklyScoresProvider.notifier).record(result);
+              if (current()) {
+                unawaited(
+                  ref.read(appTelemetryProvider).event(AppEvent.gameCompleted),
+                );
+              }
             }
           } on Object {
             if (mounted && generation == _generation) {

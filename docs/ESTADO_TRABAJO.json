@@ -1,6 +1,6 @@
 {
-  "stage": "Parte 9A verificada localmente; continuar 9B",
-  "last_tests": "199 pruebas Flutter completas; analyze limpio; Hosting generado con hashes verificados y publicación de borradores bloqueada",
+  "stage": "Parte 9B verificada localmente; continuar 9C",
+  "last_tests": "203 Flutter completos; 18 dirigidos + 4 finales observabilidad; analyze limpio; APK debug Firebase con assets y permisos verificados",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "9B observabilidad sin datos personales y distribución documentada; después 9C firma, revisión final y APK release. Firestore real, despliegue, responsables legales y dispositivos siguen pendientes.",
+  "next_action": "9C integrar firma release local, nombre GoWayki, permisos finales, compilar/verificar Android release y cerrar documentación. iOS requiere Mac; Firebase real/legales/despliegue pendientes.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -28,12 +28,12 @@
     "shapes.txt"
   ],
   "flutter_validation": "Part5 source tests/analyze and debug APK verified",
-  "verified_at": "2026-11-07T19:10:46.716765+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte9A-verificada.zip",
+  "verified_at": "2026-11-07T19:27:42.581405+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte9B-verificada.zip",
   "quota_warning_observed": true,
   "checks": {
     "python_tests": 76,
-    "flutter_total_tests": 199,
+    "flutter_total_tests": 203,
     "planner_new_tests": 14,
     "flutter_analyze": "No issues found",
     "source_hashes_verified": 5,
@@ -92,7 +92,8 @@
     "account_ranking_new_flutter_tests": 20,
     "part8_dual_apk": "passed",
     "deleted_account_marker": "empty immutable UID marker; stale-session resurrection blocked; disclosed in product/docs",
-    "city_pack_update_tests": 10
+    "city_pack_update_tests": 10,
+    "observability_tests": 4
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -279,6 +280,12 @@
     "deployed": false,
     "origin_verified": false
   },
-  "apk_source_checkpoint": "8E: APK anterior; recompilar tras integración nativa de 9B/9C",
-  "checkpoint_base_commit": "ca99990"
+  "apk_source_checkpoint": "9B debug con Firebase y observabilidad desactivada; release por generar",
+  "checkpoint_base_commit": "764aa02",
+  "observability": {
+    "integrated": true,
+    "collection_default": false,
+    "live_received": false,
+    "app_distribution_uploaded": false
+  }
 }

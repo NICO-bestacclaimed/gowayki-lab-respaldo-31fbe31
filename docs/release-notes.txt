@@ -1,0 +1,9 @@
+GoWayki: candidato local de pruebas
+
+Mapa y paquete offline de Arequipa, buscador FTS5, planificador estimado, favoritos, viaje activo y juego local.
+Firebase integra acceso, sincronización, reportes, ayuda y ranking con reglas probadas en emuladores.
+Actualizador del paquete con SHA-256 y recuperación; observabilidad preparada y desactivada.
+
+Pendientes antes de pruebas con servicios reales: crear Firestore Standard, desplegar y verificar reglas/índices/datos, comprobar Google Sign-In con la firma distribuida y completar identidad y contacto de privacidad.
+Pruebas físicas pendientes: GPS, alarmas, modo avión, WebView y rendimiento Android; compilación iOS requiere Mac.
+Este archivo no certifica una publicación o revisión de tiendas.
