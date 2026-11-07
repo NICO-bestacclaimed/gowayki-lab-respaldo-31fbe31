@@ -7,6 +7,7 @@ import '../../../shared/l10n/l10n.dart';
 import '../../providers/active_trip_provider.dart';
 import '../../providers/map_renderer_provider.dart';
 import '../explorer/presentation/widgets/explorer_map.dart';
+import '../game/game_screen.dart';
 
 class ActiveTripScreen extends ConsumerWidget {
   const ActiveTripScreen({super.key});
@@ -67,6 +68,13 @@ class ActiveTripScreen extends ConsumerWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 if (active.running) ...[
+                  if (ref.watch(gameSupportedProvider))
+                    OutlinedButton.icon(
+                      key: const ValueKey('game.active'),
+                      onPressed: () => context.push('/juego'),
+                      icon: const Icon(Icons.sports_esports_outlined),
+                      label: Text(l.gameWhileWaiting),
+                    ),
                   if (leg is TransitLeg)
                     Text(l.alightAt(leg.alightingStop.name)),
                   if (progress.remainingMeters != null &&

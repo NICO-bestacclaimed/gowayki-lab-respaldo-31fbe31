@@ -1369,6 +1369,36 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Cancelar'**
   String get cancelTripStart;
+
+  /// No description provided for @gameSaveFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo guardar el récord o el ajuste del juego.'**
+  String get gameSaveFailed;
+
+  /// No description provided for @gameMobileOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'La integración del juego está disponible en Android/iOS. En Windows abre assets/game/index.html en tu navegador.'**
+  String get gameMobileOnly;
+
+  /// No description provided for @gameLoadFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo abrir el juego local. Inténtalo de nuevo.'**
+  String get gameLoadFailed;
+
+  /// No description provided for @gameBest.
+  ///
+  /// In es, this message translates to:
+  /// **'Récord local: {score} pts'**
+  String gameBest(int score);
+
+  /// No description provided for @gameWhileWaiting.
+  ///
+  /// In es, this message translates to:
+  /// **'¿Esperando tu combi? Juega'**
+  String get gameWhileWaiting;
 }
 
 class _AppLocalizationsDelegate

@@ -1,0 +1,102 @@
+{
+  "total_bytes": 67045,
+  "limit_bytes": 150000,
+  "files": 18,
+  "sprites": 15,
+  "sprite_bytes": 47734,
+  "originals_preserved": true,
+  "external_references": "none",
+  "network_blocked_by_csp": true,
+  "assets": [
+    {
+      "path": "assets/game/game.js",
+      "bytes": 14567,
+      "sha256": "f02dda2fecc5e883937fad39e020edbbec307226f8a2fa6aa4ce1109e0239f3f"
+    },
+    {
+      "path": "assets/game/index.html",
+      "bytes": 2123,
+      "sha256": "51ffe07a7461b197b68b4c876efd54fab5c3223478b6453ee0ad72f0be06c92f"
+    },
+    {
+      "path": "assets/game/sprites/albotran_cb.webp",
+      "bytes": 3324,
+      "sha256": "3931d45a443bebc6c7581a276aed711e469c2cb0ae602cc18f8fc0a0ff66719a"
+    },
+    {
+      "path": "assets/game/sprites/albotran_f2.webp",
+      "bytes": 3218,
+      "sha256": "12024667892aa71aea84d11789c976172cab1fbeda304cbc2345647be5593b33"
+    },
+    {
+      "path": "assets/game/sprites/albotran_r.webp",
+      "bytes": 3264,
+      "sha256": "609fe5157b2aab031cfac7be76206957b61504bbcbcd1d9162ac8e21c99ed904"
+    },
+    {
+      "path": "assets/game/sprites/albotran_s_terminal_terrestre.webp",
+      "bytes": 3214,
+      "sha256": "0274228e5a7219e9919082e1ed6de66ebfd9745aae4ab2cdb5bd8eccfc3a9e2a"
+    },
+    {
+      "path": "assets/game/sprites/albotran_sin_letra.webp",
+      "bytes": 3216,
+      "sha256": "7937c013b6655a844c2ce265cd6d93192cf62df6703fd00c50a6cdbe71e15dc9"
+    },
+    {
+      "path": "assets/game/sprites/c10_megabus_m.webp",
+      "bytes": 3058,
+      "sha256": "7e4a0c986cf689f3c20c71721d2981b923c63cf272fe5efffee678acac563b02"
+    },
+    {
+      "path": "assets/game/sprites/c2_cono_norte_a.webp",
+      "bytes": 3068,
+      "sha256": "07b351c3df2b60ab74ee6d6c82c5fe97ad484659547f8f43527a6a2219331183"
+    },
+    {
+      "path": "assets/game/sprites/c2_cono_norte_c.webp",
+      "bytes": 3118,
+      "sha256": "a2e80b848c9908bdbbe9772e04ad44a298e01ff1e661b8d08a3ee22c21bd0b74"
+    },
+    {
+      "path": "assets/game/sprites/c2_cono_norte_cima.webp",
+      "bytes": 3116,
+      "sha256": "d000ab4a8b4d68174a10e3b7e53d3d72be7125cbbe3642d39905ffab97c24d77"
+    },
+    {
+      "path": "assets/game/sprites/c2_cono_norte_cima_s.webp",
+      "bytes": 3060,
+      "sha256": "dfb18b32b415672fc7afbd77cc513297fedbdecfd540d0d7247ebc72c5efef3c"
+    },
+    {
+      "path": "assets/game/sprites/c3_transcayma_embajada.webp",
+      "bytes": 3404,
+      "sha256": "dcb91d159f797c0b5446b6f66e4a46a63f9c604c83d7ef05feb269180d99ae18"
+    },
+    {
+      "path": "assets/game/sprites/c4_union_aqp_7a_huarangal.webp",
+      "bytes": 3328,
+      "sha256": "d8f2c9a939b30ea9b96bc4aa133c4c111ca42a5ece2673c3c8147d87343a8ebd"
+    },
+    {
+      "path": "assets/game/sprites/c7_aqpmasivo_05.webp",
+      "bytes": 3166,
+      "sha256": "8a6417b2260a1e5193547fb781ec434142ba544ec36c8d5a82f8abc54623c3b6"
+    },
+    {
+      "path": "assets/game/sprites/c8_bus_characato_t_quequena.webp",
+      "bytes": 3038,
+      "sha256": "1bf6e55fd34c58e2c0545090f923cd99a0ad29f78f3f060d6fb49bd5be5cc2ca"
+    },
+    {
+      "path": "assets/game/sprites/c8_bus_characato_t_san_antonio.webp",
+      "bytes": 3142,
+      "sha256": "d7c7133b1b9d37661aafe195e35eaf3abb519421f6258f935f6e860962573d39"
+    },
+    {
+      "path": "assets/game/style.css",
+      "bytes": 2621,
+      "sha256": "79e685131f46ceebaf609f94ab605f6b77bd2145537c7a80ecd96bc0cfc0a731"
+    }
+  ]
+}

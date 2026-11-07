@@ -50,6 +50,17 @@ No reemplazar las fuentes por otro GTFS sin revisar su correspondencia. La regen
 
 El APK debug se genera en `build/app/outputs/flutter-apk/app-debug.apk`. Sus datos, imágenes, mapa y bibliotecas SQLite se verifican con `tool/verify_apk.py`.
 
+## Juego local
+
+El juego completo está en `assets/game/`; `tool/verify_game.py` verifica que todos sus archivos, incluidos los 15 sprites, sumen menos de 150000 bytes. Los originales de las ilustraciones se conservan. `tool/build_game_sprites.py` regenera las copias con Pillow 13.0.0. No hay librerías JavaScript, CDN ni recursos de red; CSP bloquea conexiones y el WebView impide navegar fuera del archivo instalado.
+
+```powershell
+node tool/test_game.mjs
+C:\Proyecto_001\.tools\city-pack-venv\Scripts\python.exe -B tool/verify_game.py
+```
+
+La navegación del juego admite teclado, botones y deslizamiento; pausa al ocultar la página o minimizar la app. El canal GoWayki valida puntaje/duración y conserva el máximo personal en SharedPreferences. El ranking de Firebase sigue sin habilitarse. La ejecución en WebView, audio y vibración física requieren Android/iOS y no se han verificado en Windows.
+
 ## Organización
 
 - `lib/domain/`: modelos, contratos y planificador Dart puro en isolate.
@@ -59,4 +70,4 @@ El APK debug se genera en `build/app/outputs/flutter-apk/app-debug.apk`. Sus dat
 - `test/`: pruebas de datos, cálculo, persistencia y UI con servicios nativos sustituibles.
 - `docs/ESTADO_TRABAJO.json`: último punto de control y pendientes.
 
-Privacidad y términos aún no están publicados. Sus botones están desactivados; se configuran cuando existan con `PRIVACY_URL` y `TERMS_URL`. El viaje activo usa un servicio Android de ubicación con notificación persistente, confirmación de subida y alarmas locales configurables. Solo se inicia con consentimiento y la app visible; termina al llegar, finalizar o cerrar la tarea. No se restaura automáticamente después de que el sistema cierre el proceso. Juego, actualizaciones remotas y Firebase se completan en sus partes respectivas. No se hizo push ni despliegue automático.
+Privacidad y términos aún no están publicados. Sus botones están desactivados; se configuran cuando existan con `PRIVACY_URL` y `TERMS_URL`. El viaje activo usa un servicio Android de ubicación con notificación persistente, confirmación de subida y alarmas locales configurables. Solo se inicia con consentimiento y la app visible; termina al llegar, finalizar o cerrar la tarea. No se restaura automáticamente después de que el sistema cierre el proceso. Wayki Combi es un juego local Canvas/JavaScript con 15 sprites pequeños y récord local. Su acceso nativo aparece en Perfil y Viaje en curso en Android/iOS; en Windows se abre assets/game/index.html en el navegador. La prueba visual se aplazó a petición del usuario por el bloqueo file:// del navegador integrado. Las actualizaciones remotas y Firebase siguen pendientes. No se hizo push ni despliegue automático.

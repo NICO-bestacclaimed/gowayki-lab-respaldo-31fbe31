@@ -30,6 +30,7 @@ dependencies:
   url_launcher: 6.3.3
   share_plus: 13.3.1
   flutter_local_notifications: 22.3.3
+  webview_flutter: 4.14.1
 
 dev_dependencies:
   flutter_test:
@@ -45,5 +46,7 @@ flutter:
     - assets/map/fonts/Noto Sans Italic/
     - assets/map/fonts/Noto Sans Regular/
     - assets/city/arequipa/
+    - assets/game/
+    - assets/game/sprites/
     - assets/brand/
     - assets/illustrations/micros/

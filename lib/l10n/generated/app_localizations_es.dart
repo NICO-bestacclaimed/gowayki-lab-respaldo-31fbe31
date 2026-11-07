@@ -741,4 +741,24 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get cancelTripStart => 'Cancelar';
+
+  @override
+  String get gameSaveFailed =>
+      'No se pudo guardar el récord o el ajuste del juego.';
+
+  @override
+  String get gameMobileOnly =>
+      'La integración del juego está disponible en Android/iOS. En Windows abre assets/game/index.html en tu navegador.';
+
+  @override
+  String get gameLoadFailed =>
+      'No se pudo abrir el juego local. Inténtalo de nuevo.';
+
+  @override
+  String gameBest(int score) {
+    return 'Récord local: $score pts';
+  }
+
+  @override
+  String get gameWhileWaiting => '¿Esperando tu combi? Juega';
 }

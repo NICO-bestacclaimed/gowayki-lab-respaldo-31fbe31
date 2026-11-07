@@ -33,6 +33,12 @@ def main():
             data = apk.read(prefix+quote('assets/map/'+name, safe='/'))
             assert len(data) == info['bytes'] and sha(data) == info['sha256'], name
         assert not any('/assets/gtfs/' in name for name in apk.namelist())
+        game_files = sorted(p for p in (ROOT/'assets/game').rglob('*') if p.is_file())
+        game_bytes = sum(p.stat().st_size for p in game_files)
+        assert 0 < game_bytes < 150000
+        for path in game_files:
+            name = path.relative_to(ROOT).as_posix()
+            assert apk.read(prefix+name) == path.read_bytes(), name
         libraries = {}
         for abi, expected in official.items():
             merged = ROOT / f'build/app/intermediates/merged_native_libs/debug/mergeDebugNativeLibs/out/lib/{abi}/libsqlite3.so'
@@ -44,7 +50,7 @@ def main():
             libraries[abi] = {'official_merged_hash': expected, 'apk_hash': sha(native), 'fts5': True}
     print(json.dumps({'apk': str(APK), 'apk_bytes': APK.stat().st_size, 'apk_sha256': sha(APK.read_bytes()),
         'data_version': manifest['version'], 'pack_sha256': manifest['sha256'], 'artwork_files_verified': len(artwork['files']),
-        'map_files_verified': len(map_manifest['files']), 'payloads': 'verified', 'legacy_gtfs_assets': 'absent', 'sqlite_native': libraries}, ensure_ascii=False, indent=2))
+        'map_files_verified': len(map_manifest['files']), 'game_files_verified': len(game_files), 'game_total_bytes': game_bytes, 'payloads': 'verified', 'legacy_gtfs_assets': 'absent', 'sqlite_native': libraries}, ensure_ascii=False, indent=2))
 
 if __name__ == '__main__':
     main()

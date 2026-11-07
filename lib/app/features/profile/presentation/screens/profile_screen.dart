@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../providers/app_providers.dart';
+import '../../../game/game_screen.dart';
+import '../../../../game/game_preferences.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -49,6 +51,18 @@ class ProfileScreen extends ConsumerWidget {
             ),
           ],
           const SizedBox(height: 24),
+          if (ref.watch(gameSupportedProvider))
+            ListTile(
+              key: const ValueKey('game.profile'),
+              leading: const Icon(Icons.sports_esports_outlined),
+              title: const Text('Wayki Combi'),
+              subtitle: Text(
+                context.l10n.gameBest(
+                  ref.watch(gamePreferencesProvider).asData?.value.best ?? 0,
+                ),
+              ),
+              onTap: () => context.push('/juego'),
+            ),
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: Text(context.l10n.settings),

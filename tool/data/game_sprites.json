@@ -1,0 +1,142 @@
+{
+  "pillow": "13.0.0",
+  "quality": 45,
+  "originals_preserved": true,
+  "files": [
+    {
+      "source": "assets/illustrations/micros/albotran_cb.webp",
+      "source_sha256": "6687c41baeab84eff7f4aaa6d850612733e04cf2d37ec53e6f6ab13449393997",
+      "asset": "assets/game/sprites/albotran_cb.webp",
+      "bytes": 3324,
+      "sha256": "3931d45a443bebc6c7581a276aed711e469c2cb0ae602cc18f8fc0a0ff66719a",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/albotran_f2.webp",
+      "source_sha256": "a27ba9b60e9a5f2220bfd9f2aa16d1235d3caac071e7a467a53a402e9ba14fe6",
+      "asset": "assets/game/sprites/albotran_f2.webp",
+      "bytes": 3218,
+      "sha256": "12024667892aa71aea84d11789c976172cab1fbeda304cbc2345647be5593b33",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/albotran_r.webp",
+      "source_sha256": "4edfadc609ce1a21b54a9ebbe2db0146d64789f87cd92c9bf8627848b4d505fb",
+      "asset": "assets/game/sprites/albotran_r.webp",
+      "bytes": 3264,
+      "sha256": "609fe5157b2aab031cfac7be76206957b61504bbcbcd1d9162ac8e21c99ed904",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/albotran_s_terminal_terrestre.webp",
+      "source_sha256": "d3fb538f6204e34447f6e919567c927534ce08f98de2533525c65d259200608f",
+      "asset": "assets/game/sprites/albotran_s_terminal_terrestre.webp",
+      "bytes": 3214,
+      "sha256": "0274228e5a7219e9919082e1ed6de66ebfd9745aae4ab2cdb5bd8eccfc3a9e2a",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/albotran_sin_letra.webp",
+      "source_sha256": "fd28135db6114b0c94d537da7b37194391b099263bae0bad4c35ae2611f7905f",
+      "asset": "assets/game/sprites/albotran_sin_letra.webp",
+      "bytes": 3216,
+      "sha256": "7937c013b6655a844c2ce265cd6d93192cf62df6703fd00c50a6cdbe71e15dc9",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c10_megabus_m.webp",
+      "source_sha256": "516ccb5eee0c80413c3fa9dbf6cc8cc7a3615f6d2d76d7ce63d394bcaa772236",
+      "asset": "assets/game/sprites/c10_megabus_m.webp",
+      "bytes": 3058,
+      "sha256": "7e4a0c986cf689f3c20c71721d2981b923c63cf272fe5efffee678acac563b02",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c2_cono_norte_a.webp",
+      "source_sha256": "8e5492368775ab52c32e7ec4ab39ce698b2084602189c6d4c96d73b9418b4090",
+      "asset": "assets/game/sprites/c2_cono_norte_a.webp",
+      "bytes": 3068,
+      "sha256": "07b351c3df2b60ab74ee6d6c82c5fe97ad484659547f8f43527a6a2219331183",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c2_cono_norte_c.webp",
+      "source_sha256": "ef572af0859759badea2a050ce1b5efa1a148772e4ea22cf1bbac5c68cf63a90",
+      "asset": "assets/game/sprites/c2_cono_norte_c.webp",
+      "bytes": 3118,
+      "sha256": "a2e80b848c9908bdbbe9772e04ad44a298e01ff1e661b8d08a3ee22c21bd0b74",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c2_cono_norte_cima.webp",
+      "source_sha256": "45da6abf122473509d6af7dc090c83cfbcc11fb8cf86c9680cf815dd69fb15c8",
+      "asset": "assets/game/sprites/c2_cono_norte_cima.webp",
+      "bytes": 3116,
+      "sha256": "d000ab4a8b4d68174a10e3b7e53d3d72be7125cbbe3642d39905ffab97c24d77",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c2_cono_norte_cima_s.webp",
+      "source_sha256": "3bbf45979626c57e2b7b7d2c0b97e8d1278f84d7209c2198211e051b0de61535",
+      "asset": "assets/game/sprites/c2_cono_norte_cima_s.webp",
+      "bytes": 3060,
+      "sha256": "dfb18b32b415672fc7afbd77cc513297fedbdecfd540d0d7247ebc72c5efef3c",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c3_transcayma_embajada.webp",
+      "source_sha256": "d05e6f891aa9ad6212a27f9acf74d31902e6f1d327f208db1cf946db84f23944",
+      "asset": "assets/game/sprites/c3_transcayma_embajada.webp",
+      "bytes": 3404,
+      "sha256": "dcb91d159f797c0b5446b6f66e4a46a63f9c604c83d7ef05feb269180d99ae18",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c4_union_aqp_7a_huarangal.webp",
+      "source_sha256": "bbd73db5d8f6e462835e354538c4f42214dfcdd9df322f8fc81d234355d0c98a",
+      "asset": "assets/game/sprites/c4_union_aqp_7a_huarangal.webp",
+      "bytes": 3328,
+      "sha256": "d8f2c9a939b30ea9b96bc4aa133c4c111ca42a5ece2673c3c8147d87343a8ebd",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c7_aqpmasivo_05.webp",
+      "source_sha256": "7a876f7ba085cde4aa1929acf5796f7b4c003089c57e24be739301d824b921b4",
+      "asset": "assets/game/sprites/c7_aqpmasivo_05.webp",
+      "bytes": 3166,
+      "sha256": "8a6417b2260a1e5193547fb781ec434142ba544ec36c8d5a82f8abc54623c3b6",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c8_bus_characato_t_quequena.webp",
+      "source_sha256": "3463b002bbdf89c45cffcc2cc2e1d60471b88379646b53b9df905f22eb71a6b0",
+      "asset": "assets/game/sprites/c8_bus_characato_t_quequena.webp",
+      "bytes": 3038,
+      "sha256": "1bf6e55fd34c58e2c0545090f923cd99a0ad29f78f3f060d6fb49bd5be5cc2ca",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "source": "assets/illustrations/micros/c8_bus_characato_t_san_antonio.webp",
+      "source_sha256": "acf2496c6fb179ec26cd37a33b5dd713a28ff40a21f4341becd7f046e3dd506a",
+      "asset": "assets/game/sprites/c8_bus_characato_t_san_antonio.webp",
+      "bytes": 3142,
+      "sha256": "d7c7133b1b9d37661aafe195e35eaf3abb519421f6258f935f6e860962573d39",
+      "width": 96,
+      "height": 96
+    }
+  ]
+}

@@ -435,5 +435,17 @@
   "tripPermissionRequired": "Permite la ubicación para iniciar el viaje.",
   "tripNotificationsRequired": "Activa las notificaciones de GoWayki en los ajustes del sistema para iniciar el seguimiento.",
   "tripStartVisible": "Vuelve a GoWayki y toca Iniciar viaje para activar el seguimiento.",
-  "cancelTripStart": "Cancelar"
+  "cancelTripStart": "Cancelar",
+  "gameSaveFailed": "No se pudo guardar el récord o el ajuste del juego.",
+  "gameMobileOnly": "La integración del juego está disponible en Android/iOS. En Windows abre assets/game/index.html en tu navegador.",
+  "gameLoadFailed": "No se pudo abrir el juego local. Inténtalo de nuevo.",
+  "gameBest": "Récord local: {score} pts",
+  "@gameBest": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameWhileWaiting": "¿Esperando tu combi? Juega"
 }

@@ -366,5 +366,17 @@
   "tripPermissionRequired": "Allow location access to start the trip.",
   "tripNotificationsRequired": "Enable GoWayki notifications in system settings to start tracking.",
   "tripStartVisible": "Return to GoWayki and tap Start trip to enable tracking.",
-  "cancelTripStart": "Cancel"
+  "cancelTripStart": "Cancel",
+  "gameSaveFailed": "The game record or preference could not be saved.",
+  "gameMobileOnly": "Game integration is available on Android/iOS. On Windows open assets/game/index.html in your browser.",
+  "gameLoadFailed": "The local game could not be opened. Try again.",
+  "gameBest": "Local best: {score} pts",
+  "@gameBest": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "gameWhileWaiting": "Waiting for your combi? Play"
 }
