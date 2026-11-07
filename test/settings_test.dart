@@ -140,7 +140,7 @@ void main() {
       tester
           .widget<OutlinedButton>(find.byKey(const ValueKey('settings.update')))
           .onPressed,
-      isNull,
+      isNotNull,
     );
     await tester.scrollUntilVisible(
       find.byKey(const ValueKey('settings.privacy')),

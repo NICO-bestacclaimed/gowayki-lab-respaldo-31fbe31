@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:crypto/crypto.dart';
@@ -7,28 +8,39 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3/sqlite3.dart';
+import 'package:pub_semver/pub_semver.dart' as semver;
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'city_pack_manifest.dart';
+part 'city_pack_update_store.dart';
 
 class InstalledCityPack {
-  const InstalledCityPack({required this.directory, required this.manifest});
+  const InstalledCityPack({
+    required this.directory,
+    required this.manifest,
+    this.minAppVersion = '1.0.0',
+  });
   final Directory directory;
   final CityPackManifest manifest;
+  final String minAppVersion;
   String get databasePath => p.join(directory.path, 'pack.sqlite');
 }
 
-/// Installs the bundled build only. Network updates belong to Part 9.
+/// Opens a verified compatible active build, falling back to the previous/bundled build.
 class CityPackInstaller {
   CityPackInstaller({
     AssetBundle? bundle,
     Future<Directory> Function()? supportDirectory,
     this.assetDirectory = 'assets/city/arequipa',
+    Future<String> Function()? appVersion,
   }) : _bundle = bundle ?? rootBundle,
-       _supportDirectory = supportDirectory ?? getApplicationSupportDirectory;
+       _supportDirectory = supportDirectory ?? getApplicationSupportDirectory,
+       _appVersion = appVersion ?? _installedAppVersion;
 
   final AssetBundle _bundle;
   final Future<Directory> Function() _supportDirectory;
   final String assetDirectory;
+  final Future<String> Function() _appVersion;
   static final _queues = <String, Future<void>>{};
 
   Future<InstalledCityPack> install() async {
@@ -62,6 +74,8 @@ class CityPackInstaller {
     Directory? stage;
     try {
       await lock.lock(FileLock.blockingExclusive);
+      final active = await readActivePack(root, manifest);
+      if (active != null) return active;
       final target = Directory(
         p.join(root.path, '${manifest.version}-${manifest.sha256}'),
       );
@@ -91,7 +105,7 @@ class CityPackInstaller {
         );
       }
       final stageDatabase = p.join(stage.path, 'pack.sqlite');
-      await Isolate.run(() => validateCityPackDatabase(stageDatabase));
+      await validateCityPackInBackground(stageDatabase);
       // Existing versions remain untouched. Preserve a corrupt build for diagnosis.
       if (await target.exists()) {
         await target.rename(
@@ -177,3 +191,7 @@ void validateCityPackDatabase(String path) {
     db.close();
   }
 }
+
+// Keep the isolate closure outside async scopes holding sockets, timers or providers.
+Future<void> validateCityPackInBackground(String path) =>
+    Isolate.run(() => validateCityPackDatabase(path));

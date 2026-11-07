@@ -50,3 +50,6 @@ app.*.map.json
 # Local Firebase emulator tooling and outputs
 tool/firebase/node_modules/
 .firebase/
+
+# Generated local Hosting candidate (contains unpublished drafts)
+/hosting/

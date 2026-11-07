@@ -1049,4 +1049,53 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get accountDeletionMarkerNotice =>
       'Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios.';
+
+  @override
+  String get updateChecking => 'Buscando actualizaciones…';
+
+  @override
+  String get updateDownloading => 'Descargando y verificando datos…';
+
+  @override
+  String get updateApplying => 'Aplicando el paquete…';
+
+  @override
+  String get updateRestoring => 'Recuperando el paquete anterior…';
+
+  @override
+  String updateCurrent(int version) {
+    return 'Ya tienes el paquete disponible: versión $version.';
+  }
+
+  @override
+  String updateComplete(int version) {
+    return 'Paquete actualizado a la versión $version.';
+  }
+
+  @override
+  String get updateTripRunning =>
+      'Finaliza el viaje o la operación actual antes de actualizar.';
+
+  @override
+  String get updateNeedsApp =>
+      'Este paquete necesita una versión más reciente de GoWayki.';
+
+  @override
+  String get updateRejected =>
+      'El paquete no superó la verificación. Conservamos los datos anteriores.';
+
+  @override
+  String get updateCancelled =>
+      'Actualización cancelada. Tus datos actuales siguen disponibles.';
+
+  @override
+  String get updateUnavailable =>
+      'Las actualizaciones no están disponibles en este momento.';
+
+  @override
+  String get updateFailed =>
+      'No se pudo aplicar la actualización. Reintenta; se conserva una copia del paquete anterior.';
+
+  @override
+  String get close => 'Cerrar';
 }

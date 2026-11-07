@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../providers/app_providers.dart';
 import '../../../../settings/app_settings.dart';
 import '../../../../settings/legal_links.dart';
+import '../../../../updates/city_update_controller.dart';
 import '../../../../../domain/models/city_pack_models.dart';
 import '../../../../../shared/l10n/l10n.dart';
 import '../../../../../shared/widgets/content_state.dart';
@@ -192,10 +193,12 @@ class SettingsScreen extends ConsumerWidget {
             ),
             OutlinedButton(
               key: const ValueKey('settings.update'),
-              onPressed: null,
+              onPressed: ref.watch(cityUpdateProvider).busy
+                  ? null
+                  : () => ref.read(cityUpdateProvider.notifier).checkAndApply(),
               child: Text(l.checkUpdate),
             ),
-            Text(l.updatesLater),
+
             const SizedBox(height: 24),
             Text(l.about, style: Theme.of(context).textTheme.titleMedium),
             ListTile(

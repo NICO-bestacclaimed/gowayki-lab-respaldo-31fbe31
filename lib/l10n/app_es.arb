@@ -550,5 +550,32 @@
   "reportDeleted": "Reporte eliminado.",
   "reportDeleteError": "No se pudo eliminar el reporte. Vuelve a intentarlo.",
   "cancel": "Cancelar",
-  "accountDeletionMarkerNotice": "Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios."
+  "accountDeletionMarkerNotice": "Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios.",
+  "updateChecking": "Buscando actualizaciones…",
+  "updateDownloading": "Descargando y verificando datos…",
+  "updateApplying": "Aplicando el paquete…",
+  "updateRestoring": "Recuperando el paquete anterior…",
+  "updateCurrent": "Ya tienes el paquete disponible: versión {version}.",
+  "@updateCurrent": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "updateComplete": "Paquete actualizado a la versión {version}.",
+  "@updateComplete": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "updateTripRunning": "Finaliza el viaje o la operación actual antes de actualizar.",
+  "updateNeedsApp": "Este paquete necesita una versión más reciente de GoWayki.",
+  "updateRejected": "El paquete no superó la verificación. Conservamos los datos anteriores.",
+  "updateCancelled": "Actualización cancelada. Tus datos actuales siguen disponibles.",
+  "updateUnavailable": "Las actualizaciones no están disponibles en este momento.",
+  "updateFailed": "No se pudo aplicar la actualización. Reintenta; se conserva una copia del paquete anterior.",
+  "close": "Cerrar"
 }

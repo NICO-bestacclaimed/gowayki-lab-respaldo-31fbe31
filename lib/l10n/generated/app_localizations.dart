@@ -1897,6 +1897,84 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios.'**
   String get accountDeletionMarkerNotice;
+
+  /// No description provided for @updateChecking.
+  ///
+  /// In es, this message translates to:
+  /// **'Buscando actualizaciones…'**
+  String get updateChecking;
+
+  /// No description provided for @updateDownloading.
+  ///
+  /// In es, this message translates to:
+  /// **'Descargando y verificando datos…'**
+  String get updateDownloading;
+
+  /// No description provided for @updateApplying.
+  ///
+  /// In es, this message translates to:
+  /// **'Aplicando el paquete…'**
+  String get updateApplying;
+
+  /// No description provided for @updateRestoring.
+  ///
+  /// In es, this message translates to:
+  /// **'Recuperando el paquete anterior…'**
+  String get updateRestoring;
+
+  /// No description provided for @updateCurrent.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya tienes el paquete disponible: versión {version}.'**
+  String updateCurrent(int version);
+
+  /// No description provided for @updateComplete.
+  ///
+  /// In es, this message translates to:
+  /// **'Paquete actualizado a la versión {version}.'**
+  String updateComplete(int version);
+
+  /// No description provided for @updateTripRunning.
+  ///
+  /// In es, this message translates to:
+  /// **'Finaliza el viaje o la operación actual antes de actualizar.'**
+  String get updateTripRunning;
+
+  /// No description provided for @updateNeedsApp.
+  ///
+  /// In es, this message translates to:
+  /// **'Este paquete necesita una versión más reciente de GoWayki.'**
+  String get updateNeedsApp;
+
+  /// No description provided for @updateRejected.
+  ///
+  /// In es, this message translates to:
+  /// **'El paquete no superó la verificación. Conservamos los datos anteriores.'**
+  String get updateRejected;
+
+  /// No description provided for @updateCancelled.
+  ///
+  /// In es, this message translates to:
+  /// **'Actualización cancelada. Tus datos actuales siguen disponibles.'**
+  String get updateCancelled;
+
+  /// No description provided for @updateUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'Las actualizaciones no están disponibles en este momento.'**
+  String get updateUnavailable;
+
+  /// No description provided for @updateFailed.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo aplicar la actualización. Reintenta; se conserva una copia del paquete anterior.'**
+  String get updateFailed;
+
+  /// No description provided for @close.
+  ///
+  /// In es, this message translates to:
+  /// **'Cerrar'**
+  String get close;
 }
 
 class _AppLocalizationsDelegate

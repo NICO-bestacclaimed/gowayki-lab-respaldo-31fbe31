@@ -33,6 +33,11 @@ class SqliteCityPackRepository implements CityPackRepository {
     return SqliteCityPackRepository._(installed, db);
   }
 
+  static SqliteCityPackRepository openInstalled(InstalledCityPack installed) {
+    final db = sqlite3.open(installed.databasePath, mode: OpenMode.readOnly);
+    return SqliteCityPackRepository._(installed, db);
+  }
+
   @override
   Future<CityPackInfo> packageInfo() async {
     _ensureOpen();

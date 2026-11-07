@@ -34,6 +34,7 @@ dependencies:
   google_sign_in: 7.2.0
   package_info_plus: 10.2.2
   device_info_plus: 13.3.0
+  pub_semver: 2.2.0
 
 dev_dependencies:
   flutter_test:

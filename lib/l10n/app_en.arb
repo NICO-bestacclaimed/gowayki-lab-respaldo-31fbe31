@@ -481,5 +481,32 @@
   "reportDeleted": "Report deleted.",
   "reportDeleteError": "Could not delete the report. Please retry.",
   "cancel": "Cancel",
-  "accountDeletionMarkerNotice": "An empty deleted-account marker linked to its technical identifier remains to block old sessions. It contains no name, email, locations or feedback."
+  "accountDeletionMarkerNotice": "An empty deleted-account marker linked to its technical identifier remains to block old sessions. It contains no name, email, locations or feedback.",
+  "updateChecking": "Checking for updates…",
+  "updateDownloading": "Downloading and verifying data…",
+  "updateApplying": "Applying the package…",
+  "updateRestoring": "Restoring the previous package…",
+  "updateCurrent": "You already have the available package: version {version}.",
+  "@updateCurrent": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "updateComplete": "Package updated to version {version}.",
+  "@updateComplete": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      }
+    }
+  },
+  "updateTripRunning": "Finish the trip or current operation before updating.",
+  "updateNeedsApp": "This package needs a newer version of GoWayki.",
+  "updateRejected": "Package verification failed. Previous data was kept.",
+  "updateCancelled": "Update cancelled. Your current data is still available.",
+  "updateUnavailable": "Updates are not available right now.",
+  "updateFailed": "Could not apply the update. Retry; a copy of the previous package was kept.",
+  "close": "Close"
 }

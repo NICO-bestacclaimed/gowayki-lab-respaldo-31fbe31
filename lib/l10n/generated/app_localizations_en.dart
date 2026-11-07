@@ -1044,4 +1044,51 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get accountDeletionMarkerNotice =>
       'An empty deleted-account marker linked to its technical identifier remains to block old sessions. It contains no name, email, locations or feedback.';
+
+  @override
+  String get updateChecking => 'Checking for updates…';
+
+  @override
+  String get updateDownloading => 'Downloading and verifying data…';
+
+  @override
+  String get updateApplying => 'Applying the package…';
+
+  @override
+  String get updateRestoring => 'Restoring the previous package…';
+
+  @override
+  String updateCurrent(int version) {
+    return 'You already have the available package: version $version.';
+  }
+
+  @override
+  String updateComplete(int version) {
+    return 'Package updated to version $version.';
+  }
+
+  @override
+  String get updateTripRunning =>
+      'Finish the trip or current operation before updating.';
+
+  @override
+  String get updateNeedsApp => 'This package needs a newer version of GoWayki.';
+
+  @override
+  String get updateRejected =>
+      'Package verification failed. Previous data was kept.';
+
+  @override
+  String get updateCancelled =>
+      'Update cancelled. Your current data is still available.';
+
+  @override
+  String get updateUnavailable => 'Updates are not available right now.';
+
+  @override
+  String get updateFailed =>
+      'Could not apply the update. Retry; a copy of the previous package was kept.';
+
+  @override
+  String get close => 'Close';
 }

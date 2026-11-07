@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app/providers/app_providers.dart';
+import 'app/updates/update_overlay.dart';
 import 'app/router/app_router.dart';
 import 'app/settings/app_settings.dart';
 import 'app/features/splash/presentation/screens/splash_screen.dart';
@@ -16,9 +17,10 @@ class GowaykiLabApp extends ConsumerWidget {
     final services = ref.watch(appServicesProvider);
     final settings =
         ref.watch(appSettingsProvider).asData?.value ?? const AppSettings();
-    if (services.hasValue) {
+    if (services.hasValue && !services.isLoading && !services.hasError) {
       return MaterialApp.router(
         title: 'GoWayki',
+        builder: (context, child) => UpdateOverlay(child: child!),
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
@@ -31,6 +33,7 @@ class GowaykiLabApp extends ConsumerWidget {
       );
     }
     return MaterialApp(
+      builder: (context, child) => UpdateOverlay(child: child!),
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
