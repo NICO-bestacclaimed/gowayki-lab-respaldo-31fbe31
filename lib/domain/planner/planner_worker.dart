@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:isolate';
 
 import 'journey_planner.dart';
+import '../repositories/journey_planner_client.dart';
 import 'planner_network.dart';
 
 /// A long-lived domain isolate. The network is copied only during startup.
-class PlannerWorker {
+class PlannerWorker implements JourneyPlannerClient {
   PlannerWorker._() {
     _subscription = _receive.listen(_message);
   }
@@ -42,6 +43,7 @@ class PlannerWorker {
     }
   }
 
+  @override
   Future<JourneyResponse> plan(JourneyRequest request, {DateTime? now}) {
     if (_closing || _exited.isCompleted) {
       return Future.error(StateError('El planificador está cerrado.'));
@@ -86,6 +88,7 @@ class PlannerWorker {
     _pending.clear();
   }
 
+  @override
   Future<void> close() async {
     if (_closing) return;
     _closing = true;

@@ -7,7 +7,6 @@ import '../domain/repositories/feedback_repository.dart';
 import '../domain/repositories/place_search_repository.dart';
 import '../domain/repositories/preferences_repository.dart';
 import '../domain/repositories/transit_network_repository.dart';
-import '../domain/repositories/trip_plan_repository.dart';
 import '../infra/city_pack/city_pack_installer.dart';
 import '../infra/city_pack/city_pack_place_search_repository.dart';
 import '../infra/city_pack/sqlite_city_pack_repository.dart';
@@ -27,8 +26,7 @@ class AppServices {
     required this.cities,
     required this.preferences,
     required this.feedback,
-  }) : places = CityPackPlaceSearchRepository(cityPack),
-       trips = DemoTripPlanRepository();
+  }) : places = CityPackPlaceSearchRepository(cityPack);
   final bool useFirebase;
   final SharedPreferences localPreferences;
   final CityPackRepository cityPack;
@@ -37,9 +35,8 @@ class AppServices {
   final PreferencesRepository preferences;
   final FeedbackRepository feedback;
   final PlaceSearchRepository places;
-  final TripPlanRepository trips;
   TransitNetworkRepository get transit => cityPack;
-  bool _closed = false;
+  Future<void>? _closing;
 
   static Future<AppServices> open({
     required bool useFirebase,
@@ -70,9 +67,8 @@ class AppServices {
     }
   }
 
-  Future<void> close() async {
-    if (_closed) return;
-    _closed = true;
+  Future<void> close() => _closing ??= _finishClose();
+  Future<void> _finishClose() async {
     try {
       await cityPack.close();
     } finally {

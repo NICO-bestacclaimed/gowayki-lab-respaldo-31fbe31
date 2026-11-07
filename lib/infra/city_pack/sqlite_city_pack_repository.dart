@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:async';
 import 'dart:isolate';
 import 'sqlite_map_reader.dart';
+import 'planner_network_loader.dart';
+import '../../domain/planner/planner_network.dart';
 
 import 'package:sqlite3/sqlite3.dart';
 
@@ -18,6 +21,8 @@ class SqliteCityPackRepository implements CityPackRepository {
   final InstalledCityPack installed;
   final Database _db;
   bool _closed = false;
+  Future<void>? _closing;
+  final _loads = <Future<void>>{};
   List<TransitLine>? _lines;
 
   static Future<SqliteCityPackRepository> open({
@@ -43,7 +48,13 @@ class SqliteCityPackRepository implements CityPackRepository {
   Future<List<CityMapStop>> mapStops() async {
     _ensureOpen();
     final path = installed.databasePath;
-    return Isolate.run(() => readMapStops(path));
+    return _track(Isolate.run(() => readMapStops(path)));
+  }
+
+  @override
+  Future<PlannerNetwork> plannerNetwork() {
+    _ensureOpen();
+    return _track(loadPlannerNetwork(installed));
   }
 
   CityPackManifest get manifest => installed.manifest;
@@ -406,10 +417,25 @@ class SqliteCityPackRepository implements CityPackRepository {
     );
   }
 
+  Future<T> _track<T>(Future<T> future) {
+    final done = future.then<void>(
+      (value) {},
+      onError: (Object error, StackTrace stack) {},
+    );
+    _loads.add(done);
+    unawaited(
+      done.whenComplete(() {
+        _loads.remove(done);
+      }),
+    );
+    return future;
+  }
+
   @override
-  Future<void> close() async {
-    if (_closed) return;
+  Future<void> close() => _closing ??= _finishClose();
+  Future<void> _finishClose() async {
     _closed = true;
+    await Future.wait(_loads.toList());
     _lines = null;
     _db.close();
   }

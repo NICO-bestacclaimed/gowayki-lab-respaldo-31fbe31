@@ -220,12 +220,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get planTrip => 'Plan a trip';
 
   @override
-  String get demoOptions => 'Demo options';
-
-  @override
-  String get demoOrigin => 'Demo origin';
-
-  @override
   String get brandTagline => 'Your city, closer';
 
   @override
@@ -492,4 +486,152 @@ class AppLocalizationsEn extends AppLocalizations {
   String approxWalk(int meters) {
     return '~$meters m on foot';
   }
+
+  @override
+  String get leaveNow => 'Leave now';
+
+  @override
+  String get leaveAt => 'Leave at a time';
+
+  @override
+  String get arriveBy => 'Arrive by a time';
+
+  @override
+  String get fastest => 'Fastest';
+
+  @override
+  String get fewestTransfers => 'Fewest transfers';
+
+  @override
+  String get leastWalking => 'Least walking';
+
+  @override
+  String get noTransfers => 'No transfers';
+
+  @override
+  String get noService => 'No service at the selected time';
+
+  @override
+  String get walkOnly => 'Walking alternative';
+
+  @override
+  String get walkingEstimate => 'Approximate walk · indicative path';
+
+  @override
+  String get details => 'View details';
+
+  @override
+  String get saveTrip => 'Save trip';
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get startTrip => 'Start trip';
+
+  @override
+  String get intermediateStops => 'Intermediate stops';
+
+  @override
+  String get estimatedTimes => 'All times are estimates';
+
+  @override
+  String optionNumber(int number) {
+    return 'Option $number';
+  }
+
+  @override
+  String minutesApprox(int minutes) {
+    return '~$minutes min';
+  }
+
+  @override
+  String walkingMinutes(int minutes) {
+    return 'Walking: ~$minutes min';
+  }
+
+  @override
+  String waitingMinutes(int minutes) {
+    return 'Waiting: ~$minutes min';
+  }
+
+  @override
+  String transferNumber(int count) {
+    return '$count transfers';
+  }
+
+  @override
+  String fareAmount(String amount) {
+    return 'Estimated fare: S/ $amount';
+  }
+
+  @override
+  String walkInstruction(int meters, int minutes, String destination) {
+    return 'Walk ~$meters m (~$minutes min) to $destination';
+  }
+
+  @override
+  String boardInstruction(String line, String destination) {
+    return 'Take $line towards $destination';
+  }
+
+  @override
+  String frequencyApprox(int minutes) {
+    return 'Runs about every ~$minutes min';
+  }
+
+  @override
+  String rideInstruction(int stops, int minutes, String destination) {
+    return 'Ride $stops stops (~$minutes min) and get off at $destination';
+  }
+
+  @override
+  String waitInstruction(int minutes) {
+    return 'Estimated wait: ~$minutes min';
+  }
+
+  @override
+  String bandHoldInstruction(int minutes) {
+    return 'Additional wait for a time-band change: ~$minutes min';
+  }
+
+  @override
+  String get removeSavedTrip => 'Remove saved trip';
+
+  @override
+  String get nearMe => 'Pass near me';
+
+  @override
+  String get directionSelector => 'Direction';
+
+  @override
+  String get configureHome => 'Set Home';
+
+  @override
+  String get configureWork => 'Set Work';
+
+  @override
+  String get savedTrips => 'Saved trips';
+
+  @override
+  String get savedPlaces => 'Saved places';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get favoriteStops => 'Favorite stops';
+
+  @override
+  String get unset => 'Not set';
+
+  @override
+  String get saved => 'Saved';
+
+  @override
+  String get savedTripNote =>
+      'Saved trips are recalculated when you open them.';
 }

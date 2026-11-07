@@ -16,6 +16,9 @@ class ExplorerMap extends ConsumerStatefulWidget {
   const ExplorerMap({
     super.key,
     this.showTransit = true,
+    this.showStops = true,
+    this.journeys = const [],
+    this.selectedJourney = 0,
     this.focusedLineId,
     this.focusedDirection,
     this.position,
@@ -26,7 +29,9 @@ class ExplorerMap extends ConsumerStatefulWidget {
     this.onStopTap,
     this.onLongPress,
   });
-  final bool showTransit;
+  final bool showTransit, showStops;
+  final List<Itinerary> journeys;
+  final int selectedJourney;
   final String? focusedLineId;
   final TransitDirectionKind? focusedDirection;
   final GeoPoint? origin, destination;
@@ -65,11 +70,15 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
       WidgetsBinding.instance.addPostFrameCallback((_) => _position());
     }
     if (oldWidget.showTransit != widget.showTransit ||
+        oldWidget.showStops != widget.showStops ||
+        oldWidget.journeys != widget.journeys ||
+        oldWidget.selectedJourney != widget.selectedJourney ||
         oldWidget.focusedLineId != widget.focusedLineId ||
         oldWidget.focusedDirection != widget.focusedDirection ||
         !_samePoint(oldWidget.origin, widget.origin) ||
         !_samePoint(oldWidget.destination, widget.destination)) {
       _redraw();
+      if (oldWidget.journeys != widget.journeys) _fitJourneys();
       if (oldWidget.focusedLineId != widget.focusedLineId ||
           oldWidget.focusedDirection != widget.focusedDirection) {
         _fitFocusedLine();
@@ -220,6 +229,44 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
         minzoom: 17,
       );
       if (!current()) return;
+      for (final walking in [false, true]) {
+        final source = walking ? 'journey.walk' : 'journey.transit';
+        await map.addGeoJsonSource(source, empty);
+        if (!current()) return;
+        if (!walking) {
+          await map.addLineLayer(
+            source,
+            '$source.border',
+            const LineLayerProperties(
+              lineColor: '#FFFFFF',
+              lineWidth: [
+                '+',
+                ['get', 'width'],
+                2,
+              ],
+              lineOpacity: ['get', 'opacity'],
+              lineCap: 'round',
+              lineJoin: 'round',
+            ),
+            enableInteraction: false,
+          );
+          if (!current()) return;
+        }
+        await map.addLineLayer(
+          source,
+          source,
+          LineLayerProperties(
+            lineColor: ['get', 'color'],
+            lineWidth: ['get', 'width'],
+            lineOpacity: ['get', 'opacity'],
+            lineCap: 'round',
+            lineJoin: 'round',
+            lineDasharray: walking ? [1.5, 1.5] : null,
+          ),
+          enableInteraction: false,
+        );
+        if (!current()) return;
+      }
       await map.addGeoJsonSource('journey.endpoints', empty);
       if (!current()) return;
       await map.addCircleLayer(
@@ -251,8 +298,9 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
       await _redraw();
       if (!current()) return;
       await _fitFocusedLine();
+      await _fitJourneys();
       await _position();
-      widget.onMapReady?.call();
+      if (current()) widget.onMapReady?.call();
     } on Object catch (error) {
       if (current()) setState(() => _error = error);
     }
@@ -295,9 +343,29 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
       }
       await map.setGeoJsonSource(
         'transit.stops',
-        data.stopFeatures(
-          lineId: widget.focusedLineId,
-          direction: widget.focusedDirection,
+        widget.showStops
+            ? data.stopFeatures(
+                lineId: widget.focusedLineId,
+                direction: widget.focusedDirection,
+              )
+            : TransitMapData.collection([]),
+      );
+      if (!current()) return;
+      await map.setGeoJsonSource(
+        'journey.walk',
+        TransitMapData.journeyFeatures(
+          widget.journeys,
+          walking: true,
+          selected: widget.selectedJourney,
+        ),
+      );
+      if (!current()) return;
+      await map.setGeoJsonSource(
+        'journey.transit',
+        TransitMapData.journeyFeatures(
+          widget.journeys,
+          walking: false,
+          selected: widget.selectedJourney,
         ),
       );
       if (!current()) return;
@@ -347,10 +415,53 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
     }
   }
 
-  Future<void> flyTo({required double lat, required double lng}) async {
+  Future<void> _fitJourneys() async {
+    final map = _map;
+    if (map == null || !_ready || widget.journeys.isEmpty) return;
+    final points = widget.journeys
+        .expand((t) => t.legs)
+        .expand((leg) => leg.geometry)
+        .toList();
+    if (points.isEmpty) return;
+    final minLat = points.map((p) => p.latitude).reduce(math.min),
+        maxLat = points.map((p) => p.latitude).reduce(math.max);
+    final minLon = points.map((p) => p.longitude).reduce(math.min),
+        maxLon = points.map((p) => p.longitude).reduce(math.max);
+    try {
+      if ((maxLat - minLat).abs() < .000001 &&
+          (maxLon - minLon).abs() < .000001) {
+        await map.animateCamera(
+          CameraUpdate.newLatLngZoom(LatLng(minLat, minLon), 15),
+        );
+      } else {
+        await map.animateCamera(
+          CameraUpdate.newLatLngBounds(
+            LatLngBounds(
+              southwest: LatLng(minLat, minLon),
+              northeast: LatLng(maxLat, maxLon),
+            ),
+            left: 32,
+            top: 32,
+            right: 32,
+            bottom: 32,
+          ),
+        );
+      }
+    } on Object {
+      /* A style reload can cancel camera movement. */
+    }
+  }
+
+  Future<void> flyTo({
+    required double lat,
+    required double lng,
+    double zoom = 15,
+  }) async {
     final map = _map;
     if (map != null) {
-      await map.animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat, lng), 15));
+      await map.animateCamera(
+        CameraUpdate.newLatLngZoom(LatLng(lat, lng), zoom),
+      );
     }
   }
 

@@ -147,6 +147,15 @@ class PlannerNetwork {
       ),
     );
   }
+  PlannerNetwork._withSettings(PlannerNetwork source, this.settings)
+    : stops = source.stops,
+      patterns = source.patterns,
+      transfers = source.transfers {
+    stopPatterns = source.stopPatterns;
+    incomingTransfers = source.incomingTransfers;
+  }
+  PlannerNetwork withSettings(PlannerSettings settings) =>
+      PlannerNetwork._withSettings(this, settings);
   final Map<String, CityStop> stops;
   final List<PlannerPattern> patterns;
   final Map<String, List<CityTransfer>> transfers;

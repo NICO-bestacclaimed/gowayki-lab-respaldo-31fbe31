@@ -66,8 +66,6 @@
   "send": "Enviar",
   "genericError": "No pudimos completar la acción. Inténtalo otra vez.",
   "planTrip": "Planificar viaje",
-  "demoOptions": "Opciones de demostración",
-  "demoOrigin": "Origen de demostración",
   "brandTagline": "Tu ciudad, más cerca",
   "email": "Correo",
   "password": "Contraseña",
@@ -220,5 +218,145 @@
         "type": "int"
       }
     }
-  }
+  },
+  "leaveNow": "Salir ahora",
+  "leaveAt": "Salir a una hora",
+  "arriveBy": "Llegar antes de una hora",
+  "fastest": "Más rápida",
+  "fewestTransfers": "Menos transbordos",
+  "leastWalking": "Menos caminata",
+  "noTransfers": "Sin transbordo",
+  "noService": "Sin servicio en la hora elegida",
+  "walkOnly": "Alternativa a pie",
+  "walkingEstimate": "Caminata aproximada · trazado orientativo",
+  "details": "Ver detalle",
+  "saveTrip": "Guardar viaje",
+  "share": "Compartir",
+  "startTrip": "Iniciar viaje",
+  "intermediateStops": "Paraderos intermedios",
+  "estimatedTimes": "Todos los tiempos son estimados",
+  "optionNumber": "Opción {number}",
+  "@optionNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesApprox": "~{minutes} min",
+  "@minutesApprox": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "walkingMinutes": "Caminata: ~{minutes} min",
+  "@walkingMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "waitingMinutes": "Espera: ~{minutes} min",
+  "@waitingMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "transferNumber": "{count} transbordos",
+  "@transferNumber": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fareAmount": "Tarifa estimada: S/ {amount}",
+  "@fareAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "walkInstruction": "Camina ~{meters} m (~{minutes} min) hasta {destination}",
+  "@walkInstruction": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      },
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "boardInstruction": "Toma {line} hacia {destination}",
+  "@boardInstruction": {
+    "placeholders": {
+      "line": {
+        "type": "String"
+      },
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "frequencyApprox": "Pasa cada ~{minutes} min",
+  "@frequencyApprox": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "rideInstruction": "Viaja {stops} paraderos (~{minutes} min) y baja en {destination}",
+  "@rideInstruction": {
+    "placeholders": {
+      "stops": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      },
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "waitInstruction": "Espera estimada: ~{minutes} min",
+  "@waitInstruction": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "bandHoldInstruction": "Espera adicional por cambio de franja: ~{minutes} min",
+  "@bandHoldInstruction": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "removeSavedTrip": "Quitar viaje guardado",
+  "nearMe": "Pasan cerca de mí",
+  "directionSelector": "Sentido",
+  "configureHome": "Configurar Casa",
+  "configureWork": "Configurar Trabajo",
+  "savedTrips": "Viajes guardados",
+  "savedPlaces": "Lugares guardados",
+  "delete": "Borrar",
+  "edit": "Editar",
+  "favoriteStops": "Paraderos favoritos",
+  "unset": "Sin configurar",
+  "saved": "Guardados",
+  "savedTripNote": "Los viajes guardados se recalculan al abrirlos."
 }

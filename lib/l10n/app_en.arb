@@ -66,8 +66,6 @@
   "send": "Send",
   "genericError": "We could not complete the action. Please try again.",
   "planTrip": "Plan a trip",
-  "demoOptions": "Demo options",
-  "demoOrigin": "Demo origin",
   "brandTagline": "Your city, closer",
   "email": "Email",
   "password": "Password",
@@ -151,5 +149,145 @@
         "type": "int"
       }
     }
-  }
+  },
+  "leaveNow": "Leave now",
+  "leaveAt": "Leave at a time",
+  "arriveBy": "Arrive by a time",
+  "fastest": "Fastest",
+  "fewestTransfers": "Fewest transfers",
+  "leastWalking": "Least walking",
+  "noTransfers": "No transfers",
+  "noService": "No service at the selected time",
+  "walkOnly": "Walking alternative",
+  "walkingEstimate": "Approximate walk · indicative path",
+  "details": "View details",
+  "saveTrip": "Save trip",
+  "share": "Share",
+  "startTrip": "Start trip",
+  "intermediateStops": "Intermediate stops",
+  "estimatedTimes": "All times are estimates",
+  "optionNumber": "Option {number}",
+  "@optionNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "minutesApprox": "~{minutes} min",
+  "@minutesApprox": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "walkingMinutes": "Walking: ~{minutes} min",
+  "@walkingMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "waitingMinutes": "Waiting: ~{minutes} min",
+  "@waitingMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "transferNumber": "{count} transfers",
+  "@transferNumber": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fareAmount": "Estimated fare: S/ {amount}",
+  "@fareAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "walkInstruction": "Walk ~{meters} m (~{minutes} min) to {destination}",
+  "@walkInstruction": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      },
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "boardInstruction": "Take {line} towards {destination}",
+  "@boardInstruction": {
+    "placeholders": {
+      "line": {
+        "type": "String"
+      },
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "frequencyApprox": "Runs about every ~{minutes} min",
+  "@frequencyApprox": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "rideInstruction": "Ride {stops} stops (~{minutes} min) and get off at {destination}",
+  "@rideInstruction": {
+    "placeholders": {
+      "stops": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      },
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "waitInstruction": "Estimated wait: ~{minutes} min",
+  "@waitInstruction": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "bandHoldInstruction": "Additional wait for a time-band change: ~{minutes} min",
+  "@bandHoldInstruction": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "removeSavedTrip": "Remove saved trip",
+  "nearMe": "Pass near me",
+  "directionSelector": "Direction",
+  "configureHome": "Set Home",
+  "configureWork": "Set Work",
+  "savedTrips": "Saved trips",
+  "savedPlaces": "Saved places",
+  "delete": "Delete",
+  "edit": "Edit",
+  "favoriteStops": "Favorite stops",
+  "unset": "Not set",
+  "saved": "Saved",
+  "savedTripNote": "Saved trips are recalculated when you open them."
 }

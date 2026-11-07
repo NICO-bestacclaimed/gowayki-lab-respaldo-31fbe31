@@ -494,18 +494,6 @@ abstract class AppLocalizations {
   /// **'Planificar viaje'**
   String get planTrip;
 
-  /// No description provided for @demoOptions.
-  ///
-  /// In es, this message translates to:
-  /// **'Opciones de demostración'**
-  String get demoOptions;
-
-  /// No description provided for @demoOrigin.
-  ///
-  /// In es, this message translates to:
-  /// **'Origen de demostración'**
-  String get demoOrigin;
-
   /// No description provided for @brandTagline.
   ///
   /// In es, this message translates to:
@@ -967,6 +955,252 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'~{meters} m a pie'**
   String approxWalk(int meters);
+
+  /// No description provided for @leaveNow.
+  ///
+  /// In es, this message translates to:
+  /// **'Salir ahora'**
+  String get leaveNow;
+
+  /// No description provided for @leaveAt.
+  ///
+  /// In es, this message translates to:
+  /// **'Salir a una hora'**
+  String get leaveAt;
+
+  /// No description provided for @arriveBy.
+  ///
+  /// In es, this message translates to:
+  /// **'Llegar antes de una hora'**
+  String get arriveBy;
+
+  /// No description provided for @fastest.
+  ///
+  /// In es, this message translates to:
+  /// **'Más rápida'**
+  String get fastest;
+
+  /// No description provided for @fewestTransfers.
+  ///
+  /// In es, this message translates to:
+  /// **'Menos transbordos'**
+  String get fewestTransfers;
+
+  /// No description provided for @leastWalking.
+  ///
+  /// In es, this message translates to:
+  /// **'Menos caminata'**
+  String get leastWalking;
+
+  /// No description provided for @noTransfers.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin transbordo'**
+  String get noTransfers;
+
+  /// No description provided for @noService.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin servicio en la hora elegida'**
+  String get noService;
+
+  /// No description provided for @walkOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'Alternativa a pie'**
+  String get walkOnly;
+
+  /// No description provided for @walkingEstimate.
+  ///
+  /// In es, this message translates to:
+  /// **'Caminata aproximada · trazado orientativo'**
+  String get walkingEstimate;
+
+  /// No description provided for @details.
+  ///
+  /// In es, this message translates to:
+  /// **'Ver detalle'**
+  String get details;
+
+  /// No description provided for @saveTrip.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardar viaje'**
+  String get saveTrip;
+
+  /// No description provided for @share.
+  ///
+  /// In es, this message translates to:
+  /// **'Compartir'**
+  String get share;
+
+  /// No description provided for @startTrip.
+  ///
+  /// In es, this message translates to:
+  /// **'Iniciar viaje'**
+  String get startTrip;
+
+  /// No description provided for @intermediateStops.
+  ///
+  /// In es, this message translates to:
+  /// **'Paraderos intermedios'**
+  String get intermediateStops;
+
+  /// No description provided for @estimatedTimes.
+  ///
+  /// In es, this message translates to:
+  /// **'Todos los tiempos son estimados'**
+  String get estimatedTimes;
+
+  /// No description provided for @optionNumber.
+  ///
+  /// In es, this message translates to:
+  /// **'Opción {number}'**
+  String optionNumber(int number);
+
+  /// No description provided for @minutesApprox.
+  ///
+  /// In es, this message translates to:
+  /// **'~{minutes} min'**
+  String minutesApprox(int minutes);
+
+  /// No description provided for @walkingMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'Caminata: ~{minutes} min'**
+  String walkingMinutes(int minutes);
+
+  /// No description provided for @waitingMinutes.
+  ///
+  /// In es, this message translates to:
+  /// **'Espera: ~{minutes} min'**
+  String waitingMinutes(int minutes);
+
+  /// No description provided for @transferNumber.
+  ///
+  /// In es, this message translates to:
+  /// **'{count} transbordos'**
+  String transferNumber(int count);
+
+  /// No description provided for @fareAmount.
+  ///
+  /// In es, this message translates to:
+  /// **'Tarifa estimada: S/ {amount}'**
+  String fareAmount(String amount);
+
+  /// No description provided for @walkInstruction.
+  ///
+  /// In es, this message translates to:
+  /// **'Camina ~{meters} m (~{minutes} min) hasta {destination}'**
+  String walkInstruction(int meters, int minutes, String destination);
+
+  /// No description provided for @boardInstruction.
+  ///
+  /// In es, this message translates to:
+  /// **'Toma {line} hacia {destination}'**
+  String boardInstruction(String line, String destination);
+
+  /// No description provided for @frequencyApprox.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasa cada ~{minutes} min'**
+  String frequencyApprox(int minutes);
+
+  /// No description provided for @rideInstruction.
+  ///
+  /// In es, this message translates to:
+  /// **'Viaja {stops} paraderos (~{minutes} min) y baja en {destination}'**
+  String rideInstruction(int stops, int minutes, String destination);
+
+  /// No description provided for @waitInstruction.
+  ///
+  /// In es, this message translates to:
+  /// **'Espera estimada: ~{minutes} min'**
+  String waitInstruction(int minutes);
+
+  /// No description provided for @bandHoldInstruction.
+  ///
+  /// In es, this message translates to:
+  /// **'Espera adicional por cambio de franja: ~{minutes} min'**
+  String bandHoldInstruction(int minutes);
+
+  /// No description provided for @removeSavedTrip.
+  ///
+  /// In es, this message translates to:
+  /// **'Quitar viaje guardado'**
+  String get removeSavedTrip;
+
+  /// No description provided for @nearMe.
+  ///
+  /// In es, this message translates to:
+  /// **'Pasan cerca de mí'**
+  String get nearMe;
+
+  /// No description provided for @directionSelector.
+  ///
+  /// In es, this message translates to:
+  /// **'Sentido'**
+  String get directionSelector;
+
+  /// No description provided for @configureHome.
+  ///
+  /// In es, this message translates to:
+  /// **'Configurar Casa'**
+  String get configureHome;
+
+  /// No description provided for @configureWork.
+  ///
+  /// In es, this message translates to:
+  /// **'Configurar Trabajo'**
+  String get configureWork;
+
+  /// No description provided for @savedTrips.
+  ///
+  /// In es, this message translates to:
+  /// **'Viajes guardados'**
+  String get savedTrips;
+
+  /// No description provided for @savedPlaces.
+  ///
+  /// In es, this message translates to:
+  /// **'Lugares guardados'**
+  String get savedPlaces;
+
+  /// No description provided for @delete.
+  ///
+  /// In es, this message translates to:
+  /// **'Borrar'**
+  String get delete;
+
+  /// No description provided for @edit.
+  ///
+  /// In es, this message translates to:
+  /// **'Editar'**
+  String get edit;
+
+  /// No description provided for @favoriteStops.
+  ///
+  /// In es, this message translates to:
+  /// **'Paraderos favoritos'**
+  String get favoriteStops;
+
+  /// No description provided for @unset.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin configurar'**
+  String get unset;
+
+  /// No description provided for @saved.
+  ///
+  /// In es, this message translates to:
+  /// **'Guardados'**
+  String get saved;
+
+  /// No description provided for @savedTripNote.
+  ///
+  /// In es, this message translates to:
+  /// **'Los viajes guardados se recalculan al abrirlos.'**
+  String get savedTripNote;
 }
 
 class _AppLocalizationsDelegate

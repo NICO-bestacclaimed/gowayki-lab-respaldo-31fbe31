@@ -11,7 +11,6 @@ import '../../domain/repositories/feedback_repository.dart';
 import '../../domain/repositories/place_search_repository.dart';
 import '../../domain/repositories/preferences_repository.dart';
 import '../../domain/repositories/transit_network_repository.dart';
-import '../../domain/repositories/trip_plan_repository.dart';
 import '../../infra/city_pack/city_pack_installer.dart';
 import '../../domain/repositories/location_permission_repository.dart';
 import '../../infra/location/geolocator_permission_repository.dart';
@@ -64,9 +63,6 @@ final preferencesRepositoryProvider = Provider<PreferencesRepository>(
 final feedbackRepositoryProvider = Provider<FeedbackRepository>(
   (ref) => ref.watch(appServicesProvider).requireValue.feedback,
 );
-final tripPlanRepositoryProvider = Provider<TripPlanRepository>(
-  (ref) => ref.watch(appServicesProvider).requireValue.trips,
-);
 final authStateProvider = StreamProvider<AuthUser?>(
   (ref) => ref.watch(authRepositoryProvider).observeSession(),
 );
@@ -87,7 +83,7 @@ final favoriteLineIdsProvider = NotifierProvider<FavoriteLineIds, Set<String>>(
 
 class FavoriteLineIds extends Notifier<Set<String>> {
   static const storageKey = 'favorites.line_ids';
-  Future<void> _pending = Future<void>.value();
+  Future<void>? _pending;
   @override
   Set<String> build() => Set.unmodifiable(
     ref
@@ -97,16 +93,15 @@ class FavoriteLineIds extends Notifier<Set<String>> {
             .getStringList(storageKey) ??
         const <String>[],
   );
-  Future<void> toggle(String id) async {
+  Future<void> _change(Set<String> Function(Set<String>) change) async {
     final previous = _pending;
     final turn = Completer<void>();
     _pending = turn.future;
-    await previous;
+    if (previous != null) await previous;
     try {
       if (!ref.mounted) throw StateError('El proveedor está cerrado.');
       final prefs = ref.read(appServicesProvider).requireValue.localPreferences;
-      final next = state.toSet();
-      if (!next.add(id)) next.remove(id);
+      final next = change(state.toSet());
       final saved = await prefs.setStringList(
         storageKey,
         next.toList()..sort(),
@@ -117,6 +112,12 @@ class FavoriteLineIds extends Notifier<Set<String>> {
       turn.complete();
     }
   }
+
+  Future<void> toggle(String id) => _change((next) {
+    if (!next.add(id)) next.remove(id);
+    return next;
+  });
+  Future<void> remove(String id) => _change((next) => next..remove(id));
 }
 
 final locationPermissionRepositoryProvider =

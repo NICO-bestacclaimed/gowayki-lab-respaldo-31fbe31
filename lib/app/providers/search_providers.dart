@@ -30,7 +30,10 @@ class RecentPlaces extends Notifier<List<PlaceResult>> {
       for (final row in rows.take(30)) {
         final lat = (row['lat'] as num).toDouble(),
             lon = (row['lon'] as num).toDouble();
-        if (!lat.isFinite || !lon.isFinite || lat.abs() > 90 || lon.abs() > 180) {
+        if (!lat.isFinite ||
+            !lon.isFinite ||
+            lat.abs() > 90 ||
+            lon.abs() > 180) {
           continue;
         }
         final id = row['id'] as String;
@@ -52,18 +55,15 @@ class RecentPlaces extends Notifier<List<PlaceResult>> {
     }
   }
 
-  Future<void> remember(PlaceResult point) async {
-    if (point.id == 'current-location') return;
-    final previous = _pending;
-    final turn = Completer<void>();
+  Future<void> _change(
+    List<PlaceResult> Function(List<PlaceResult>) change,
+  ) async {
+    final previous = _pending, turn = Completer<void>();
     _pending = turn.future;
     if (previous != null) await previous;
     try {
       if (!ref.mounted) return;
-      final next = [
-        point,
-        ...state.where((p) => p.id != point.id),
-      ].take(30).toList();
+      final next = change(state);
       final prefs = ref.read(appServicesProvider).requireValue.localPreferences;
       if (!await prefs.setString(
         key,
@@ -88,4 +88,23 @@ class RecentPlaces extends Notifier<List<PlaceResult>> {
       turn.complete();
     }
   }
+
+  Future<void> remember(PlaceResult point) {
+    if (point.id == 'current-location') return Future.value();
+    return _change(
+      (current) =>
+          [point, ...current.where((p) => p.id != point.id)].take(30).toList(),
+    );
+  }
+
+  Future<void> remove(String id) =>
+      _change((current) => current.where((p) => p.id != id).toList());
+  Future<void> reorder(List<String> ids) => _change((current) {
+    final byId = {for (final point in current) point.id: point};
+    if (ids.toSet().length != current.length ||
+        ids.any((id) => !byId.containsKey(id))) {
+      throw ArgumentError('Invalid recent order');
+    }
+    return ids.map((id) => byId[id]!).toList();
+  });
 }

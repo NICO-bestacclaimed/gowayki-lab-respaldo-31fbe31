@@ -413,6 +413,29 @@ void main() {
     },
   );
 
+  test(
+    'close espera lectores aislados y permite retirar su carpeta en Windows',
+    () async {
+      final directory = await base.createTemp('reader-close-');
+      final disposable = await SqliteCityPackRepository.open(
+        installer: CityPackInstaller(supportDirectory: () async => directory),
+      );
+      final map = disposable.mapStops();
+      final network = disposable.plannerNetwork();
+      final closing = disposable.close();
+      expect(identical(closing, disposable.close()), isTrue);
+      await closing;
+      if (p.dirname(p.normalize(directory.absolute.path)) !=
+              p.normalize(base.absolute.path) ||
+          !p.basename(directory.path).startsWith('reader-close-')) {
+        throw StateError('Unsafe cleanup');
+      }
+      await directory.delete(recursive: true);
+      expect((await map).length, 6128);
+      expect((await network).patterns.length, 191);
+    },
+  );
+
   test('repairs corrupt local files and close rejects later queries', () async {
     // Close before replacing the file, including on Windows.
     await repository.close();

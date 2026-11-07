@@ -105,4 +105,28 @@ class TransitMapData {
         },
       },
   ]);
+  static Map<String, dynamic> journeyFeatures(
+    List<Itinerary> trips, {
+    required bool walking,
+    required int selected,
+  }) => collection([
+    for (final (index, trip) in trips.indexed)
+      for (final (legIndex, leg) in trip.legs.indexed)
+        if ((leg is WalkLeg) == walking)
+          {
+            'type': 'Feature',
+            'id': '$index:$legIndex',
+            'properties': {
+              'color': leg is TransitLeg ? leg.color : '#7A7F86',
+              'width': index == selected ? 5 : 2.5,
+              'opacity': index == selected ? 1.0 : .4,
+            },
+            'geometry': {
+              'type': 'LineString',
+              'coordinates': leg.geometry
+                  .map((p) => [p.longitude, p.latitude])
+                  .toList(growable: false),
+            },
+          },
+  ]);
 }

@@ -1,3 +1,6 @@
+import '../../../../library/local_library.dart';
+import '../../../../providers/map_renderer_provider.dart';
+export '../../../../providers/map_renderer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,12 +20,6 @@ import '../../map/nearby_stops.dart';
 import '../../map/transit_map_data.dart';
 import '../widgets/combis_sheet.dart';
 import '../widgets/explorer_map.dart';
-
-/// Native renderer boundary; widget tests can exercise the surrounding UI.
-final explorerMapRendererProvider = Provider<Widget Function(ExplorerMap)>(
-  (ref) =>
-      (map) => map,
-);
 
 class ExplorerScreen extends ConsumerStatefulWidget {
   const ExplorerScreen({super.key, required this.onOpenMenu});
@@ -194,21 +191,10 @@ class _ExplorerScreenState extends ConsumerState<ExplorerScreen>
     );
   }
 
-  void _stop(CityMapStop stop) => _pointActions(
-    PlaceResult(
-      id: stop.stop.id,
-      name: stop.stop.name,
-      address: '',
-      latitude: stop.stop.latitude,
-      longitude: stop.stop.longitude,
-    ),
-    stop: stop,
-  );
-  void _route(MapRouteSelection route) => setState(() {
-    _focused = route.line;
-    _direction = route.direction.kind;
-    _showTransit = true;
-  });
+  void _stop(CityMapStop stop) =>
+      context.push('/paradero/${Uri.encodeComponent(stop.stop.id)}');
+  void _route(MapRouteSelection route) =>
+      context.push('/linea/${Uri.encodeComponent(route.line.id)}');
   Future<void> _locate() async {
     final controller = ref.read(explorerLocationProvider.notifier);
     await controller.start(refresh: true);
@@ -373,6 +359,20 @@ class _ExplorerScreenState extends ConsumerState<ExplorerScreen>
                 }),
               ),
             ),
+          if (_origin != null && _destination != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: FilledButton(
+                onPressed: () => context.push(
+                  '/planificar',
+                  extra: JourneyEndpoints(
+                    origin: _origin!,
+                    destination: _destination!,
+                  ),
+                ),
+                child: Text(l.planTrip),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             child: Text(
@@ -401,6 +401,16 @@ class _ExplorerScreenState extends ConsumerState<ExplorerScreen>
     final location = ref.watch(explorerLocationProvider);
     final data = ref.watch(transitMapDataProvider);
     final favorites = ref.watch(favoriteLineIdsProvider);
+    final savedPoints =
+        ref
+            .watch(localLibraryProvider)
+            .asData
+            ?.value
+            .orderedItems
+            .where((item) => item.point != null)
+            .take(8)
+            .toList() ??
+        <LibraryItem>[];
     final favoriteLines =
         data.asData?.value.lines
             .where((line) => favorites.contains(line.id))
@@ -455,11 +465,33 @@ class _ExplorerScreenState extends ConsumerState<ExplorerScreen>
                     ),
                   ],
                 ),
-                if (favoriteLines.isNotEmpty)
+                if (favoriteLines.isNotEmpty || savedPoints.isNotEmpty)
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
+                        for (final item in savedPoints)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: ActionChip(
+                              avatar: Icon(
+                                item.kind == LibraryKind.home
+                                    ? Icons.home
+                                    : item.kind == LibraryKind.work
+                                    ? Icons.work
+                                    : Icons.place,
+                                size: 18,
+                              ),
+                              label: Text(
+                                item.kind == LibraryKind.home
+                                    ? l.home
+                                    : item.kind == LibraryKind.work
+                                    ? l.work
+                                    : item.label,
+                              ),
+                              onPressed: () => _search(destination: item.point),
+                            ),
+                          ),
                         for (final line in favoriteLines)
                           Padding(
                             padding: const EdgeInsets.only(right: 8),

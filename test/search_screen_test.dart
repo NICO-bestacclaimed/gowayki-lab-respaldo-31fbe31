@@ -1,3 +1,6 @@
+import 'package:gowayki_lab/app/providers/location_providers.dart';
+import 'package:gowayki_lab/domain/repositories/position_repository.dart';
+import 'package:gowayki_lab/domain/planner/itinerary.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -22,6 +25,7 @@ void main() {
   late AppServices services;
   late PlaceResult tecsup;
   late Completer<List<NavigationSearchResult>> slowSearch;
+  late Future<PositionFix?> Function() positionSource;
   const origin = PlaceResult(
     id: 'current-location',
     name: 'Mi ubicación',
@@ -33,8 +37,10 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     support = await Directory.systemTemp.createTemp('gowayki-search-test-');
     slowSearch = Completer<List<NavigationSearchResult>>();
+    positionSource = () async => null;
     container = ProviderContainer(
       overrides: [
+        currentPositionProvider.overrideWith((ref) => positionSource()),
         navigationSearchProvider.overrideWith(
           (ref, query) async => query == 'delayed'
               ? await slowSearch.future
@@ -185,6 +191,73 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Sin resultados'), findsOneWidget);
     expect(find.text(tecsup.name), findsNothing);
+    await tester.pumpWidget(const SizedBox());
+  });
+  testWidgets(
+    'ubicación tardía no reemplaza un origen que el usuario ya editó',
+    (tester) async {
+      final location = Completer<PositionFix?>();
+      positionSource = () => location.future;
+      await mount(tester, SearchArguments(destination: tecsup));
+      await tester.enterText(
+        find.byKey(const ValueKey('search.origin')),
+        'Origen escrito',
+      );
+      location.complete(
+        PositionFix(
+          point: GeoPoint(tecsup.latitude, tecsup.longitude),
+          accuracyMeters: 5,
+          at: DateTime.utc(2026, 11, 6, 15),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widget<TextField>(find.byKey(const ValueKey('search.origin')))
+            .controller!
+            .text,
+        'Origen escrito',
+      );
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+  testWidgets('selector simple devuelve un lugar sin exigir un segundo punto', (
+    tester,
+  ) async {
+    PlaceResult? selected;
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: TextButton(
+                onPressed: () async {
+                  selected = await Navigator.of(context).push<PlaceResult>(
+                    MaterialPageRoute(
+                      builder: (context) => SearchScreen(
+                        arguments: SearchArguments(
+                          pickSingle: true,
+                          destination: tecsup,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('Elegir'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('Elegir'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('search.origin')), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('search.usePoints')));
+    await tester.pumpAndSettle();
+    expect(selected!.id, tecsup.id);
     await tester.pumpWidget(const SizedBox());
   });
   testWidgets('pantalla pequeña con teclado y texto grande no desborda', (

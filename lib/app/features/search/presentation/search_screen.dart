@@ -1,8 +1,11 @@
+import '../../../library/local_library.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/place_result.dart';
 import '../../../../domain/models/navigation_search.dart';
+import '../../../../domain/repositories/position_repository.dart';
+import '../../../providers/location_providers.dart';
 import '../../../../shared/l10n/l10n.dart';
 import '../../../../shared/widgets/content_state.dart';
 import '../../../providers/app_providers.dart';
@@ -15,9 +18,10 @@ class SearchArguments {
     this.destination,
     this.editOrigin = false,
     this.currentLocation,
+    this.pickSingle = false,
   });
   final PlaceResult? origin, destination, currentLocation;
-  final bool editOrigin;
+  final bool editOrigin, pickSingle;
 }
 
 class SearchScreen extends ConsumerStatefulWidget {
@@ -33,15 +37,47 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   late bool _editOrigin;
   String _query = '';
   String? _line;
+  PlaceResult? _resolvedCurrent;
+  bool _originEdited = false;
   Timer? _debounce;
   @override
   void initState() {
     super.initState();
     _origin = widget.arguments.origin ?? widget.arguments.currentLocation;
     _destination = widget.arguments.destination;
-    _editOrigin = widget.arguments.editOrigin;
+    _editOrigin = widget.arguments.pickSingle
+        ? false
+        : widget.arguments.editOrigin;
+    _resolvedCurrent = widget.arguments.currentLocation;
+    _originEdited =
+        widget.arguments.origin != null &&
+        widget.arguments.origin!.id != 'current-location';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _applyPosition(ref.read(currentPositionProvider).asData?.value);
+      }
+    });
     _originText = TextEditingController(text: _origin?.name ?? '');
     _destinationText = TextEditingController(text: _destination?.name ?? '');
+  }
+
+  void _applyPosition(PositionFix? fix) {
+    if (!mounted || fix == null) return;
+    final point = PlaceResult(
+      id: 'current-location',
+      name: context.l10n.myLocation,
+      address: '',
+      latitude: fix.point.latitude,
+      longitude: fix.point.longitude,
+    );
+    setState(() {
+      _resolvedCurrent = point;
+      if (!_originEdited && !widget.arguments.pickSingle) {
+        _origin = point;
+        _originText.text = point.name;
+        _editOrigin = false;
+      }
+    });
   }
 
   @override
@@ -58,6 +94,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       _editOrigin = origin;
       _line = null;
       if (origin) {
+        _originEdited = true;
         _origin = null;
       } else {
         _destination = null;
@@ -72,6 +109,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     _debounce?.cancel();
     setState(() {
       if (_editOrigin) {
+        _originEdited = true;
         _origin = point;
         _originText.text = point.name;
         _editOrigin = false;
@@ -97,6 +135,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   void _swap() {
     _debounce?.cancel();
     setState(() {
+      _originEdited = true;
       final point = _origin;
       _origin = _destination;
       _destination = point;
@@ -134,16 +173,57 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     NavigationSearchGroup.line => context.l10n.routes,
     NavigationSearchGroup.street => context.l10n.streets,
   };
-  Widget _pointTile(PlaceResult point, {bool review = false}) => ListTile(
-    title: Text(point.name),
-    subtitle: review
-        ? Text(context.l10n.estimatedName)
-        : point.address.isEmpty
-        ? null
-        : Text(point.address),
-    leading: const Icon(Icons.place_outlined),
-    onTap: () => _select(point),
-  );
+  Widget _pointTile(PlaceResult point, {bool review = false}) {
+    final library = ref.watch(localLibraryProvider);
+    final stop =
+        ref
+            .read(transitMapDataProvider)
+            .asData
+            ?.value
+            .stops
+            .containsKey(point.id) ??
+        false;
+    final id = '${stop ? 'stop' : 'place'}:${point.id}';
+    final saved = library.asData?.value.contains(id) ?? false;
+    return ListTile(
+      title: Text(point.name),
+      subtitle: review
+          ? Text(context.l10n.estimatedName)
+          : point.address.isEmpty
+          ? null
+          : Text(point.address),
+      leading: const Icon(Icons.place_outlined),
+      onTap: () => _select(point),
+      trailing: IconButton(
+        tooltip: saved ? context.l10n.removeFavorite : context.l10n.addFavorite,
+        onPressed:
+            !library.hasValue || !ref.read(transitMapDataProvider).hasValue
+            ? null
+            : () async {
+                try {
+                  await ref
+                      .read(localLibraryProvider.notifier)
+                      .toggle(
+                        LibraryItem(
+                          id: id,
+                          kind: stop ? LibraryKind.stop : LibraryKind.place,
+                          label: point.name,
+                          point: point,
+                        ),
+                      );
+                } on Object {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(context.l10n.saveFailed)),
+                    );
+                  }
+                }
+              },
+        icon: Icon(saved ? Icons.star : Icons.star_border),
+      ),
+    );
+  }
+
   Widget _body() {
     final map = ref.watch(transitMapDataProvider);
     if (_line != null) {
@@ -188,6 +268,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     }
     if (_query.isEmpty) {
       final recent = ref.watch(recentPlacesProvider);
+      final savedPoints =
+          ref
+              .watch(localLibraryProvider)
+              .asData
+              ?.value
+              .orderedItems
+              .where((item) => item.point != null)
+              .toList() ??
+          <LibraryItem>[];
       final favorites = ref.watch(favoriteLineIdsProvider);
       final lines =
           map.asData?.value.lines
@@ -196,12 +285,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           [];
       return ListView(
         children: [
-          if (widget.arguments.currentLocation != null)
+          if (_resolvedCurrent != null)
             ListTile(
               key: const ValueKey('search.myLocation'),
               leading: const Icon(Icons.my_location),
               title: Text(context.l10n.myLocation),
-              onTap: () => _select(widget.arguments.currentLocation!),
+              onTap: () => _select(_resolvedCurrent!),
             ),
           if (lines.isNotEmpty)
             Padding(
@@ -223,13 +312,37 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 ],
               ),
             ),
+          if (savedPoints.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(context.l10n.savedPlaces),
+            ),
+          for (final item in savedPoints)
+            ListTile(
+              leading: Icon(
+                item.kind == LibraryKind.home
+                    ? Icons.home
+                    : item.kind == LibraryKind.work
+                    ? Icons.work
+                    : Icons.star,
+              ),
+              title: Text(
+                item.kind == LibraryKind.home
+                    ? context.l10n.home
+                    : item.kind == LibraryKind.work
+                    ? context.l10n.work
+                    : item.label,
+              ),
+              subtitle: Text(item.point!.name),
+              onTap: () => _select(item.point!),
+            ),
           if (recent.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(context.l10n.recent),
             ),
           for (final point in recent) _pointTile(point),
-          if (recent.isEmpty && lines.isEmpty)
+          if (recent.isEmpty && lines.isEmpty && savedPoints.isEmpty)
             const ContentState(kind: ContentStateKind.empty),
         ],
       );
@@ -287,18 +400,21 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             Expanded(
               child: Column(
                 children: [
-                  _field(true),
-                  const SizedBox(height: 12),
+                  if (!widget.arguments.pickSingle) ...[
+                    _field(true),
+                    const SizedBox(height: 12),
+                  ],
                   _field(false),
                 ],
               ),
             ),
-            IconButton(
-              key: const ValueKey('search.swap'),
-              tooltip: context.l10n.swapPoints,
-              onPressed: _swap,
-              icon: const Icon(Icons.swap_vert),
-            ),
+            if (!widget.arguments.pickSingle)
+              IconButton(
+                key: const ValueKey('search.swap'),
+                tooltip: context.l10n.swapPoints,
+                onPressed: _swap,
+                icon: const Icon(Icons.swap_vert),
+              ),
           ],
         ),
       ),
@@ -307,33 +423,47 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         padding: const EdgeInsets.all(16),
         child: FilledButton(
           key: const ValueKey('search.usePoints'),
-          onPressed: _origin == null || _destination == null
+          onPressed:
+              _destination == null ||
+                  (!widget.arguments.pickSingle && _origin == null)
               ? null
               : () => Navigator.of(context).pop(
-                  JourneyEndpoints(
-                    origin: _origin!,
-                    destination: _destination!,
-                  ),
+                  widget.arguments.pickSingle
+                      ? _destination!
+                      : JourneyEndpoints(
+                          origin: _origin!,
+                          destination: _destination!,
+                        ),
                 ),
-          child: Text(context.l10n.usePoints),
+          child: Text(
+            widget.arguments.pickSingle
+                ? context.l10n.continueAction
+                : context.l10n.usePoints,
+          ),
         ),
       ),
     ],
   );
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(context.l10n.choosePoints)),
-    body: SafeArea(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final minimum = 320 + MediaQuery.textScalerOf(context).scale(80);
-          if (constraints.maxHeight >= minimum) return _form();
-          return SingleChildScrollView(
-            primary: false,
-            child: SizedBox(height: minimum, child: _form()),
-          );
-        },
+  Widget build(BuildContext context) {
+    ref.listen(
+      currentPositionProvider,
+      (previous, next) => _applyPosition(next.asData?.value),
+    );
+    return Scaffold(
+      appBar: AppBar(title: Text(context.l10n.choosePoints)),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final minimum = 320 + MediaQuery.textScalerOf(context).scale(80);
+            if (constraints.maxHeight >= minimum) return _form();
+            return SingleChildScrollView(
+              primary: false,
+              child: SizedBox(height: minimum, child: _form()),
+            );
+          },
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

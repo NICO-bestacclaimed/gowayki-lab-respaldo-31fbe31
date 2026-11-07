@@ -29,7 +29,11 @@ class ExplorerLocationController extends Notifier<ExplorerLocation> {
   ExplorerLocation build() {
     ref.onDispose(() {
       ++_generation;
-      _subscription?.cancel();
+      final subscription = _subscription;
+      _subscription = null;
+      if (subscription != null) {
+        unawaited(subscription.cancel().catchError((Object error) {}));
+      }
     });
     return const ExplorerLocation(LocationStatus.idle);
   }
@@ -97,3 +101,20 @@ class ExplorerLocationController extends Notifier<ExplorerLocation> {
     }
   }
 }
+
+/// Search can use one fresh sample with an already granted permission.
+final currentPositionProvider = FutureProvider.autoDispose<PositionFix?>((
+  ref,
+) async {
+  try {
+    if (await ref.read(locationPermissionRepositoryProvider).check() !=
+        LocationAccess.allowed) {
+      return null;
+    }
+    final repository = ref.read(positionRepositoryProvider);
+    if (!await repository.serviceEnabled()) return null;
+    return await repository.current();
+  } on Object {
+    return null;
+  }
+});

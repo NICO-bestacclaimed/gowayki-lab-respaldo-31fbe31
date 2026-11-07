@@ -1,10 +1,13 @@
+import '../features/library/presentation/library_screen.dart';
+import '../features/lines/presentation/screens/line_detail_screen.dart';
+import '../features/stops/presentation/stop_detail_screen.dart';
 import '../features/search/presentation/search_screen.dart';
 import 'package:gowayki_lab/shared/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/models/place_result.dart';
+import '../../domain/models/navigation_search.dart';
 import '../providers/app_providers.dart';
 import '../features/explorer/presentation/screens/explorer_screen.dart';
 import '../features/feedback/presentation/screens/feedback_screen.dart';
@@ -103,8 +106,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: '/favoritos',
-                builder: (context, state) =>
-                    const LinesScreen(favoritesOnly: true),
+                builder: (context, state) => const LibraryScreen(),
               ),
             ],
           ),
@@ -122,13 +124,23 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/planificar',
         builder: (context, state) {
           final destination = state.extra;
-          if (destination is PlaceResult) {
-            return PlannerScreen(destination: destination);
+          if (destination is JourneyEndpoints) {
+            return PlannerScreen(points: destination);
           }
           return Scaffold(
             body: Center(child: Text(context.l10n.chooseDestination)),
           );
         },
+      ),
+      GoRoute(
+        path: '/linea/:id',
+        builder: (context, state) =>
+            LineDetailScreen(lineId: state.pathParameters['id']!),
+      ),
+      GoRoute(
+        path: '/paradero/:id',
+        builder: (context, state) =>
+            StopDetailScreen(stopId: state.pathParameters['id']!),
       ),
       GoRoute(
         path: '/buscar',
