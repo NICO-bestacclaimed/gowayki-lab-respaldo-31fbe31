@@ -18,6 +18,7 @@ async function confirm(db,uid,id='r1',changes={confirmations:1}) {
   const batch=writeBatch(db);
   batch.update(doc(db,'reports',id),changes);
   batch.set(doc(db,'reports',id,'confirmations',uid),{uid,createdAt:serverTimestamp()});
+  batch.set(doc(db,'users',uid,'confirmationRefs',id),{id});
   return batch.commit();
 }
 before(async()=>{
@@ -99,8 +100,8 @@ test('expired reports cannot receive new confirmations',async()=>{
   await assertFails(confirm(real('bob'),'bob'));
 });
 test('feedback is create-only for authenticated users, including guests, and is never client-readable',async()=>{
-  const alice=real('alice');await assertSucceeds(setDoc(doc(alice,'feedback/f1'),feedback()));
-  await assertSucceeds(setDoc(doc(anon('guest'),'feedback/f2'),feedback('guest')));
+  const alice=real('alice');await assertSucceeds(sendFeedback(alice,'f1',feedback()));
+  await assertSucceeds(sendFeedback(anon('guest'),'f2',feedback('guest')));
   for(const db of [alice,real('bob'),publicDb()]) await assertFails(getDoc(doc(db,'feedback/f1')));
   await assertFails(getDocs(collection(alice,'feedback')));
   await assertFails(updateDoc(doc(alice,'feedback/f1'),{message:'Otro'}));
@@ -109,7 +110,7 @@ test('feedback is create-only for authenticated users, including guests, and is 
 test('feedback rejects no auth, forged uid and invalid metadata/fields',async()=>{
   await assertFails(setDoc(doc(publicDb(),'feedback/f1'),feedback()));
   for(const change of [{uid:'bob'},{kind:'invalid'},{message:'x'.repeat(2001)},{app_version:3},{data_version:0},{device_model:''},{extra:true}]) {
-    await assertFails(setDoc(doc(real('alice'),'feedback/f1'),feedback('alice',change)));
+    await assertFails(sendFeedback(real('alice'),'f1',feedback('alice',change),'alice'));
   }
 });
 test('leaderboard is public and accepts only the owner personal best',async()=>{
@@ -165,4 +166,30 @@ test('independent devices retain independent favorites and saved journeys',async
 test('anonymous state supports transaction sync and remains private',async()=>{
  const db=anon('guest');await assertSucceeds(pushPersonal(db,'users/guest/state/item',personal('line:a',1,true)));
  await assertFails(getDoc(doc(real('alice'),'users/guest/state/item')));
+});
+
+async function sendFeedback(db,id,data,uid=data.uid) {
+ const batch=writeBatch(db);batch.set(doc(db,'feedback',id),data);batch.set(doc(db,'users',uid,'feedbackRefs',id),{id});return batch.commit();
+}
+test('feedback and confirmation references are mandatory, immutable and private',async()=>{
+ const alice=real('alice'),bob=real('bob');
+ await assertFails(setDoc(doc(alice,'feedback/f1'),feedback()));
+ await sendFeedback(alice,'f1',feedback());
+ await assertSucceeds(getDoc(doc(alice,'users/alice/feedbackRefs/f1')));
+ await assertFails(getDoc(doc(bob,'users/alice/feedbackRefs/f1')));
+ await assertFails(deleteDoc(doc(alice,'users/alice/feedbackRefs/f1')));
+ await assertFails(setDoc(doc(alice,'users/alice/feedbackRefs/fake'),{id:'fake'}));
+ await setDoc(doc(alice,'reports/r1'),report());
+ const batch=writeBatch(bob);batch.update(doc(bob,'reports/r1'),{confirmations:1});batch.set(doc(bob,'reports/r1/confirmations/bob'),{uid:'bob',createdAt:serverTimestamp()});await assertFails(batch.commit());
+ await confirm(bob,'bob');
+ await assertFails(deleteDoc(doc(bob,'users/bob/confirmationRefs/r1')));
+ await assertFails(setDoc(doc(bob,'users/bob/confirmationRefs/fake'),{id:'fake'}));
+});
+test('reserved private references cannot bypass rules using a recursive owner grant',async()=>{
+ const db=real('alice');await assertFails(setDoc(doc(db,'users/alice/arbitrary/id'),{anything:true}));
+ await assertFails(setDoc(doc(db,'users/alice/state/x/nested/y'),{anything:true}));
+});
+test('line missing report requires a line identifier',async()=>{
+ const db=real('alice');await assertFails(setDoc(doc(db,'reports/r1'),report('alice',{type:'line_missing'})));
+ await assertSucceeds(setDoc(doc(db,'reports/r2'),report('alice',{type:'line_missing',lineId:'fixture-line'})));
 });

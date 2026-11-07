@@ -3,6 +3,9 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
     function owner(uid) { return signedIn() && request.auth.uid == uid; }
+    function activeOwner(uid) {
+      return owner(uid) && (!exists(/databases/$(database)/documents/users/$(uid)) || get(/databases/$(database)/documents/users/$(uid)).data.get('deleting', false) != true);
+    }
     function realAccount() {
       return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous';
     }
@@ -21,7 +24,8 @@ service cloud.firestore {
         && d.createdAt == request.time
         && d.confirmations is int && d.confirmations == 0
         && boundedText(d.get('stopId', ''), 0, 128)
-        && boundedText(d.get('lineId', ''), 0, 128);
+        && boundedText(d.get('lineId', ''), 0, 128)
+        && (d.type != 'line_missing' || boundedText(d.get('lineId', ''), 1, 128));
     }
     function validFeedback(d) {
       return d.keys().hasAll(['uid', 'kind', 'message', 'city_code', 'created_at', 'app_version', 'device_model', 'data_version'])
@@ -47,14 +51,32 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
-    match /users/{uid}/{document=**} {
+    match /users/{uid} {
       allow read, write: if owner(uid);
+      match /{section}/{id} {
+        allow read, delete: if owner(uid) && section in ['state', 'library', 'preferences'];
+        allow create, update: if activeOwner(uid) && section in ['state', 'library', 'preferences'];
+      }
+      match /feedbackRefs/{id} {
+        allow read: if owner(uid);
+        allow create: if activeOwner(uid) && request.resource.data.keys().hasOnly(['id']) && request.resource.data.id == id
+          && !exists(/databases/$(database)/documents/feedback/$(id))
+          && getAfter(/databases/$(database)/documents/feedback/$(id)).data.uid == uid;
+        allow update, delete: if false;
+      }
+      match /confirmationRefs/{id} {
+        allow read: if owner(uid);
+        allow create: if activeOwner(uid) && request.resource.data.keys().hasOnly(['id']) && request.resource.data.id == id
+          && !exists(/databases/$(database)/documents/reports/$(id)/confirmations/$(uid))
+          && getAfter(/databases/$(database)/documents/reports/$(id)/confirmations/$(uid)).data.uid == uid;
+        allow update, delete: if false;
+      }
     }
     match /reports/{reportId} {
       allow read: if true;
-      allow create: if realAccount() && validReport(request.resource.data);
+      allow create: if realAccount() && activeOwner(request.auth.uid) && validReport(request.resource.data);
       allow delete: if owner(resource.data.uid);
-      allow update: if realAccount()
+      allow update: if realAccount() && activeOwner(request.auth.uid)
         && resource.data.createdAt + duration.value(72, 'h') > request.time
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['confirmations'])
         && request.resource.data.confirmations is int
@@ -70,6 +92,8 @@ service cloud.firestore {
           && request.resource.data.keys().hasOnly(['uid', 'createdAt'])
           && request.resource.data.uid == uid
           && request.resource.data.createdAt == request.time
+          && activeOwner(uid)
+          && getAfter(/databases/$(database)/documents/users/$(uid)/confirmationRefs/$(reportId)).data.id == reportId
           && exists(/databases/$(database)/documents/reports/$(reportId))
           && get(/databases/$(database)/documents/reports/$(reportId)).data.createdAt + duration.value(72, 'h') > request.time
           && getAfter(/databases/$(database)/documents/reports/$(reportId)).data.confirmations == get(/databases/$(database)/documents/reports/$(reportId)).data.confirmations + 1;
@@ -78,7 +102,8 @@ service cloud.firestore {
       }
     }
     match /feedback/{id} {
-      allow create: if signedIn() && validFeedback(request.resource.data);
+      allow create: if signedIn() && activeOwner(request.auth.uid) && validFeedback(request.resource.data)
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)/feedbackRefs/$(id)).data.id == id;
       allow read, update, delete: if false;
     }
     match /leaderboards/{cityWeek} {

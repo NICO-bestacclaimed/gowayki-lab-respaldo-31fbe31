@@ -192,7 +192,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mapError => 'The offline map could not be loaded.';
 
   @override
-  String get feedbackMinimum => 'Enter at least 5 characters';
+  String get feedbackMinimum => 'Enter at least 3 characters.';
 
   @override
   String get feedbackSent => 'Thank you. Your feedback was submitted.';
@@ -874,4 +874,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get syncRetry => 'Retry sync';
+
+  @override
+  String get communityReports => 'Community reports';
+
+  @override
+  String get communityLoading => 'Loading…';
+
+  @override
+  String get communityUnavailable => 'Could not refresh reports.';
+
+  @override
+  String get communityCached => 'Offline: saved reports may be out of date.';
+
+  @override
+  String get communityError =>
+      'Could not confirm submission. Your text is still here so you can retry.';
+
+  @override
+  String get communityLocalOnly =>
+      'Submitting reports and feedback is not enabled in this version.';
+
+  @override
+  String get reportProblem => 'Report a problem';
+
+  @override
+  String get reportType => 'Problem type';
+
+  @override
+  String get reportDetour => 'Detour';
+
+  @override
+  String get reportMissingStop => 'Stop does not exist';
+
+  @override
+  String get reportStopName => 'Incorrect or missing stop name';
+
+  @override
+  String get reportLineMissing => 'Line no longer serves here';
+
+  @override
+  String get reportNeedsAccount =>
+      'Sign in with email or Google to report and confirm.';
+
+  @override
+  String get reportExpired => 'This report has expired or was deleted.';
+
+  @override
+  String get reportNone => 'No active reports for this location.';
+
+  @override
+  String get reportConfirm => '👍 Still happening';
+
+  @override
+  String get reportConfirmed => 'Confirmation saved.';
+
+  @override
+  String get reportAlreadyConfirmed => 'You already confirmed this report.';
+
+  @override
+  String get reportLifetime => 'Reports remain visible for 72 hours.';
+
+  @override
+  String get reportSent => 'Report submitted.';
+
+  @override
+  String get reportValidation =>
+      'Describe the problem using 3 to 500 characters.';
+
+  @override
+  String get feedbackIncorrectData => 'Incorrect data';
+
+  @override
+  String get feedbackMetadataNotice =>
+      'App version, device model and data version will be sent.';
+
+  @override
+  String get feedbackSendError =>
+      'Could not confirm submission. Your message is still here so you can retry.';
+
+  @override
+  String get feedbackNeedsSession =>
+      'Sign in or continue as a guest to send feedback.';
+
+  @override
+  String get reportSelectLine => 'Select a line if applicable';
 }

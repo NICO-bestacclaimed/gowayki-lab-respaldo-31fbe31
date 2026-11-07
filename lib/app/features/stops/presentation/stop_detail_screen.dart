@@ -8,6 +8,8 @@ import '../../../../domain/planner/itinerary.dart';
 import '../../../../shared/l10n/l10n.dart';
 import '../../../../shared/widgets/content_state.dart';
 import '../../../library/local_library.dart';
+import '../../../community/report_form.dart';
+import '../../../community/report_widgets.dart';
 import '../../../providers/location_providers.dart';
 import '../../../providers/map_renderer_provider.dart';
 import '../../../providers/planner_providers.dart';
@@ -170,6 +172,20 @@ class _StopDetailState extends ConsumerState<StopDetailScreen> {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: OutlinedButton.icon(
+                      key: const ValueKey('stopDetail.report'),
+                      onPressed: () => openReportForm(
+                        context,
+                        point: point,
+                        stopId: widget.stopId,
+                      ),
+                      icon: const Icon(Icons.report_outlined),
+                      label: Text(l.reportProblem),
+                    ),
+                  ),
+                  ReportsPanel(stopId: widget.stopId),
                   if (data.entry.services.isEmpty)
                     const ContentState(kind: ContentStateKind.empty),
                   for (final service in data.entry.services)

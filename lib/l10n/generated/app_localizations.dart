@@ -443,7 +443,7 @@ abstract class AppLocalizations {
   /// No description provided for @feedbackMinimum.
   ///
   /// In es, this message translates to:
-  /// **'Escribe al menos 5 caracteres'**
+  /// **'Escribe al menos 3 caracteres.'**
   String get feedbackMinimum;
 
   /// No description provided for @feedbackSent.
@@ -1597,6 +1597,162 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Reintentar sincronización'**
   String get syncRetry;
+
+  /// No description provided for @communityReports.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportes de la comunidad'**
+  String get communityReports;
+
+  /// No description provided for @communityLoading.
+  ///
+  /// In es, this message translates to:
+  /// **'Cargando…'**
+  String get communityLoading;
+
+  /// No description provided for @communityUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudieron actualizar los reportes.'**
+  String get communityUnavailable;
+
+  /// No description provided for @communityCached.
+  ///
+  /// In es, this message translates to:
+  /// **'Sin conexión: los reportes guardados pueden no estar actualizados.'**
+  String get communityCached;
+
+  /// No description provided for @communityError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo confirmar el envío. Conservamos el texto para que vuelvas a intentarlo.'**
+  String get communityError;
+
+  /// No description provided for @communityLocalOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'El envío de reportes y comentarios no está habilitado en esta versión.'**
+  String get communityLocalOnly;
+
+  /// No description provided for @reportProblem.
+  ///
+  /// In es, this message translates to:
+  /// **'Reportar problema'**
+  String get reportProblem;
+
+  /// No description provided for @reportType.
+  ///
+  /// In es, this message translates to:
+  /// **'Tipo de problema'**
+  String get reportType;
+
+  /// No description provided for @reportDetour.
+  ///
+  /// In es, this message translates to:
+  /// **'Desvío'**
+  String get reportDetour;
+
+  /// No description provided for @reportMissingStop.
+  ///
+  /// In es, this message translates to:
+  /// **'El paradero no existe'**
+  String get reportMissingStop;
+
+  /// No description provided for @reportStopName.
+  ///
+  /// In es, this message translates to:
+  /// **'Nombre del paradero incorrecto o ausente'**
+  String get reportStopName;
+
+  /// No description provided for @reportLineMissing.
+  ///
+  /// In es, this message translates to:
+  /// **'La línea ya no pasa'**
+  String get reportLineMissing;
+
+  /// No description provided for @reportNeedsAccount.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicia sesión con una cuenta de correo o Google para reportar y confirmar.'**
+  String get reportNeedsAccount;
+
+  /// No description provided for @reportExpired.
+  ///
+  /// In es, this message translates to:
+  /// **'Este reporte ya venció o fue eliminado.'**
+  String get reportExpired;
+
+  /// No description provided for @reportNone.
+  ///
+  /// In es, this message translates to:
+  /// **'No hay reportes vigentes para esta ubicación.'**
+  String get reportNone;
+
+  /// No description provided for @reportConfirm.
+  ///
+  /// In es, this message translates to:
+  /// **'👍 Sigue así'**
+  String get reportConfirm;
+
+  /// No description provided for @reportConfirmed.
+  ///
+  /// In es, this message translates to:
+  /// **'Confirmación guardada.'**
+  String get reportConfirmed;
+
+  /// No description provided for @reportAlreadyConfirmed.
+  ///
+  /// In es, this message translates to:
+  /// **'Ya confirmaste este reporte.'**
+  String get reportAlreadyConfirmed;
+
+  /// No description provided for @reportLifetime.
+  ///
+  /// In es, this message translates to:
+  /// **'Los reportes se muestran durante 72 horas.'**
+  String get reportLifetime;
+
+  /// No description provided for @reportSent.
+  ///
+  /// In es, this message translates to:
+  /// **'Reporte enviado.'**
+  String get reportSent;
+
+  /// No description provided for @reportValidation.
+  ///
+  /// In es, this message translates to:
+  /// **'Describe el problema con entre 3 y 500 caracteres.'**
+  String get reportValidation;
+
+  /// No description provided for @feedbackIncorrectData.
+  ///
+  /// In es, this message translates to:
+  /// **'Datos incorrectos'**
+  String get feedbackIncorrectData;
+
+  /// No description provided for @feedbackMetadataNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'Se enviarán la versión de la app, el modelo del dispositivo y la versión de los datos.'**
+  String get feedbackMetadataNotice;
+
+  /// No description provided for @feedbackSendError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo confirmar el envío. Tu comentario sigue aquí para volver a intentarlo.'**
+  String get feedbackSendError;
+
+  /// No description provided for @feedbackNeedsSession.
+  ///
+  /// In es, this message translates to:
+  /// **'Inicia sesión o entra como invitado para enviar un comentario.'**
+  String get feedbackNeedsSession;
+
+  /// No description provided for @reportSelectLine.
+  ///
+  /// In es, this message translates to:
+  /// **'Selecciona una línea si corresponde'**
+  String get reportSelectLine;
 }
 
 class _AppLocalizationsDelegate

@@ -11,6 +11,8 @@ import '../../../../../infra/map/offline_map_package.dart';
 import '../../../../../shared/l10n/l10n.dart';
 import '../../../../../shared/widgets/content_state.dart';
 import '../../../../providers/map_providers.dart';
+import '../../../../community/community_providers.dart';
+import '../../../../community/report_widgets.dart';
 import '../../map/transit_map_data.dart';
 
 class ExplorerMap extends ConsumerStatefulWidget {
@@ -129,7 +131,15 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
     _map = map;
     map.onFeatureTapped.add((point, coordinates, id, layer, annotation) {
       if (!mounted) return;
-      if (layer.startsWith('transit.stop')) {
+      if (layer.startsWith('community.report')) {
+        final report = ref
+            .read(activeReportsProvider)
+            .asData
+            ?.value
+            .where((r) => r.id == id)
+            .firstOrNull;
+        if (report != null) showCommunityReport(context, report);
+      } else if (layer.startsWith('transit.stop')) {
         final stop = _data?.stops[id];
         if (stop != null) widget.onStopTap?.call(stop);
       } else if (layer.startsWith('transit.route')) {
@@ -295,6 +305,19 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
         enableInteraction: false,
       );
       if (!current()) return;
+      await map.addGeoJsonSource('community.reports', empty);
+      if (!current()) return;
+      await map.addCircleLayer(
+        'community.reports',
+        'community.report.points',
+        const CircleLayerProperties(
+          circleRadius: 9,
+          circleColor: '#D43D32',
+          circleStrokeColor: '#FFFFFF',
+          circleStrokeWidth: 2,
+        ),
+      );
+      if (!current()) return;
       _ready = true;
       await _redraw();
       if (!current()) return;
@@ -328,6 +351,26 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
         mounted && generation == _generation && _ready && identical(map, _map);
     if (!current()) return;
     try {
+      final reports = ref.read(activeReportsProvider).asData?.value ?? const [];
+      await map.setGeoJsonSource(
+        'community.reports',
+        TransitMapData.collection(
+          reports
+              .where(
+                (r) =>
+                    widget.focusedLineId == null ||
+                    r.lineId == widget.focusedLineId ||
+                    (r.stopId != null &&
+                        (data.stops[r.stopId]?.services.any(
+                              (s) => s.lineId == widget.focusedLineId,
+                            ) ??
+                            false)),
+              )
+              .map((r) => r.feature)
+              .toList(),
+        ),
+      );
+      if (!current()) return;
       for (final direction in TransitDirectionKind.values) {
         await map.setGeoJsonSource(
           'transit.routes.${direction.name}',
@@ -468,6 +511,10 @@ class ExplorerMapState extends ConsumerState<ExplorerMap> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(activeReportsProvider, (_, next) {
+      if (mounted && _ready) _redraw();
+    });
+
     if (_error != null) {
       return ContentState(
         kind: ContentStateKind.error,

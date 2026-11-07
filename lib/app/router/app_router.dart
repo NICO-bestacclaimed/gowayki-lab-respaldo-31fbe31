@@ -81,7 +81,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/acceso',
         builder: (context, state) => SignInScreen(
-          onSignedIn: () => context.go('/perfil'),
+          onSignedIn: () {
+            if (state.uri.queryParameters['regresar'] == '1' &&
+                context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/perfil');
+            }
+          },
           onBackToOnboarding: () => context.go('/bienvenida'),
         ),
       ),

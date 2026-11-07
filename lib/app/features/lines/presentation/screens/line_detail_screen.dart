@@ -6,6 +6,7 @@ import '../../../../../core/models/transit_line.dart';
 import '../../../../../shared/l10n/l10n.dart';
 import '../../../../../shared/widgets/content_state.dart';
 import '../../../../providers/app_providers.dart';
+import '../../../../community/report_widgets.dart';
 import '../../../../providers/map_renderer_provider.dart';
 import '../../../../providers/planner_providers.dart';
 import '../../../../providers/sharing_providers.dart';
@@ -202,6 +203,13 @@ class _LineDetailState extends ConsumerState<LineDetailScreen> {
                       icon: const Icon(Icons.share),
                       label: Text(l.share),
                     ),
+                  ),
+                  ReportsPanel(
+                    lineId: widget.lineId,
+                    stopIds: {
+                      for (final group in data.visits.values)
+                        for (final visit in group) visit.stop.id,
+                    },
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),

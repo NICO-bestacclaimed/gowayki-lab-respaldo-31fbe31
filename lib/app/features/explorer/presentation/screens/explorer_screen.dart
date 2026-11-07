@@ -1,4 +1,5 @@
 import '../../../../library/local_library.dart';
+import '../../../../community/report_form.dart';
 import '../../../../providers/map_renderer_provider.dart';
 export '../../../../providers/map_renderer_provider.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class _ExplorerScreenState extends ConsumerState<ExplorerScreen>
   }
 
   Future<void> _pointActions(PlaceResult point, {CityMapStop? stop}) async {
-    final origin = await showModalBottomSheet<bool>(
+    final action = await showModalBottomSheet<int>(
       context: context,
       showDragHandle: true,
       isScrollControlled: true,
@@ -168,22 +169,37 @@ class _ExplorerScreenState extends ConsumerState<ExplorerScreen>
               ],
               const SizedBox(height: 16),
               FilledButton.icon(
-                onPressed: () => Navigator.pop(context, false),
+                onPressed: () => Navigator.pop(context, 0),
                 icon: const Icon(Icons.place),
                 label: Text(context.l10n.goHere),
               ),
               const SizedBox(height: 8),
               OutlinedButton.icon(
-                onPressed: () => Navigator.pop(context, true),
+                onPressed: () => Navigator.pop(context, 1),
                 icon: const Icon(Icons.trip_origin),
                 label: Text(context.l10n.leaveHere),
+              ),
+              OutlinedButton.icon(
+                onPressed: () => Navigator.pop(context, 2),
+                icon: const Icon(Icons.report_outlined),
+                label: Text(context.l10n.reportProblem),
               ),
             ],
           ),
         ),
       ),
     );
-    if (!mounted || origin == null) return;
+    if (!mounted || action == null) return;
+    if (action == 2) {
+      await openReportForm(
+        context,
+        point: point,
+        stopId: stop?.stop.id,
+        lineId: _focused?.id,
+      );
+      return;
+    }
+    final origin = action == 1;
     await _search(
       origin: origin ? point : null,
       destination: origin ? null : point,

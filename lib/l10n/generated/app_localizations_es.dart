@@ -192,7 +192,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get mapError => 'No se pudo cargar el mapa sin conexión.';
 
   @override
-  String get feedbackMinimum => 'Escribe al menos 5 caracteres';
+  String get feedbackMinimum => 'Escribe al menos 3 caracteres.';
 
   @override
   String get feedbackSent => 'Gracias. Comentario enviado.';
@@ -876,4 +876,90 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get syncRetry => 'Reintentar sincronización';
+
+  @override
+  String get communityReports => 'Reportes de la comunidad';
+
+  @override
+  String get communityLoading => 'Cargando…';
+
+  @override
+  String get communityUnavailable => 'No se pudieron actualizar los reportes.';
+
+  @override
+  String get communityCached =>
+      'Sin conexión: los reportes guardados pueden no estar actualizados.';
+
+  @override
+  String get communityError =>
+      'No se pudo confirmar el envío. Conservamos el texto para que vuelvas a intentarlo.';
+
+  @override
+  String get communityLocalOnly =>
+      'El envío de reportes y comentarios no está habilitado en esta versión.';
+
+  @override
+  String get reportProblem => 'Reportar problema';
+
+  @override
+  String get reportType => 'Tipo de problema';
+
+  @override
+  String get reportDetour => 'Desvío';
+
+  @override
+  String get reportMissingStop => 'El paradero no existe';
+
+  @override
+  String get reportStopName => 'Nombre del paradero incorrecto o ausente';
+
+  @override
+  String get reportLineMissing => 'La línea ya no pasa';
+
+  @override
+  String get reportNeedsAccount =>
+      'Inicia sesión con una cuenta de correo o Google para reportar y confirmar.';
+
+  @override
+  String get reportExpired => 'Este reporte ya venció o fue eliminado.';
+
+  @override
+  String get reportNone => 'No hay reportes vigentes para esta ubicación.';
+
+  @override
+  String get reportConfirm => '👍 Sigue así';
+
+  @override
+  String get reportConfirmed => 'Confirmación guardada.';
+
+  @override
+  String get reportAlreadyConfirmed => 'Ya confirmaste este reporte.';
+
+  @override
+  String get reportLifetime => 'Los reportes se muestran durante 72 horas.';
+
+  @override
+  String get reportSent => 'Reporte enviado.';
+
+  @override
+  String get reportValidation =>
+      'Describe el problema con entre 3 y 500 caracteres.';
+
+  @override
+  String get feedbackIncorrectData => 'Datos incorrectos';
+
+  @override
+  String get feedbackMetadataNotice =>
+      'Se enviarán la versión de la app, el modelo del dispositivo y la versión de los datos.';
+
+  @override
+  String get feedbackSendError =>
+      'No se pudo confirmar el envío. Tu comentario sigue aquí para volver a intentarlo.';
+
+  @override
+  String get feedbackNeedsSession =>
+      'Inicia sesión o entra como invitado para enviar un comentario.';
+
+  @override
+  String get reportSelectLine => 'Selecciona una línea si corresponde';
 }

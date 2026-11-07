@@ -104,6 +104,6 @@ class DemoPreferencesRepository implements PreferencesRepository {
 class DemoFeedbackRepository implements FeedbackRepository {
   @override
   Future<void> submit(FeedbackItem item) async {
-    await Future<void>.delayed(const Duration(milliseconds: 250));
+    throw const AuthFailure(AuthFailureCode.localOnly);
   }
 }

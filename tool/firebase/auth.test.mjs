@@ -27,8 +27,8 @@ beforeEach(async()=>{
 });
 afterEach(async()=>{await signOut(auth);await deleteApp(app);});
 after(async()=>environment?.cleanup());
-async function saveFavorite(user){await setDoc(doc(db,`users/${user.uid}/private/favorites`),{lineIds:['fixture-line']});}
-async function assertFavorite(user){assert.deepEqual((await getDoc(doc(db,`users/${user.uid}/private/favorites`))).data().lineIds,['fixture-line']);}
+async function saveFavorite(user){await setDoc(doc(db,`users/${user.uid}/library/favorites`),{lineIds:['fixture-line']});}
+async function assertFavorite(user){assert.deepEqual((await getDoc(doc(db,`users/${user.uid}/library/favorites`))).data().lineIds,['fixture-line']);}
 test('anonymous session links to email without changing UID or private favorites',async()=>{
  const guest=(await signInAnonymously(auth)).user;await saveFavorite(guest);
  const linked=(await linkWithCredential(guest,EmailAuthProvider.credential(email,password))).user;

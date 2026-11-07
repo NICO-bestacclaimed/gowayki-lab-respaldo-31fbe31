@@ -1,0 +1,17 @@
+# Punto de control 8D — reportes y ayuda
+
+Reportes reales con5 tipos, descripción3–500 caracteres, coordenadas del paradero o punto seleccionado, relación opcional a una línea real (obligatoria para «La línea ya no pasa»). Solo una cuenta de correo/Google crea o confirma; el emulador rechaza invitados. Confirmación atómica con contador+1 y marcador único, sin duplicación por reintento. Los avisos caducan exactamente a72h mediante un temporizador local independiente de la consulta. Capa de reportes separada del mapa offline; fichas de línea/paradero y menú de punto del mapa permiten ver o crear reportes. El modo local conserva mapa y fichas sin depender de Firestore.
+
+Ayuda: Bug, Idea, Datos incorrectos y Otro; mensaje3–2000 caracteres. Metadatos obtenidos con package_info_plus10.2.2 y device_info_plus13.3.0: versión/build reales, fabricante/modelo Android o identificador de modelo iOS y versión del pack. No se envían el mapa completo de propiedades del dispositivo, correo, nombre del equipo, serial ni identificadores publicitarios. Windows/Linux declaran expresamente que el modelo no está disponible. El modo sin Firebase deja el envío deshabilitado; se eliminó el envío ficticio del adaptador demo.
+
+Los formularios conservan el texto si falla el envío, reutilizan la identidad del borrador al reintentar y solo muestran éxito tras confirmación del servidor. El acceso puede regresar al formulario abierto. Los reportes de caché se identifican; una caché vacía no se presenta como prueba de que no haya reportes en la ciudad.
+
+Preparación de8E: comentarios y confirmaciones crean referencias privadas en el mismo lote/transacción. Estas referencias permiten encontrar datos propios para borrarlos sin dar permiso de lectura a feedback. Se sustituyó el permiso recursivo amplio de users por colecciones conocidas y se impide modificar/borrar referencias por separado. Las excepciones de borrado de cuenta autorizadas se añaden en8E; aún no se eliminó ninguna cuenta real.
+
+Verificación:169 pruebas Flutter aprobadas (10 de comunidad, incluyendo caducidad mientras la pantalla está inactiva, coordenadas reales del formulario, invitado bloqueado, error sin éxito ficticio, reintento, metadatos y pantalla pequeña).39 pruebas de emulador aprobadas:35 de reglas/protocolo y4 de Auth. Análisis final sin incidencias. Ambos APK Android compilados y sus datos/mapa/juego/SQLite comprobados; cliente Google coincide con el archivo suministrado. Manifest sin ACCESS_BACKGROUND_LOCATION ni READ_PHONE_STATE. Gradle/emuladores detenidos. Resumen de APK en los archivos VERIFICACION_APK_8D_*.json.
+
+Percance resuelto: los tests de vinculación usaban una colección «private» de prueba que dejó de estar permitida al enumerar las colecciones de la app. Se actualizó el fixture a library; las4 pruebas de Auth volvieron a pasar. Se corrigieron avisos de tipos/estilo y de const detectados por el análisis.
+
+Pendiente: Cloud Firestore real no creado, reglas/índices sin desplegar y reportes reales sin prueba entre teléfonos. El dibujo/tap de marcadores en MapLibre, los metadatos nativos y Google en dispositivo no están verificados físicamente; el APK solo confirma integración/compilación. iOS sigue pendiente de macOS/Xcode. La prueba visual del juego continúa aplazada.
+
+Fuentes: https://pub.dev/packages/package_info_plus ; https://pub.dev/packages/device_info_plus ; https://firebase.google.com/docs/firestore/manage-data/transactions
