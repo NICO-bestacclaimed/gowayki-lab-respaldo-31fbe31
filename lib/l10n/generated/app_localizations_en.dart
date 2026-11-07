@@ -959,4 +959,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportSelectLine => 'Select a line if applicable';
+
+  @override
+  String get accountDeletionPending =>
+      'Account deletion is pending. Retry from your profile to finish.';
+
+  @override
+  String get deleteAccount => 'Delete my account';
+
+  @override
+  String get accountDeletionWarning =>
+      'Your account favorites, trips, reports, feedback, confirmations and scores will be deleted. This cannot be undone.';
+
+  @override
+  String get accountDeletionGoogle =>
+      'Google will open to verify your identity. Choose the same account.';
+
+  @override
+  String get accountDeletionError =>
+      'Deletion could not finish. Some data may already be removed. Retry to finish; synchronization remains paused.';
+
+  @override
+  String get accountDeleting => 'Deleting account and data…';
+
+  @override
+  String get accountDeleted => 'Account and data deleted.';
+
+  @override
+  String get accountDeletionResume => 'Complete account deletion';
+
+  @override
+  String get weeklyRanking => 'Weekly ranking';
+
+  @override
+  String rankingPeriod(int week, int year) {
+    return 'Week $week of $year';
+  }
+
+  @override
+  String get rankingPublicName =>
+      'Your profile name is displayed with your score.';
+
+  @override
+  String get rankingLocalOnly =>
+      'Records are saved on this device. Ranking is not enabled in this version.';
+
+  @override
+  String get rankingPending =>
+      'Scores saved on this device are waiting to be published.';
+
+  @override
+  String get rankingUnavailable =>
+      'Could not load the ranking. Try again with a connection.';
+
+  @override
+  String get rankingNoScore => 'You have no published score this week yet.';
+
+  @override
+  String rankingOwn(int position, int score) {
+    return 'Your position: $position · $score points';
+  }
+
+  @override
+  String get rankingEmpty => 'No scores have been published this week yet.';
+
+  @override
+  String get myReports => 'My reports';
+
+  @override
+  String get myReportsEmpty => 'You have no saved reports.';
+
+  @override
+  String get deleteReport => 'Delete report';
+
+  @override
+  String get reportDeleted => 'Report deleted.';
+
+  @override
+  String get reportDeleteError => 'Could not delete the report. Please retry.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get accountDeletionMarkerNotice =>
+      'An empty deleted-account marker linked to its technical identifier remains to block old sessions. It contains no name, email, locations or feedback.';
 }

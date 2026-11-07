@@ -10,6 +10,7 @@ class PersonalSyncTile extends ConsumerWidget {
     final status = ref.watch(personalSyncProvider);
     final l = context.l10n;
     final text = switch (status) {
+      SyncStatus.deleting => l.accountDeletionPending,
       SyncStatus.local => l.syncLocal,
       SyncStatus.needsSession => l.syncNeedsSession,
       SyncStatus.waiting => l.syncWaiting,

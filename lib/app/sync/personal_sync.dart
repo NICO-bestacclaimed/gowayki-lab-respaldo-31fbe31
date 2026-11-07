@@ -5,8 +5,17 @@ import '../../domain/repositories/personal_sync_repository.dart';
 import '../../domain/sync/personal_record.dart';
 import '../providers/app_providers.dart';
 import 'personal_data.dart';
+import 'account_deletion_state.dart';
 
-enum SyncStatus { local, needsSession, waiting, syncing, synced, unavailable }
+enum SyncStatus {
+  local,
+  needsSession,
+  waiting,
+  syncing,
+  synced,
+  unavailable,
+  deleting,
+}
 
 final personalSyncRepositoryProvider = Provider<PersonalSyncRepository>(
   (ref) => FirestorePersonalSyncRepository(),
@@ -21,6 +30,7 @@ class PersonalSyncController extends Notifier<SyncStatus> {
   Timer? _timer;
   var _generation = 0, _failures = 0;
   bool _ready = false, _busy = false, _again = false;
+  final _writes = <Future<void>>{};
   Map<String, PersonalRecord> _remote = {};
   @override
   SyncStatus build() {
@@ -41,6 +51,10 @@ class PersonalSyncController extends Notifier<SyncStatus> {
     });
     if (!enabled) return SyncStatus.local;
     if (scope.uid == null) return SyncStatus.needsSession;
+    final jobs = ref.watch(accountDeletionJobsProvider);
+    if (jobs.isLoading) return SyncStatus.waiting;
+    if (jobs.hasError) return SyncStatus.unavailable;
+    if (jobs.requireValue.contains(scope.uid)) return SyncStatus.deleting;
     ref.listen(personalDataProvider, (previous, next) {
       if (next.hasValue && _current(generation)) {
         _schedule(scope.uid!, generation);
@@ -101,6 +115,8 @@ class PersonalSyncController extends Notifier<SyncStatus> {
     if (!_current(generation) || !_ready || _busy) return;
     _busy = true;
     _again = false;
+    final turn = Completer<void>();
+    _writes.add(turn.future);
     try {
       final data = await ref.read(personalDataProvider.future);
       if (!_current(generation)) return;
@@ -126,6 +142,8 @@ class PersonalSyncController extends Notifier<SyncStatus> {
     } on Object {
       _failed(uid, generation);
     } finally {
+      _writes.remove(turn.future);
+      turn.complete();
       if (_current(generation)) {
         _busy = false;
         if (_again) _schedule(uid, generation);
@@ -148,6 +166,10 @@ class PersonalSyncController extends Notifier<SyncStatus> {
         }
       });
     }
+  }
+
+  Future<void> settle() async {
+    await Future.wait(_writes.toList());
   }
 
   void retry() {

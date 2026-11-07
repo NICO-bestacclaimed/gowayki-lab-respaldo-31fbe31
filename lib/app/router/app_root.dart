@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/active_trip_provider.dart';
 import '../sync/personal_sync.dart';
 import '../sync/personal_data.dart';
+import '../game/weekly_scores.dart';
 
 class AppRoot extends ConsumerWidget {
   const AppRoot({super.key, required this.navigationShell});
@@ -13,6 +14,7 @@ class AppRoot extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(personalDataProvider);
     ref.watch(personalSyncProvider);
+    ref.watch(weeklyScoresProvider);
     return Scaffold(
       body: Column(
         children: [

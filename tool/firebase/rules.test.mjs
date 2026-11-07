@@ -2,8 +2,9 @@ import {readFileSync} from 'node:fs';
 import {before,after,beforeEach,test} from 'node:test';
 import assert from 'node:assert/strict';
 import {initializeTestEnvironment,assertSucceeds,assertFails} from '@firebase/rules-unit-testing';
-import {doc,setDoc,getDoc,updateDoc,deleteDoc,writeBatch,serverTimestamp,Timestamp,collection,getDocs,query,where,runTransaction} from 'firebase/firestore';
+import {doc,setDoc,getDoc,updateDoc,deleteDoc,writeBatch,serverTimestamp,Timestamp,collection,getDocs,query,where,runTransaction,orderBy,limit,getCountFromServer} from 'firebase/firestore';
 import {seedCity,cityDocument} from './seed.mjs';
+import {eraseFirestoreFixture} from './erase-account.mjs';
 let env;
 const project=process.env.GCLOUD_PROJECT;
 if(!project?.startsWith('demo-') || !process.env.FIRESTORE_EMULATOR_HOST?.startsWith('127.0.0.1:')) throw Error('Only local demo emulator tests allowed.');
@@ -114,7 +115,7 @@ test('feedback rejects no auth, forged uid and invalid metadata/fields',async()=
   }
 });
 test('leaderboard is public and accepts only the owner personal best',async()=>{
-  const alice=real('alice');await assertSucceeds(setDoc(doc(alice,scorePath+'alice'),score()));
+  const alice=real('alice');await assertSucceeds(saveScore(alice,'alice',score()));
   await assertSucceeds(getDoc(doc(publicDb(),scorePath+'alice')));
   await assertSucceeds(getDocs(collection(publicDb(),'leaderboards/arequipa_2026-W45/scores')));
   await assertFails(setDoc(doc(real('bob'),scorePath+'alice'),score('alice',{score:200})));
@@ -126,7 +127,7 @@ test('leaderboard is public and accepts only the owner personal best',async()=>{
 });
 test('leaderboard rejects impossible scores, invalid durations and wrong paths',async()=>{
   for(const change of [{score:5001},{score:-1},{score:10.5},{score:5000,durationMs:1000},{durationMs:120001},{uid:'bob'},{displayName:''},{displayName:'x'.repeat(61)},{extra:true}]) {
-    await assertFails(setDoc(doc(real('alice'),scorePath+'alice'),score('alice',change)));
+    await assertFails(saveScore(real('alice'),'alice',score('alice',change)));
   }
   await assertFails(setDoc(doc(publicDb(),scorePath+'alice'),score()));
   await assertFails(setDoc(doc(real('alice'),'leaderboards/lima_2026-W45/scores/alice'),score()));
@@ -192,4 +193,102 @@ test('reserved private references cannot bypass rules using a recursive owner gr
 test('line missing report requires a line identifier',async()=>{
  const db=real('alice');await assertFails(setDoc(doc(db,'reports/r1'),report('alice',{type:'line_missing'})));
  await assertSucceeds(setDoc(doc(db,'reports/r2'),report('alice',{type:'line_missing',lineId:'fixture-line'})));
+});
+
+async function saveScore(db,uid,data,week='arequipa_2026-W45') {
+ const batch=writeBatch(db);batch.set(doc(db,'leaderboards',week,'scores',uid),data);batch.set(doc(db,'users',uid,'scoreRefs',week),{id:week});return batch.commit();
+}
+
+async function deleting(db,uid){return setDoc(doc(db,'users',uid),{deleting:true,deletionStartedAt:serverTimestamp()},{merge:true});}
+async function removeVote(db,uid,{count=0,removeIndex=true,removeMarker=true}={}) {
+ const batch=writeBatch(db);batch.update(doc(db,'reports/r1'),{confirmations:count});if(removeMarker)batch.delete(doc(db,'reports/r1/confirmations',uid));if(removeIndex)batch.delete(doc(db,'users',uid,'confirmationRefs/r1'));return batch.commit();
+}
+test('erasure decrements exactly one vote and removes only its paired marker and index',async()=>{
+ await setDoc(doc(real('alice'),'reports/r1'),report());const bob=real('bob');await confirm(bob,'bob');await deleting(bob,'bob');
+ await assertFails(removeVote(bob,'bob',{count:0,removeIndex:false}));
+ await assertFails(removeVote(bob,'bob',{count:0,removeMarker:false}));
+ await assertFails(removeVote(bob,'bob',{count:-1}));
+ await assertSucceeds(removeVote(bob,'bob'));
+ assert.equal((await getDoc(doc(publicDb(),'reports/r1'))).data().confirmations,0);
+ await assertFails(removeVote(bob,'bob'));
+});
+test('erasure cannot remove somebody else vote or feedback and cannot bypass counter adjustment',async()=>{
+ const alice=real('alice'),bob=real('bob');await setDoc(doc(alice,'reports/r1'),report());await confirm(bob,'bob');await sendFeedback(bob,'fb',feedback('bob'));await deleting(alice,'alice');
+ await assertFails(deleteDoc(doc(alice,'reports/r1/confirmations/bob')));
+ await assertFails(deleteDoc(doc(alice,'users/bob/confirmationRefs/r1')));
+ await assertFails(deleteDoc(doc(alice,'feedback/fb')));
+ await assertFails(updateDoc(doc(alice,'reports/r1'),{confirmations:0}));
+});
+test('deleting flag is irreversible until root erasure and blocks new private/public data',async()=>{
+ const alice=real('alice');await setDoc(doc(alice,'users/alice'),{displayName:'Prueba'});await assertFails(deleteDoc(doc(alice,'users/alice')));await deleting(alice,'alice');
+ await assertFails(updateDoc(doc(alice,'users/alice'),{deleting:false}));
+ await assertFails(setDoc(doc(alice,'reports/r1'),report()));
+ await assertFails(sendFeedback(alice,'f1',feedback()));
+ await assertFails(saveScore(alice,'alice',score()));
+ await assertFails(setDoc(doc(alice,'users/alice/state/item'),personal('line:a',1,true)));
+ const seal=writeBatch(alice);seal.set(doc(alice,'deletedAccounts/alice'),{});seal.delete(doc(alice,'users/alice'));await assertSucceeds(seal.commit());
+});
+test('old and orphaned confirmation references can be erased',async()=>{
+ const alice=real('alice'),bob=real('bob');await setDoc(doc(alice,'reports/r1'),report());await confirm(bob,'bob');await deleteDoc(doc(alice,'reports/r1'));
+ await assertSucceeds(eraseFirestoreFixture(bob,'bob'));await env.withSecurityRulesDisabled(async c=>{assert.equal((await getDoc(doc(c.firestore(),'reports/r1/confirmations/bob'))).exists(),false);});
+});
+test('expired report counter still decreases on account erasure',async()=>{
+ const alice=real('alice'),bob=real('bob');await setDoc(doc(alice,'reports/r1'),report());await confirm(bob,'bob');
+ await env.withSecurityRulesDisabled(async c=>updateDoc(doc(c.firestore(),'reports/r1'),{createdAt:Timestamp.fromMillis(Date.now()-73*3600000)}));
+ await assertSucceeds(eraseFirestoreFixture(bob,'bob'));assert.equal((await getDoc(doc(publicDb(),'reports/r1'))).data().confirmations,0);
+});
+test('weekly scores require a private reference and references cannot be discarded separately',async()=>{
+ const alice=real('alice');await assertFails(setDoc(doc(alice,scorePath+'alice'),score()));await saveScore(alice,'alice',score());
+ await assertFails(deleteDoc(doc(alice,'users/alice/scoreRefs/arequipa_2026-W45')));
+ await assertFails(getDoc(doc(real('bob'),'users/alice/scoreRefs/arequipa_2026-W45')));
+ await deleting(alice,'alice');await assertFails(deleteDoc(doc(alice,'users/alice/scoreRefs/arequipa_2026-W45')));
+ const batch=writeBatch(alice);batch.delete(doc(alice,scorePath+'alice'));batch.delete(doc(alice,'users/alice/scoreRefs/arequipa_2026-W45'));await assertSucceeds(batch.commit());
+});
+test('complete erasure removes 25 unreadable feedbacks, private data, own reports, every score and own confirmations',async()=>{
+ const alice=real('alice'),bob=real('bob');await setDoc(doc(bob,'reports/r1'),report('bob'));await confirm(alice,'alice');await setDoc(doc(alice,'reports/own'),report());
+ await sendFeedback(bob,'other-feedback',feedback('bob'));
+ for(let i=0;i<25;i++)await sendFeedback(alice,`f${i}`,feedback());
+ for(const week of ['arequipa_2026-W44','arequipa_2026-W45'])await saveScore(alice,'alice',score(),week);
+ for(const section of ['state','library','preferences'])await setDoc(doc(alice,'users/alice',section,'item'),{fixture:true});
+ await assertSucceeds(eraseFirestoreFixture(alice,'alice'));
+ await env.withSecurityRulesDisabled(async c=>{const db=c.firestore();assert.equal((await getDoc(doc(db,'users/alice'))).exists(),false);assert.equal((await getDoc(doc(db,'reports/own'))).exists(),false);assert.equal((await getDoc(doc(db,'reports/r1'))).data().confirmations,0);assert.equal((await getDoc(doc(db,'reports/r1/confirmations/alice'))).exists(),false);assert.equal((await getDocs(collection(db,'feedback'))).size,1);assert.equal((await getDoc(doc(db,'feedback/other-feedback'))).data().uid,'bob');for(const section of ['state','library','preferences','feedbackRefs','confirmationRefs','scoreRefs'])assert.equal((await getDocs(collection(db,'users/alice',section))).size,0);for(const week of ['arequipa_2026-W44','arequipa_2026-W45'])assert.equal((await getDoc(doc(db,'leaderboards',week,'scores/alice'))).exists(),false);});
+});
+test('erasure resumes safely after a partial failure without deleting another user data',async()=>{
+ const alice=real('alice'),bob=real('bob');await setDoc(doc(bob,'reports/r1'),report('bob'));await confirm(alice,'alice');await sendFeedback(alice,'f1',feedback());await setDoc(doc(bob,'users/bob/library/home'),{fixture:true});
+ await assert.rejects(eraseFirestoreFixture(alice,'alice',{afterPhase:async phase=>{if(phase==='feedback')throw Error('Simulated interruption');}}));
+ assert.equal((await getDoc(doc(alice,'users/alice'))).data().deleting,true);assert.equal((await getDoc(doc(publicDb(),'reports/r1'))).data().confirmations,1);
+ await assertSucceeds(eraseFirestoreFixture(alice,'alice'));assert.equal((await getDoc(doc(publicDb(),'reports/r1'))).data().confirmations,0);await assertSucceeds(getDoc(doc(bob,'users/bob/library/home')));
+});
+
+test('weekly top is limited to 20 and own position uses competition ranking for ties',async()=>{
+ for(let i=0;i<25;i++){const uid=`fixture-${i}`;await saveScore(real(uid),uid,score(uid,{score:100+i*10}));}
+ await saveScore(real('tie'),'tie',score('tie',{score:100}));
+ const scores=collection(publicDb(),'leaderboards/arequipa_2026-W45/scores');
+ const top=await getDocs(query(scores,orderBy('score','desc'),orderBy('updatedAt','asc'),limit(20)));
+ assert.equal(top.size,20);assert.equal(top.docs[0].data().score,340);
+ const count=(await getCountFromServer(query(scores,where('score','>',100)))).data().count;
+ assert.equal(count+1,25);
+});
+test('an orphaned feedback reference can be cleared without reading feedback',async()=>{
+ const alice=real('alice');await sendFeedback(alice,'f1',feedback());
+ await env.withSecurityRulesDisabled(async c=>deleteDoc(doc(c.firestore(),'feedback/f1')));
+ await assertSucceeds(eraseFirestoreFixture(alice,'alice'));
+ await env.withSecurityRulesDisabled(async c=>assert.equal((await getDoc(doc(c.firestore(),'users/alice/feedbackRefs/f1'))).exists(),false));
+});
+
+test('deleted-account marker blocks stale sessions from recreating any account data',async()=>{
+ const alice=real('alice');await setDoc(doc(alice,'users/alice/library/home'),{fixture:true});await eraseFirestoreFixture(alice,'alice');
+ const stale=real('alice');await assertFails(setDoc(doc(stale,'users/alice'),{displayName:'Resurrection'}));
+ await assertFails(setDoc(doc(stale,'users/alice/state/item'),personal('line:a',1,true)));
+ await assertFails(setDoc(doc(stale,'reports/new'),report()));await assertFails(sendFeedback(stale,'new',feedback()));await assertFails(saveScore(stale,'alice',score()));
+ assert.deepEqual((await assertSucceeds(getDoc(doc(stale,'deletedAccounts/alice')))).data(),{});
+ await assertFails(deleteDoc(doc(stale,'deletedAccounts/alice')));await assertFails(updateDoc(doc(stale,'deletedAccounts/alice'),{payload:'data'}));await assertFails(getDoc(doc(real('bob'),'deletedAccounts/alice')));
+ await assertSucceeds(eraseFirestoreFixture(stale,'alice')); // Retry after Auth failed; no personal data returns.
+});
+test('security marker cannot be forged or contain personal data and requires paired root deletion',async()=>{
+ const alice=real('alice');await assertFails(setDoc(doc(alice,'deletedAccounts/alice'),{}));await deleting(alice,'alice');
+ await assertFails(setDoc(doc(alice,'deletedAccounts/alice'),{}));
+ const bad=writeBatch(alice);bad.set(doc(alice,'deletedAccounts/alice'),{email:'fixture@example.test'});bad.delete(doc(alice,'users/alice'));await assertFails(bad.commit());
+ const forged=writeBatch(alice);forged.set(doc(alice,'deletedAccounts/bob'),{});forged.delete(doc(alice,'users/alice'));await assertFails(forged.commit());
+ await assertFails(deleteDoc(doc(alice,'users/alice')));
 });

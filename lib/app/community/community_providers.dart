@@ -43,14 +43,13 @@ final activeReportsProvider =
         (rows) => List.unmodifiable(rows.items.where((r) => r.activeAt(now))),
       );
     });
-final myReportsProvider = StreamProvider.autoDispose<List<CommunityReport>>((
-  ref,
-) {
-  if (!ref.watch(useFirebaseProvider)) return Stream.value(const []);
+final myReportsProvider = StreamProvider.autoDispose<ReportFeed>((ref) {
+  if (!ref.watch(useFirebaseProvider)) {
+    return Stream.value(const ReportFeed([], fromCache: false));
+  }
   final user = ref.watch(authStateProvider).asData?.value;
-  if (user == null || user.isAnonymous) return Stream.value(const []);
-  return ref
-      .watch(reportsRepositoryProvider)
-      .watchMine(user.id)
-      .map((feed) => feed.items);
+  if (user == null || user.isAnonymous) {
+    return Stream.value(const ReportFeed([], fromCache: false));
+  }
+  return ref.watch(reportsRepositoryProvider).watchMine(user.id);
 });

@@ -1,10 +1,10 @@
-import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
 import '../../core/models/auth_user.dart';
 import '../../domain/auth/auth_failure.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/google_identity_repository.dart';
 import '../../infra/auth/google_identity_repository.dart';
+import '../../infra/auth/auth_operations.dart';
 
 AuthFailure firebaseAuthFailure(String code) => AuthFailure(switch (code) {
   'invalid-email' => AuthFailureCode.invalidEmail,
@@ -30,11 +30,13 @@ class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuthRepository({
     fb.FirebaseAuth? auth,
     GoogleIdentityRepository? google,
+    AuthOperations? operations,
   }) : _auth = auth ?? fb.FirebaseAuth.instance,
-       _google = google ?? PlatformGoogleIdentityRepository();
+       _google = google ?? PlatformGoogleIdentityRepository(),
+       _operations = operations ?? firebaseAuthOperations;
   final fb.FirebaseAuth _auth;
   final GoogleIdentityRepository _google;
-  Future<void>? _pending;
+  final AuthOperations _operations;
   AuthUser? _map(fb.User? user) => user == null
       ? null
       : AuthUser(
@@ -51,19 +53,14 @@ class FirebaseAuthRepository implements AuthRepository {
   AuthUser? get currentUser => _map(_auth.currentUser);
   @override
   Stream<AuthUser?> observeSession() => _auth.userChanges().map(_map);
-  Future<void> _run(Future<void> Function() action) async {
-    final previous = _pending, turn = Completer<void>();
-    _pending = turn.future;
-    if (previous != null) await previous;
-    try {
-      await action();
-    } on fb.FirebaseAuthException catch (error) {
-      throw firebaseAuthFailure(error.code);
-    } finally {
-      turn.complete();
-    }
-  }
-
+  Future<void> _run(Future<void> Function() action) =>
+      _operations.run(() async {
+        try {
+          await action();
+        } on fb.FirebaseAuthException catch (error) {
+          throw firebaseAuthFailure(error.code);
+        }
+      });
   @override
   Future<void> signInWithEmail({
     required String email,

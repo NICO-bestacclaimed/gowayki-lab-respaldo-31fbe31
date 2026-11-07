@@ -1753,6 +1753,150 @@ abstract class AppLocalizations {
   /// In es, this message translates to:
   /// **'Selecciona una línea si corresponde'**
   String get reportSelectLine;
+
+  /// No description provided for @accountDeletionPending.
+  ///
+  /// In es, this message translates to:
+  /// **'La eliminación está pendiente. Reintenta desde tu perfil para completarla.'**
+  String get accountDeletionPending;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar mi cuenta'**
+  String get deleteAccount;
+
+  /// No description provided for @accountDeletionWarning.
+  ///
+  /// In es, this message translates to:
+  /// **'Se borrarán tus favoritos, viajes, reportes, comentarios, confirmaciones y puntajes de tu cuenta. Esta acción no se puede deshacer.'**
+  String get accountDeletionWarning;
+
+  /// No description provided for @accountDeletionGoogle.
+  ///
+  /// In es, this message translates to:
+  /// **'Se abrirá Google para verificar que eres tú. Selecciona la misma cuenta.'**
+  String get accountDeletionGoogle;
+
+  /// No description provided for @accountDeletionError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo completar la eliminación. Parte de los datos puede haberse borrado. Reintenta para terminar; la sincronización queda pausada.'**
+  String get accountDeletionError;
+
+  /// No description provided for @accountDeleting.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminando datos y cuenta…'**
+  String get accountDeleting;
+
+  /// No description provided for @accountDeleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Cuenta y datos eliminados.'**
+  String get accountDeleted;
+
+  /// No description provided for @accountDeletionResume.
+  ///
+  /// In es, this message translates to:
+  /// **'Completar eliminación de cuenta'**
+  String get accountDeletionResume;
+
+  /// No description provided for @weeklyRanking.
+  ///
+  /// In es, this message translates to:
+  /// **'Ranking semanal'**
+  String get weeklyRanking;
+
+  /// No description provided for @rankingPeriod.
+  ///
+  /// In es, this message translates to:
+  /// **'Semana {week} de {year}'**
+  String rankingPeriod(int week, int year);
+
+  /// No description provided for @rankingPublicName.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu nombre de perfil se muestra junto a tu puntaje.'**
+  String get rankingPublicName;
+
+  /// No description provided for @rankingLocalOnly.
+  ///
+  /// In es, this message translates to:
+  /// **'Tus récords se guardan en este equipo. El ranking no está habilitado en esta versión.'**
+  String get rankingLocalOnly;
+
+  /// No description provided for @rankingPending.
+  ///
+  /// In es, this message translates to:
+  /// **'Hay puntajes guardados en este equipo pendientes de publicar.'**
+  String get rankingPending;
+
+  /// No description provided for @rankingUnavailable.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo cargar el ranking. Vuelve a intentarlo con conexión.'**
+  String get rankingUnavailable;
+
+  /// No description provided for @rankingNoScore.
+  ///
+  /// In es, this message translates to:
+  /// **'Todavía no tienes un puntaje publicado esta semana.'**
+  String get rankingNoScore;
+
+  /// No description provided for @rankingOwn.
+  ///
+  /// In es, this message translates to:
+  /// **'Tu puesto: {position} · {score} puntos'**
+  String rankingOwn(int position, int score);
+
+  /// No description provided for @rankingEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'Aún no hay puntajes publicados esta semana.'**
+  String get rankingEmpty;
+
+  /// No description provided for @myReports.
+  ///
+  /// In es, this message translates to:
+  /// **'Mis reportes'**
+  String get myReports;
+
+  /// No description provided for @myReportsEmpty.
+  ///
+  /// In es, this message translates to:
+  /// **'No tienes reportes guardados.'**
+  String get myReportsEmpty;
+
+  /// No description provided for @deleteReport.
+  ///
+  /// In es, this message translates to:
+  /// **'Eliminar reporte'**
+  String get deleteReport;
+
+  /// No description provided for @reportDeleted.
+  ///
+  /// In es, this message translates to:
+  /// **'Reporte eliminado.'**
+  String get reportDeleted;
+
+  /// No description provided for @reportDeleteError.
+  ///
+  /// In es, this message translates to:
+  /// **'No se pudo eliminar el reporte. Vuelve a intentarlo.'**
+  String get reportDeleteError;
+
+  /// No description provided for @cancel.
+  ///
+  /// In es, this message translates to:
+  /// **'Cancelar'**
+  String get cancel;
+
+  /// No description provided for @accountDeletionMarkerNotice.
+  ///
+  /// In es, this message translates to:
+  /// **'Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios.'**
+  String get accountDeletionMarkerNotice;
 }
 
 class _AppLocalizationsDelegate

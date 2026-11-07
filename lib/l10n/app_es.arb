@@ -506,5 +506,49 @@
   "feedbackMetadataNotice": "Se enviarán la versión de la app, el modelo del dispositivo y la versión de los datos.",
   "feedbackSendError": "No se pudo confirmar el envío. Tu comentario sigue aquí para volver a intentarlo.",
   "feedbackNeedsSession": "Inicia sesión o entra como invitado para enviar un comentario.",
-  "reportSelectLine": "Selecciona una línea si corresponde"
+  "reportSelectLine": "Selecciona una línea si corresponde",
+  "accountDeletionPending": "La eliminación está pendiente. Reintenta desde tu perfil para completarla.",
+  "deleteAccount": "Eliminar mi cuenta",
+  "accountDeletionWarning": "Se borrarán tus favoritos, viajes, reportes, comentarios, confirmaciones y puntajes de tu cuenta. Esta acción no se puede deshacer.",
+  "accountDeletionGoogle": "Se abrirá Google para verificar que eres tú. Selecciona la misma cuenta.",
+  "accountDeletionError": "No se pudo completar la eliminación. Parte de los datos puede haberse borrado. Reintenta para terminar; la sincronización queda pausada.",
+  "accountDeleting": "Eliminando datos y cuenta…",
+  "accountDeleted": "Cuenta y datos eliminados.",
+  "accountDeletionResume": "Completar eliminación de cuenta",
+  "weeklyRanking": "Ranking semanal",
+  "rankingPeriod": "Semana {week} de {year}",
+  "@rankingPeriod": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "rankingPublicName": "Tu nombre de perfil se muestra junto a tu puntaje.",
+  "rankingLocalOnly": "Tus récords se guardan en este equipo. El ranking no está habilitado en esta versión.",
+  "rankingPending": "Hay puntajes guardados en este equipo pendientes de publicar.",
+  "rankingUnavailable": "No se pudo cargar el ranking. Vuelve a intentarlo con conexión.",
+  "rankingNoScore": "Todavía no tienes un puntaje publicado esta semana.",
+  "rankingOwn": "Tu puesto: {position} · {score} puntos",
+  "@rankingOwn": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      },
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "rankingEmpty": "Aún no hay puntajes publicados esta semana.",
+  "myReports": "Mis reportes",
+  "myReportsEmpty": "No tienes reportes guardados.",
+  "deleteReport": "Eliminar reporte",
+  "reportDeleted": "Reporte eliminado.",
+  "reportDeleteError": "No se pudo eliminar el reporte. Vuelve a intentarlo.",
+  "cancel": "Cancelar",
+  "accountDeletionMarkerNotice": "Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios."
 }

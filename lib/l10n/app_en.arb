@@ -437,5 +437,49 @@
   "feedbackMetadataNotice": "App version, device model and data version will be sent.",
   "feedbackSendError": "Could not confirm submission. Your message is still here so you can retry.",
   "feedbackNeedsSession": "Sign in or continue as a guest to send feedback.",
-  "reportSelectLine": "Select a line if applicable"
+  "reportSelectLine": "Select a line if applicable",
+  "accountDeletionPending": "Account deletion is pending. Retry from your profile to finish.",
+  "deleteAccount": "Delete my account",
+  "accountDeletionWarning": "Your account favorites, trips, reports, feedback, confirmations and scores will be deleted. This cannot be undone.",
+  "accountDeletionGoogle": "Google will open to verify your identity. Choose the same account.",
+  "accountDeletionError": "Deletion could not finish. Some data may already be removed. Retry to finish; synchronization remains paused.",
+  "accountDeleting": "Deleting account and data…",
+  "accountDeleted": "Account and data deleted.",
+  "accountDeletionResume": "Complete account deletion",
+  "weeklyRanking": "Weekly ranking",
+  "rankingPeriod": "Week {week} of {year}",
+  "@rankingPeriod": {
+    "placeholders": {
+      "week": {
+        "type": "int"
+      },
+      "year": {
+        "type": "int"
+      }
+    }
+  },
+  "rankingPublicName": "Your profile name is displayed with your score.",
+  "rankingLocalOnly": "Records are saved on this device. Ranking is not enabled in this version.",
+  "rankingPending": "Scores saved on this device are waiting to be published.",
+  "rankingUnavailable": "Could not load the ranking. Try again with a connection.",
+  "rankingNoScore": "You have no published score this week yet.",
+  "rankingOwn": "Your position: {position} · {score} points",
+  "@rankingOwn": {
+    "placeholders": {
+      "position": {
+        "type": "int"
+      },
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "rankingEmpty": "No scores have been published this week yet.",
+  "myReports": "My reports",
+  "myReportsEmpty": "You have no saved reports.",
+  "deleteReport": "Delete report",
+  "reportDeleted": "Report deleted.",
+  "reportDeleteError": "Could not delete the report. Please retry.",
+  "cancel": "Cancel",
+  "accountDeletionMarkerNotice": "An empty deleted-account marker linked to its technical identifier remains to block old sessions. It contains no name, email, locations or feedback."
 }

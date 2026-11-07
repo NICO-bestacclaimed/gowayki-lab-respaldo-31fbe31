@@ -1,3 +1,5 @@
+> Documento histórico del punto8A. El contrato final, incluidas las excepciones de eliminación y el marcador técnico, está en [CIERRE_PARTE8.md](CIERRE_PARTE8.md).
+
 # Firebase — configuración y reglas 8A
 
 ## Configuración recibida y validada

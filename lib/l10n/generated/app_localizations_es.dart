@@ -962,4 +962,91 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get reportSelectLine => 'Selecciona una línea si corresponde';
+
+  @override
+  String get accountDeletionPending =>
+      'La eliminación está pendiente. Reintenta desde tu perfil para completarla.';
+
+  @override
+  String get deleteAccount => 'Eliminar mi cuenta';
+
+  @override
+  String get accountDeletionWarning =>
+      'Se borrarán tus favoritos, viajes, reportes, comentarios, confirmaciones y puntajes de tu cuenta. Esta acción no se puede deshacer.';
+
+  @override
+  String get accountDeletionGoogle =>
+      'Se abrirá Google para verificar que eres tú. Selecciona la misma cuenta.';
+
+  @override
+  String get accountDeletionError =>
+      'No se pudo completar la eliminación. Parte de los datos puede haberse borrado. Reintenta para terminar; la sincronización queda pausada.';
+
+  @override
+  String get accountDeleting => 'Eliminando datos y cuenta…';
+
+  @override
+  String get accountDeleted => 'Cuenta y datos eliminados.';
+
+  @override
+  String get accountDeletionResume => 'Completar eliminación de cuenta';
+
+  @override
+  String get weeklyRanking => 'Ranking semanal';
+
+  @override
+  String rankingPeriod(int week, int year) {
+    return 'Semana $week de $year';
+  }
+
+  @override
+  String get rankingPublicName =>
+      'Tu nombre de perfil se muestra junto a tu puntaje.';
+
+  @override
+  String get rankingLocalOnly =>
+      'Tus récords se guardan en este equipo. El ranking no está habilitado en esta versión.';
+
+  @override
+  String get rankingPending =>
+      'Hay puntajes guardados en este equipo pendientes de publicar.';
+
+  @override
+  String get rankingUnavailable =>
+      'No se pudo cargar el ranking. Vuelve a intentarlo con conexión.';
+
+  @override
+  String get rankingNoScore =>
+      'Todavía no tienes un puntaje publicado esta semana.';
+
+  @override
+  String rankingOwn(int position, int score) {
+    return 'Tu puesto: $position · $score puntos';
+  }
+
+  @override
+  String get rankingEmpty => 'Aún no hay puntajes publicados esta semana.';
+
+  @override
+  String get myReports => 'Mis reportes';
+
+  @override
+  String get myReportsEmpty => 'No tienes reportes guardados.';
+
+  @override
+  String get deleteReport => 'Eliminar reporte';
+
+  @override
+  String get reportDeleted => 'Reporte eliminado.';
+
+  @override
+  String get reportDeleteError =>
+      'No se pudo eliminar el reporte. Vuelve a intentarlo.';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get accountDeletionMarkerNotice =>
+      'Conservamos una señal vacía de cuenta eliminada, ligada a su identificador técnico, para bloquear sesiones antiguas. No contiene nombre, correo, ubicaciones ni comentarios.';
 }

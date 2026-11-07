@@ -82,11 +82,16 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('nav.profile')));
       await tester.pumpAndSettle();
       expect(find.text('No hay sesión iniciada.'), findsOneWidget);
+      await tester.scrollUntilVisible(find.text('Ajustes'), 200);
       await tester.tap(find.text('Ajustes'));
       await tester.pumpAndSettle();
       expect(find.text('Ciudad activa'), findsOneWidget);
       container.read(appRouterProvider).pop();
       await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.text('No hay sesión iniciada.'),
+        -200,
+      );
       expect(find.text('No hay sesión iniciada.'), findsOneWidget);
       await tester.pumpWidget(const SizedBox());
     },

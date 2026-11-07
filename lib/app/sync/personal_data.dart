@@ -9,6 +9,7 @@ import '../../core/models/place_result.dart';
 import '../library/library_models.dart';
 import '../providers/app_providers.dart';
 import '../settings/app_settings.dart';
+import 'account_deletion_state.dart';
 
 class PersonalScope {
   const PersonalScope(this.uid, {this.anonymous = true});
@@ -120,6 +121,9 @@ class PersonalDataController extends AsyncNotifier<PersonalSnapshot> {
       prefs = await ref.watch(localSettingsStorageProvider.future);
     }
     _prefs = prefs;
+    if (scope.uid != null && prefs.getBool(deletionFlag(scope.uid!)) == true) {
+      return PersonalSnapshot([]);
+    }
     if (!ref.mounted || _scope != scope) throw StateError('Session changed');
     var device = prefs.getString('personal.device');
     if (device == null) {
@@ -219,6 +223,10 @@ class PersonalDataController extends AsyncNotifier<PersonalSnapshot> {
     if (previous != null) await previous;
     try {
       if (!ref.mounted || _scope != scope) throw StateError('Session changed');
+      if (scope.uid != null &&
+          _prefs.getBool(deletionFlag(scope.uid!)) == true) {
+        throw StateError('Account deletion pending');
+      }
       final next = change(state.requireValue);
       if (next.encode() == state.requireValue.encode()) return;
       if (!await _prefs.setString(scope.key, next.encode())) {
@@ -241,6 +249,18 @@ class PersonalDataController extends AsyncNotifier<PersonalSnapshot> {
       turn.complete();
       if (identical(_pending, turn.future)) _pending = null;
     }
+  }
+
+  Future<void> settle() async {
+    if (state.isLoading) {
+      try {
+        await future;
+      } on Object {
+        /* Explicit deletion can also clear a damaged cache. */
+      }
+    }
+    final pending = _pending;
+    if (pending != null) await pending;
   }
 
   PersonalSnapshot _edit(

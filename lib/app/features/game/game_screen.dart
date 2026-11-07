@@ -7,6 +7,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../../domain/game/game_message.dart';
 import '../../../shared/l10n/l10n.dart';
 import '../../game/game_preferences.dart';
+import '../../game/weekly_scores.dart';
 import '../../providers/app_providers.dart';
 import '../../settings/app_settings.dart';
 
@@ -60,12 +61,16 @@ class _GameScreenState extends ConsumerState<GameScreen>
         onMessageReceived: (message) async {
           if (!current()) return;
           try {
+            final result = GameMessage.parse(message.message);
             await _bridge.handle(
               message.message,
               alarm:
                   ref.read(appSettingsProvider).asData?.value.alarm ??
                   AlarmMode.sound,
             );
+            if (result is GameScore) {
+              await ref.read(weeklyScoresProvider.notifier).record(result);
+            }
           } on Object {
             if (mounted && generation == _generation) {
               ScaffoldMessenger.of(context).showSnackBar(

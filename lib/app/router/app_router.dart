@@ -20,6 +20,7 @@ import '../features/settings/presentation/screens/settings_screen.dart';
 import '../features/sign_in/presentation/screens/sign_in_screen.dart';
 import 'app_root.dart';
 import '../features/game/game_screen.dart';
+import '../features/game/ranking_screen.dart';
 import '../features/active_trip/active_trip_screen.dart';
 import '../features/location/presentation/screens/location_disclosure_screen.dart';
 
@@ -128,6 +129,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/ranking',
+        builder: (context, state) => const RankingScreen(),
       ),
       GoRoute(path: '/juego', builder: (context, state) => const GameScreen()),
       GoRoute(

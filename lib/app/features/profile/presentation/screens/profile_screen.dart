@@ -7,6 +7,11 @@ import '../../../../providers/app_providers.dart';
 import '../../../game/game_screen.dart';
 import '../../../../game/game_preferences.dart';
 import '../../../../sync/personal_sync_tile.dart';
+import '../../../../sync/account_deletion_controller.dart';
+import '../../../../sync/account_deletion_state.dart';
+import '../../../../community/community_providers.dart';
+import '../../../../community/report_widgets.dart';
+import 'delete_account_dialog.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -16,15 +21,44 @@ class ProfileScreen extends ConsumerWidget {
         ref.watch(authStateProvider).asData?.value ??
         ref.read(authRepositoryProvider).currentUser;
     final guest = user?.isAnonymous ?? false;
+    final deleting = ref.watch(accountDeletionControllerProvider);
+    final photo = Uri.tryParse(user?.photoUrl ?? '');
+    final photoUrl =
+        photo != null && photo.scheme == 'https' && photo.host.isNotEmpty
+        ? photo.toString()
+        : null;
+    final best = ref.watch(gamePreferencesProvider).asData?.value.best ?? 0;
+    final pending =
+        ref.watch(useFirebaseProvider) &&
+        user != null &&
+        (ref
+                .watch(accountDeletionJobsProvider)
+                .asData
+                ?.value
+                .contains(user.id) ??
+            false);
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.profile)),
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          const Center(
-            child: CircleAvatar(
-              radius: 36,
-              child: Icon(Icons.person_outline, size: 36),
+          Center(
+            child: SizedBox(
+              width: 72,
+              height: 72,
+              child: ClipOval(
+                child: photoUrl == null
+                    ? const CircleAvatar(
+                        child: Icon(Icons.person_outline, size: 36),
+                      )
+                    : Image.network(
+                        photoUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, e, s) => const CircleAvatar(
+                          child: Icon(Icons.person_outline, size: 36),
+                        ),
+                      ),
+              ),
             ),
           ),
           const SizedBox(height: 24),
@@ -55,25 +89,64 @@ class ProfileScreen extends ConsumerWidget {
               ),
             const SizedBox(height: 16),
             OutlinedButton(
-              onPressed: () async {
-                try {
-                  await ref.read(authRepositoryProvider).signOut();
-                  if (context.mounted) context.go('/perfil');
-                } on Object catch (error) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(authErrorText(error, context.l10n)),
-                      ),
-                    );
-                  }
-                }
-              },
+              onPressed: deleting
+                  ? null
+                  : () async {
+                      try {
+                        await ref.read(authRepositoryProvider).signOut();
+                        if (context.mounted) context.go('/perfil');
+                      } on Object catch (error) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(authErrorText(error, context.l10n)),
+                            ),
+                          );
+                        }
+                      }
+                    },
               child: Text(context.l10n.signOut),
+            ),
+          ],
+          const SizedBox(height: 12),
+          const Center(child: Text('Arequipa')),
+          Center(child: Text(context.l10n.gameBest(best))),
+          if (ref.watch(useFirebaseProvider) && user != null) ...[
+            if (!guest) _MyReports(),
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              key: const ValueKey('account.delete'),
+              onPressed: deleting
+                  ? null
+                  : () async {
+                      final removed = await showDialog<bool>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => DeleteAccountDialog(user: user),
+                      );
+                      if (context.mounted && removed == true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(context.l10n.accountDeleted)),
+                        );
+                        context.go('/perfil');
+                      }
+                    },
+              icon: const Icon(Icons.delete_outline),
+              label: Text(
+                pending
+                    ? context.l10n.accountDeletionResume
+                    : context.l10n.deleteAccount,
+              ),
             ),
           ],
           const SizedBox(height: 24),
           const PersonalSyncTile(),
+          ListTile(
+            key: const ValueKey('ranking.profile'),
+            leading: const Icon(Icons.leaderboard_outlined),
+            title: Text(context.l10n.weeklyRanking),
+            onTap: () => context.push('/ranking'),
+          ),
           if (ref.watch(gameSupportedProvider))
             ListTile(
               key: const ValueKey('game.profile'),
@@ -98,6 +171,80 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _MyReports extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = context.l10n;
+    return ExpansionTile(
+      title: Text(l.myReports),
+      children: ref
+          .watch(myReportsProvider)
+          .when(
+            loading: () => [const LinearProgressIndicator()],
+            error: (_, s) => [
+              Text(l.communityUnavailable),
+              TextButton(
+                onPressed: () => ref.invalidate(myReportsProvider),
+                child: Text(l.retry),
+              ),
+            ],
+            data: (feed) => [
+              if (feed.fromCache) Text(l.communityCached),
+              if (feed.items.isEmpty && !feed.fromCache) Text(l.myReportsEmpty),
+              for (final report in feed.items)
+                ListTile(
+                  title: Text(reportKindText(report.kind, l)),
+                  subtitle: Text(
+                    report.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  trailing: IconButton(
+                    tooltip: l.deleteReport,
+                    onPressed: () async {
+                      final confirmed = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(l.deleteReport),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: Text(l.cancel),
+                            ),
+                            FilledButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              child: Text(l.deleteReport),
+                            ),
+                          ],
+                        ),
+                      );
+                      if (confirmed != true) return;
+                      try {
+                        await ref
+                            .read(reportsRepositoryProvider)
+                            .delete(report.id);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(l.reportDeleted)),
+                          );
+                        }
+                      } on Object {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(l.reportDeleteError)),
+                          );
+                        }
+                      }
+                    },
+                    icon: const Icon(Icons.delete_outline),
+                  ),
+                ),
+            ],
+          ),
     );
   }
 }

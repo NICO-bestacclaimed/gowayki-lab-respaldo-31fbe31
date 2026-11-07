@@ -2,7 +2,15 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
-    function owner(uid) { return signedIn() && request.auth.uid == uid; }
+    function rawOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function owner(uid) { return rawOwner(uid) && !exists(/databases/$(database)/documents/deletedAccounts/$(uid)); }
+    function deleting(uid) {
+      return rawOwner(uid) && (exists(/databases/$(database)/documents/deletedAccounts/$(uid))
+        || (exists(/databases/$(database)/documents/users/$(uid)) && get(/databases/$(database)/documents/users/$(uid)).data.get('deleting', false) == true));
+    }
+    function validDeletionFlag(d) {
+      return d.get('deleting', false) != true || d.get('deletionStartedAt', null) == request.time;
+    }
     function activeOwner(uid) {
       return owner(uid) && (!exists(/databases/$(database)/documents/users/$(uid)) || get(/databases/$(database)/documents/users/$(uid)).data.get('deleting', false) != true);
     }
@@ -51,32 +59,58 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
+    match /deletedAccounts/{uid} {
+      // Empty, immutable security marker. Old valid ID tokens cannot recreate
+      // account data after erasure. It contains no profile or report payload.
+      allow read: if rawOwner(uid);
+      allow create: if rawOwner(uid) && request.resource.data.keys().size() == 0
+        && exists(/databases/$(database)/documents/users/$(uid))
+        && get(/databases/$(database)/documents/users/$(uid)).data.get('deleting', false) == true
+        && !existsAfter(/databases/$(database)/documents/users/$(uid));
+      allow update, delete: if false;
+    }
     match /users/{uid} {
-      allow read, write: if owner(uid);
+      allow read: if rawOwner(uid);
+      allow create: if owner(uid) && validDeletionFlag(request.resource.data);
+      allow update: if owner(uid)
+        && (validDeletionFlag(request.resource.data) || (resource.data.get('deleting', false) == true && request.resource.data.get('deletionStartedAt', null) == resource.data.get('deletionStartedAt', null)))
+        && (resource.data.get('deleting', false) != true || request.resource.data.get('deleting', false) == true);
+      allow delete: if rawOwner(uid) && resource.data.get('deleting', false) == true
+        && existsAfter(/databases/$(database)/documents/deletedAccounts/$(uid));
       match /{section}/{id} {
-        allow read, delete: if owner(uid) && section in ['state', 'library', 'preferences'];
+        allow read, delete: if rawOwner(uid) && section in ['state', 'library', 'preferences'];
         allow create, update: if activeOwner(uid) && section in ['state', 'library', 'preferences'];
       }
       match /feedbackRefs/{id} {
-        allow read: if owner(uid);
+        allow read: if rawOwner(uid);
         allow create: if activeOwner(uid) && request.resource.data.keys().hasOnly(['id']) && request.resource.data.id == id
           && !exists(/databases/$(database)/documents/feedback/$(id))
           && getAfter(/databases/$(database)/documents/feedback/$(id)).data.uid == uid;
-        allow update, delete: if false;
+        allow update: if false;
+        allow delete: if deleting(uid) && !existsAfter(/databases/$(database)/documents/feedback/$(id));
       }
       match /confirmationRefs/{id} {
-        allow read: if owner(uid);
+        allow read: if rawOwner(uid);
         allow create: if activeOwner(uid) && request.resource.data.keys().hasOnly(['id']) && request.resource.data.id == id
           && !exists(/databases/$(database)/documents/reports/$(id)/confirmations/$(uid))
           && getAfter(/databases/$(database)/documents/reports/$(id)/confirmations/$(uid)).data.uid == uid;
-        allow update, delete: if false;
+        allow update: if false;
+        allow delete: if deleting(uid) && !existsAfter(/databases/$(database)/documents/reports/$(id)/confirmations/$(uid));
+      }
+      match /scoreRefs/{id} {
+        allow read: if rawOwner(uid);
+        allow create: if activeOwner(uid) && request.resource.data.keys().hasOnly(['id']) && request.resource.data.id == id
+          && id.matches('arequipa_[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])')
+          && getAfter(/databases/$(database)/documents/leaderboards/$(id)/scores/$(uid)).data.uid == uid;
+        allow update: if false;
+        allow delete: if deleting(uid) && !existsAfter(/databases/$(database)/documents/leaderboards/$(id)/scores/$(uid));
       }
     }
     match /reports/{reportId} {
       allow read: if true;
       allow create: if realAccount() && activeOwner(request.auth.uid) && validReport(request.resource.data);
-      allow delete: if owner(resource.data.uid);
-      allow update: if realAccount() && activeOwner(request.auth.uid)
+      allow delete: if (!exists(/databases/$(database)/documents/reports/$(reportId)) && signedIn() && deleting(request.auth.uid)) || rawOwner(resource.data.uid);
+      allow update: if (realAccount() && activeOwner(request.auth.uid)
         && resource.data.createdAt + duration.value(72, 'h') > request.time
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['confirmations'])
         && request.resource.data.confirmations is int
@@ -84,7 +118,14 @@ service cloud.firestore {
         && !exists(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid))
         && existsAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid))
         && getAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid)).data.uid == request.auth.uid
-        && getAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid)).data.createdAt == request.time;
+        && getAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid)).data.createdAt == request.time)
+        || (signedIn() && deleting(request.auth.uid)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['confirmations'])
+          && request.resource.data.confirmations is int && request.resource.data.confirmations >= 0
+          && request.resource.data.confirmations == resource.data.confirmations - 1
+          && exists(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid))
+          && !existsAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid))
+          && !existsAfter(/databases/$(database)/documents/users/$(request.auth.uid)/confirmationRefs/$(reportId)));
       match /confirmations/{uid} {
         allow read: if owner(uid);
         allow create: if realAccount() && owner(uid)
@@ -97,30 +138,40 @@ service cloud.firestore {
           && exists(/databases/$(database)/documents/reports/$(reportId))
           && get(/databases/$(database)/documents/reports/$(reportId)).data.createdAt + duration.value(72, 'h') > request.time
           && getAfter(/databases/$(database)/documents/reports/$(reportId)).data.confirmations == get(/databases/$(database)/documents/reports/$(reportId)).data.confirmations + 1;
-        // Immutable: deleting a marker would allow the same account to vote again.
-        allow update, delete: if false;
+        allow update: if false;
+        // Only account erasure may remove a vote, together with its private index
+        // and the exact counter decrement (or after its parent was deleted).
+        allow delete: if deleting(uid)
+          && !existsAfter(/databases/$(database)/documents/users/$(uid)/confirmationRefs/$(reportId))
+          && (!existsAfter(/databases/$(database)/documents/reports/$(reportId))
+            || getAfter(/databases/$(database)/documents/reports/$(reportId)).data.confirmations == get(/databases/$(database)/documents/reports/$(reportId)).data.confirmations - 1);
       }
     }
     match /feedback/{id} {
       allow create: if signedIn() && activeOwner(request.auth.uid) && validFeedback(request.resource.data)
         && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)/feedbackRefs/$(id)).data.id == id;
-      allow read, update, delete: if false;
+      allow read, update: if false;
+      allow delete: if signedIn() && deleting(request.auth.uid)
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)/feedbackRefs/$(id)).data.id == id
+        && !existsAfter(/databases/$(database)/documents/users/$(request.auth.uid)/feedbackRefs/$(id))
+        && (!exists(/databases/$(database)/documents/feedback/$(id)) || resource.data.uid == request.auth.uid);
     }
     match /leaderboards/{cityWeek} {
       allow read: if true;
       allow write: if false;
       match /scores/{uid} {
         allow read: if true;
-        allow create: if owner(uid)
+        allow create: if activeOwner(uid)
+          && getAfter(/databases/$(database)/documents/users/$(uid)/scoreRefs/$(cityWeek)).data.id == cityWeek
           && cityWeek.matches('arequipa_[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])')
           && validScore(request.resource.data, uid)
           && request.resource.data.createdAt == request.time;
-        allow update: if owner(uid)
+        allow update: if activeOwner(uid)
           && validScore(request.resource.data, uid)
           && request.resource.data.score > resource.data.score
           && request.resource.data.createdAt == resource.data.createdAt
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['score', 'durationMs', 'updatedAt', 'displayName']);
-        allow delete: if owner(uid);
+        allow delete: if rawOwner(uid);
       }
     }
     match /{document=**} { allow read, write: if false; }

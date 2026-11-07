@@ -1,9 +1,10 @@
 import {before,after,afterEach,beforeEach,test} from 'node:test';
 import assert from 'node:assert/strict';
 import {initializeApp,deleteApp} from 'firebase/app';
-import {getAuth,connectAuthEmulator,signInAnonymously,linkWithCredential,EmailAuthProvider,GoogleAuthProvider,signInWithCredential,signInWithEmailAndPassword,createUserWithEmailAndPassword,getIdTokenResult,sendPasswordResetEmail,signOut} from 'firebase/auth';
-import {getFirestore,connectFirestoreEmulator,doc,setDoc,getDoc,serverTimestamp} from 'firebase/firestore';
+import {getAuth,connectAuthEmulator,signInAnonymously,linkWithCredential,EmailAuthProvider,GoogleAuthProvider,signInWithCredential,signInWithEmailAndPassword,createUserWithEmailAndPassword,getIdTokenResult,sendPasswordResetEmail,signOut,deleteUser} from 'firebase/auth';
+import {getFirestore,connectFirestoreEmulator,doc,setDoc,getDoc,serverTimestamp,writeBatch} from 'firebase/firestore';
 import {initializeTestEnvironment} from '@firebase/rules-unit-testing';
+import {eraseFirestoreFixture} from './erase-account.mjs';
 const project=process.env.GCLOUD_PROJECT,authHost=process.env.FIREBASE_AUTH_EMULATOR_HOST;
 if(!project?.startsWith('demo-') || !authHost?.startsWith('127.0.0.1:') || !process.env.FIRESTORE_EMULATOR_HOST?.startsWith('127.0.0.1:')) throw Error('Auth tests require local demo emulators.');
 let environment,app,auth,db,sequence=0;
@@ -59,4 +60,19 @@ test('email/password validates incorrect credentials and password reset remains 
  const response=await fetch(`http://${authHost}/emulator/v1/projects/${project}/oobCodes`);
  const data=await response.json();assert.ok(data.oobCodes.some(code=>code.email===email&&code.requestType==='PASSWORD_RESET'));
  await signOut(auth);assert.equal(auth.currentUser,null);
+});
+
+test('deleting an authenticated account removes its Firestore data and Auth user while preserving another account',async()=>{
+ const owner=(await createUserWithEmailAndPassword(auth,email,password)).user;await saveFavorite(owner);
+ const ownReport='owner-report',peerReport='peer-report';
+ const makeReport=uid=>({uid,cityCode:'arequipa',type:'other',description:'Fixture de eliminación',latitude:-16.4,longitude:-71.5,createdAt:serverTimestamp(),confirmations:0});
+ await setDoc(doc(db,'reports',ownReport),makeReport(owner.uid));
+ const batch=writeBatch(db);batch.set(doc(db,'feedback','owner-feedback'),{uid:owner.uid,kind:'bug',message:'Fixture de eliminación',city_code:'arequipa',created_at:serverTimestamp(),app_version:'1.0.0+1',device_model:'Fixture',data_version:2});batch.set(doc(db,'users',owner.uid,'feedbackRefs','owner-feedback'),{id:'owner-feedback'});await batch.commit();
+ const peerEmail='peer@example.test',peer=(await createUserWithEmailAndPassword(auth,peerEmail,password)).user;await saveFavorite(peer);await setDoc(doc(db,'reports',peerReport),makeReport(peer.uid));
+ await signInWithEmailAndPassword(auth,email,password);
+ const vote=writeBatch(db);vote.update(doc(db,'reports',peerReport),{confirmations:1});vote.set(doc(db,'reports',peerReport,'confirmations',owner.uid),{uid:owner.uid,createdAt:serverTimestamp()});vote.set(doc(db,'users',owner.uid,'confirmationRefs',peerReport),{id:peerReport});await vote.commit();
+ await eraseFirestoreFixture(db,owner.uid);await deleteUser(auth.currentUser);
+ assert.equal(auth.currentUser,null);await assert.rejects(signInWithEmailAndPassword(auth,email,password));
+ assert.equal((await signInWithEmailAndPassword(auth,peerEmail,password)).user.uid,peer.uid);await assertFavorite(peer);
+ await environment.withSecurityRulesDisabled(async context=>{const check=context.firestore();assert.equal((await getDoc(doc(check,'users',owner.uid))).exists(),false);assert.equal((await getDoc(doc(check,'users',owner.uid,'library/favorites'))).exists(),false);assert.equal((await getDoc(doc(check,'reports',ownReport))).exists(),false);assert.equal((await getDoc(doc(check,'feedback','owner-feedback'))).exists(),false);assert.equal((await getDoc(doc(check,'reports',peerReport))).data().confirmations,0);});
 });
