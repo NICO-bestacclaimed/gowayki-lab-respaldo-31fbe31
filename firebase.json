@@ -3,19 +3,45 @@
     "platforms": {
       "android": {
         "default": {
-          "projectId": "mobility-lab-tecsup",
-          "appId": "REEMPLAZAR_APP_ID",
+          "projectId": "gowayki-lab",
+          "appId": "1:959294066022:android:3ab035e603ff2ab4998ca7",
           "fileOutput": "android/app/google-services.json"
         }
       },
       "ios": {
         "default": {
-          "projectId": "mobility-lab-tecsup",
-          "appId": "REEMPLAZAR_APP_ID",
+          "projectId": "gowayki-lab",
+          "appId": "1:959294066022:ios:9995015ebc89a67d998ca7",
           "uploadDebugSymbols": false,
           "fileOutput": "ios/Runner/GoogleService-Info.plist"
         }
       }
     }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "hosting",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "emulators": {
+    "auth": {
+      "host": "127.0.0.1",
+      "port": 9099
+    },
+    "firestore": {
+      "host": "127.0.0.1",
+      "port": 8085
+    },
+    "ui": {
+      "enabled": false
+    },
+    "singleProjectMode": true
   }
 }

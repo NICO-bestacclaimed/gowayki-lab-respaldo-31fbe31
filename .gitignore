@@ -46,3 +46,7 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Local Firebase emulator tooling and outputs
+tool/firebase/node_modules/
+.firebase/

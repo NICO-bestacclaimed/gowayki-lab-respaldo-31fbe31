@@ -1,0 +1,15 @@
+{
+  "required_permissions": [
+    "ACCESS_FINE_LOCATION",
+    "ACCESS_COARSE_LOCATION",
+    "FOREGROUND_SERVICE",
+    "FOREGROUND_SERVICE_LOCATION",
+    "POST_NOTIFICATIONS",
+    "WAKE_LOCK"
+  ],
+  "background_location_permission": "absent",
+  "location_service_type": "location",
+  "service_stop_with_task": true,
+  "service_exported": false,
+  "physical_runtime": "not tested"
+}

@@ -1,0 +1,13 @@
+{
+  "project_id": "gowayki-lab",
+  "android_package": "pe.edu.tecsup.gowayki_lab",
+  "android_app_id": "1:959294066022:android:3ab035e603ff2ab4998ca7",
+  "ios_bundle": "pe.edu.tecsup.mobilityLab",
+  "ios_app_id": "1:959294066022:ios:9995015ebc89a67d998ca7",
+  "android_config_sha256": "dbbf9d3c7f585a92e36b1968ca522abfbe72f2a483cce290d95e5350b57648bd",
+  "ios_config_sha256": "575150d831bad9abd22b3a1d683df51174809cff5ee7fb4cbb2b7c4c479e850b",
+  "same_project": true,
+  "google_android_web_client_present": false,
+  "google_ios_client_present": false,
+  "google_ios_url_scheme_present": false
+}

@@ -1,0 +1,103 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function owner(uid) { return signedIn() && request.auth.uid == uid; }
+    function realAccount() {
+      return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+    function boundedText(value, minimum, maximum) {
+      return value is string && value.size() >= minimum && value.size() <= maximum;
+    }
+    function validReport(d) {
+      return d.keys().hasAll(['uid', 'cityCode', 'type', 'description', 'latitude', 'longitude', 'createdAt', 'confirmations'])
+        && d.keys().hasOnly(['uid', 'cityCode', 'type', 'description', 'latitude', 'longitude', 'createdAt', 'confirmations', 'stopId', 'lineId'])
+        && d.uid == request.auth.uid && boundedText(d.uid, 1, 128)
+        && d.cityCode == 'arequipa'
+        && d.type in ['detour', 'missing_stop', 'stop_name', 'line_missing', 'other']
+        && boundedText(d.description, 3, 500)
+        && d.latitude is number && d.latitude >= -90 && d.latitude <= 90
+        && d.longitude is number && d.longitude >= -180 && d.longitude <= 180
+        && d.createdAt == request.time
+        && d.confirmations is int && d.confirmations == 0
+        && boundedText(d.get('stopId', ''), 0, 128)
+        && boundedText(d.get('lineId', ''), 0, 128);
+    }
+    function validFeedback(d) {
+      return d.keys().hasAll(['uid', 'kind', 'message', 'city_code', 'created_at', 'app_version', 'device_model', 'data_version'])
+        && d.keys().hasOnly(['uid', 'kind', 'message', 'city_code', 'created_at', 'app_version', 'device_model', 'data_version'])
+        && d.uid == request.auth.uid && d.city_code == 'arequipa'
+        && d.kind in ['bug', 'idea', 'incorrect_data', 'other']
+        && boundedText(d.message, 3, 2000)
+        && d.created_at == request.time
+        && boundedText(d.app_version, 1, 40)
+        && boundedText(d.device_model, 1, 120)
+        && d.data_version is int && d.data_version > 0 && d.data_version < 1000000;
+    }
+    function validScore(d, uid) {
+      return d.keys().hasAll(['uid', 'displayName', 'score', 'durationMs', 'createdAt', 'updatedAt'])
+        && d.keys().hasOnly(['uid', 'displayName', 'score', 'durationMs', 'createdAt', 'updatedAt'])
+        && d.uid == uid && boundedText(d.displayName, 1, 60)
+        && d.score is int && d.score >= 0 && d.score <= 5000
+        && d.durationMs is int && d.durationMs >= 1000 && d.durationMs <= 120000
+        && d.score <= d.durationMs / 1000 * 30 + 30
+        && d.createdAt is timestamp && d.updatedAt == request.time;
+    }
+    match /cities/{cityCode} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /users/{uid}/{document=**} {
+      allow read, write: if owner(uid);
+    }
+    match /reports/{reportId} {
+      allow read: if true;
+      allow create: if realAccount() && validReport(request.resource.data);
+      allow delete: if owner(resource.data.uid);
+      allow update: if realAccount()
+        && resource.data.createdAt + duration.value(72, 'h') > request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['confirmations'])
+        && request.resource.data.confirmations is int
+        && request.resource.data.confirmations == resource.data.confirmations + 1
+        && !exists(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid))
+        && existsAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid))
+        && getAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid)).data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/reports/$(reportId)/confirmations/$(request.auth.uid)).data.createdAt == request.time;
+      match /confirmations/{uid} {
+        allow read: if owner(uid);
+        allow create: if realAccount() && owner(uid)
+          && request.resource.data.keys().hasAll(['uid', 'createdAt'])
+          && request.resource.data.keys().hasOnly(['uid', 'createdAt'])
+          && request.resource.data.uid == uid
+          && request.resource.data.createdAt == request.time
+          && exists(/databases/$(database)/documents/reports/$(reportId))
+          && get(/databases/$(database)/documents/reports/$(reportId)).data.createdAt + duration.value(72, 'h') > request.time
+          && getAfter(/databases/$(database)/documents/reports/$(reportId)).data.confirmations == get(/databases/$(database)/documents/reports/$(reportId)).data.confirmations + 1;
+        // Immutable: deleting a marker would allow the same account to vote again.
+        allow update, delete: if false;
+      }
+    }
+    match /feedback/{id} {
+      allow create: if signedIn() && validFeedback(request.resource.data);
+      allow read, update, delete: if false;
+    }
+    match /leaderboards/{cityWeek} {
+      allow read: if true;
+      allow write: if false;
+      match /scores/{uid} {
+        allow read: if true;
+        allow create: if owner(uid)
+          && cityWeek.matches('arequipa_[0-9]{4}-W(0[1-9]|[1-4][0-9]|5[0-3])')
+          && validScore(request.resource.data, uid)
+          && request.resource.data.createdAt == request.time;
+        allow update: if owner(uid)
+          && validScore(request.resource.data, uid)
+          && request.resource.data.score > resource.data.score
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['score', 'durationMs', 'updatedAt', 'displayName']);
+        allow delete: if owner(uid);
+      }
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

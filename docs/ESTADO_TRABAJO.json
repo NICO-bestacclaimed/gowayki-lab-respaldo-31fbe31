@@ -1,6 +1,6 @@
 {
-  "stage": "Partes6–7 implementadas; pruebas Windows/APK verificadas. Prueba visual de juego aplazada por usuario. Parte8 bloqueada por configuración Firebase faltante.",
-  "last_tests": "130 Flutter passed; 8 JS logic passed; analyze clean; APK assets/game/compiled permissions verified",
+  "stage": "8A verificada: configuración real, reglas locales, seed y dos APK. Siguiente8B con nuevos archivos OAuth detectados.",
+  "last_tests": "133 Flutter passed; 28 Firestore rules tests passed; analyze clean; Firebase true/false APK verified",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "Esperar archivos Firebase reales del mismo proyecto en android/app/google-services.json e ios/Runner/GoogleService-Info.plist. No activar USE_FIREBASE ni inventar opciones. Prueba visual del juego y Android físico aplazadas.",
+  "next_action": "Guardar8A e importar google-services (1).json y GoogleService-Info (1).plist del mismo proyecto para8B. Autenticación correo/Google/anónimo y migración de invitado; luego8C–8E. Usuario prepara proveedores y Firestore.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -28,12 +28,12 @@
     "shapes.txt"
   ],
   "flutter_validation": "Part5 source tests/analyze and debug APK verified",
-  "verified_at": "2026-11-07T02:16:05.498492+00:00",
-  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte7-codigo-apk-verificados-20261107T021605Z.zip",
+  "verified_at": "2026-11-07T15:42:25.338185+00:00",
+  "verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte8A-verificada-20261107T154225Z.zip",
   "quota_warning_observed": true,
   "checks": {
     "python_tests": 76,
-    "flutter_total_tests": 130,
+    "flutter_total_tests": 133,
     "planner_new_tests": 14,
     "flutter_analyze": "No issues found",
     "source_hashes_verified": 5,
@@ -78,7 +78,11 @@
     "game_total_bytes": 67045,
     "game_sprite_bytes": 47734,
     "game_browser_visual": "deferred by user after file URL blocked",
-    "game_android_runtime": "not tested"
+    "game_android_runtime": "not tested",
+    "firestore_rules_tests": 28,
+    "firebase_seed_local": "passed",
+    "firebase_dual_apk": "passed",
+    "emulators": "stopped"
   },
   "known_limits": [
     "1.280 nombres estimados requieren revisión; candidatos GTFS no certificados físicamente",
@@ -90,7 +94,7 @@
   ],
   "native_download_issue": "Resolved: official ARM/ARM64/x64 libraries downloaded and SHA-256 verified; final APK built successfully.",
   "local_pub_cache_verified": true,
-  "base_verified_commit": "d9d064b",
+  "base_verified_commit": "e5e77dd",
   "approved_frequency_hours": [
     {
       "start": "05:00",
@@ -171,7 +175,7 @@
     },
     "device_runtime": "not tested"
   },
-  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte6-verificada-20261107T015618Z.zip",
+  "previous_verified_backup": "C:\\Proyecto_001\\.tools\\backups\\parte7-codigo-apk-verificados-20261107T021605Z.zip",
   "data_version": 2,
   "continue_between_sections_authorized": true,
   "android_available": false,
@@ -182,8 +186,8 @@
   "legal_urls_exist": false,
   "current_apk_verification": {
     "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
-    "apk_bytes": 241992563,
-    "apk_sha256": "04272f3b869eec1d057d9f5184ef63e2fafeea3fd8570b57bfce768c7a6e6fb7",
+    "apk_bytes": 270919188,
+    "apk_sha256": "2bd27a8a3e64d3983e174d638fd19a29709b06a3520273878592e5d3c05ef7b8",
     "data_version": 2,
     "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
     "artwork_files_verified": 16,
@@ -213,12 +217,44 @@
   "map_scope": "Usuario: Que use el maplibre Offline. Continuar nativo con MBTiles local; web/PMTiles aplazado.",
   "quota_resume": "El usuario indicó continua después del aviso; reanudación y herramientas autorizadas funcionaron.",
   "game_art_preference": "Usuario: que se lo mas ligero posible; crear copias pequeñas locales, conservar originales y medir total.",
-  "firebase_block": {
-    "android_config": false,
-    "ios_config": false,
-    "options_have_placeholders": true,
-    "project_ids_disagree": true,
-    "cloud_actions_performed": false
+  "browser_test_user_reply": "se puede realizar la prueba despues?",
+  "firebase_apk_verification": {
+    "apk": "C:\\Proyecto_001\\gowayki_lab\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
+    "apk_bytes": 233298356,
+    "apk_sha256": "e04ed5475d8614e81a943a43859e8f2d4cfe91915e52e76ae80bd22e9d4e694e",
+    "data_version": 2,
+    "pack_sha256": "0a60cb9a3462cd01f68de4438f6133578549716bc54d010a63ef548af615f679",
+    "artwork_files_verified": 16,
+    "map_files_verified": 12,
+    "game_files_verified": 18,
+    "game_total_bytes": 67045,
+    "payloads": "verified",
+    "legacy_gtfs_assets": "absent",
+    "sqlite_native": {
+      "armeabi-v7a": {
+        "official_merged_hash": "f33868d94e80992af137c7cf046a99406800f15434e289733cf472346be00ed4",
+        "apk_hash": "3dcb95dd6d0e19a280a3b6cfebbad870b313b739ad67ebba4f98dd0575a2b3f3",
+        "fts5": true
+      },
+      "arm64-v8a": {
+        "official_merged_hash": "e684ef8646ffd48b95bae58bf29c55ffd85acebac2a7118ffde9fd02df37d629",
+        "apk_hash": "4d586f7b1920f226030b1c93e9bc8cb7986813c3e7bea28f71fa8873299d7b3d",
+        "fts5": true
+      },
+      "x86_64": {
+        "official_merged_hash": "ff28e78c5b790b3eafc15ceface32c3f5626ef80f622a726c60b0b802825699a",
+        "apk_hash": "87a7dbdbd0b11b7053abf9d9cec5f789de6180053f03ab2476082b94620ac360",
+        "fts5": true
+      }
+    }
   },
-  "browser_test_user_reply": "se puede realizar la prueba despues?"
+  "firebase_configuration": {
+    "project": "gowayki-lab",
+    "android_config": true,
+    "ios_config": true,
+    "placeholders": false,
+    "same_project": true,
+    "new_oauth_files_detected": true,
+    "deployed": false
+  }
 }

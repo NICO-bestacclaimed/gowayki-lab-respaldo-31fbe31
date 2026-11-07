@@ -16,7 +16,7 @@ C:\Proyecto_001\Flutter.cmd build apk --debug
 
 `run` requiere un Android/iOS compatible con MapLibre. Windows se utiliza para preparar, compilar y ejecutar las pruebas; no se ha certificado una aplicación de mapas nativa de Windows. iOS requiere macOS/Xcode para compilarse.
 
-`USE_FIREBASE=false` es el valor predeterminado. El login y comentarios heredados permanecen en modo demo hasta su parte de integración; no son servicios remotos configurados. No activar Firebase real con los identificadores de ejemplo del repositorio. La variante web/PMTiles/Hosting se aplazó por la decisión de usar MapLibre offline.
+`USE_FIREBASE=false` es el valor predeterminado. El login y comentarios heredados permanecen en modo demo hasta su parte de integración; no son servicios remotos configurados. La configuración cliente real de gowayki-lab está integrada y sus reglas se prueban localmente. La activación de proveedores, autenticación/sincronización completa y despliegue del backend siguen en la Parte8; consulta docs/FIREBASE_8A.md. La variante web/PMTiles/Hosting se aplazó por la decisión de usar MapLibre offline.
 
 ## Datos y límites
 
@@ -49,6 +49,17 @@ C:\Proyecto_001\.tools\city-pack-venv\Scripts\python.exe -B tool/verify_apk.py
 No reemplazar las fuentes por otro GTFS sin revisar su correspondencia. La regeneración requiere el PBF fijado y sus hashes, documentados en `tool/build_city_pack/`. El comando de Planetiler para una salida nueva con POI y números se documenta en `docs/MAPA_4A.md`; no se ha ejecutado ni reemplazado el mapa original.
 
 El APK debug se genera en `build/app/outputs/flutter-apk/app-debug.apk`. Sus datos, imágenes, mapa y bibliotecas SQLite se verifican con `tool/verify_apk.py`.
+
+## Firebase y pruebas de reglas
+
+Los archivos de Android/iOS suministrados se validan contra los identificadores del proyecto. `tool/configure_firebase.py` actualiza opciones, .firebaserc y firebase.json desde esos archivos. El entorno local no necesita credenciales de administración para probar las reglas.
+
+```powershell
+.\tool\test_firebase.ps1
+.\tool\test_firebase.ps1 -SeedOnly
+```
+
+El seed se limita al emulador demo y deriva sus metadatos del pack real. Las reglas no se han desplegado. Google Sign-In necesita completar la configuración OAuth indicada en docs/FIREBASE_8A.md antes de su integración en8B. No se afirma que haber compilado un APK con Firebase compruebe la autenticación real.
 
 ## Juego local
 

@@ -1,37 +1,33 @@
+// Generated locally from the supplied client configuration. Regenerate with tool/configure_firebase.py.
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-/// Placeholder: reemplaza con `flutterfire configure`.
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
-    if (kIsWeb) {
-      throw UnsupportedError('Web no configurado.');
-    }
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.android:
-        return android;
-      case TargetPlatform.iOS:
-        return ios;
-      default:
-        throw UnsupportedError('Plataforma no configurada.');
-    }
+    if (kIsWeb) throw UnsupportedError('Firebase web no configurado.');
+    return switch (defaultTargetPlatform) {
+      TargetPlatform.android => android,
+      TargetPlatform.iOS => ios,
+      _ => throw UnsupportedError(
+        'Firebase disponible para Android/iOS en este proyecto.',
+      ),
+    };
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REEMPLAZAR_API_KEY',
-    appId: 'REEMPLAZAR_APP_ID',
-    messagingSenderId: 'REEMPLAZAR_SENDER_ID',
-    projectId: 'gowayki-lab-tecsup',
-    storageBucket: 'gowayki-lab-tecsup.appspot.com',
+  static const android = FirebaseOptions(
+    apiKey: "AIzaSyDuCpGsXMXrsMzG_CvGiERL0m-8A2VF7ec",
+    appId: "1:959294066022:android:3ab035e603ff2ab4998ca7",
+    messagingSenderId: "959294066022",
+    projectId: "gowayki-lab",
+    storageBucket: "gowayki-lab.firebasestorage.app",
   );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'REEMPLAZAR_API_KEY',
-    appId: 'REEMPLAZAR_APP_ID',
-    messagingSenderId: 'REEMPLAZAR_SENDER_ID',
-    projectId: 'gowayki-lab-tecsup',
-    storageBucket: 'gowayki-lab-tecsup.appspot.com',
-    iosBundleId: 'pe.edu.tecsup.gowaykiLab',
+  static const ios = FirebaseOptions(
+    apiKey: "AIzaSyCdl-dj-W4Ct-8Ctxzk897DjKa-gJHCSgU",
+    appId: "1:959294066022:ios:9995015ebc89a67d998ca7",
+    messagingSenderId: "959294066022",
+    projectId: "gowayki-lab",
+    storageBucket: "gowayki-lab.firebasestorage.app",
+    iosBundleId: "pe.edu.tecsup.mobilityLab",
   );
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "959294066022",
+    "project_id": "gowayki-lab",
+    "storage_bucket": "gowayki-lab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959294066022:android:3ab035e603ff2ab4998ca7",
+        "android_client_info": {
+          "package_name": "pe.edu.tecsup.gowayki_lab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuCpGsXMXrsMzG_CvGiERL0m-8A2VF7ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
