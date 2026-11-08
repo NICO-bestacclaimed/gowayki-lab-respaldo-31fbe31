@@ -4,6 +4,7 @@ Mapa y paquete offline de Arequipa, buscador FTS5, planificador estimado, favori
 Firebase integra acceso, sincronización, reportes, ayuda y ranking con reglas probadas en emuladores.
 Actualizador del paquete con SHA-256 y recuperación; observabilidad preparada y desactivada.
 
-Pendientes antes de pruebas con servicios reales: crear Firestore Standard, desplegar y verificar reglas/índices/datos, comprobar Google Sign-In con la firma distribuida y completar identidad y contacto de privacidad.
+Parte 10: protección de bytes del paquete, catálogo de micros y colores por empresa y SHA-1 release registrada en Firebase.
+Pendientes: verificar en dispositivo Google y los demás flujos con Firebase; inicializar los metadatos con una URL comprobada. Firestore, reglas e índices ya existían. Privacidad y términos incluyen el responsable y contacto suministrados y siguen pendientes de revisión/publicación.
 Pruebas físicas pendientes: GPS, alarmas, modo avión, WebView y rendimiento Android; compilación iOS requiere Mac.
 Este archivo no certifica una publicación o revisión de tiendas.
