@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify exact city asset bytes on a clean checkout
         run: python3 tool/verify_city_assets.py
+      - name: Verify map styles, tiles and fonts
+        run: python3 tool/build_map_manifest.py --check
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.47.3'
