@@ -1,6 +1,6 @@
 {
-  "stage": "Parte 10: integridad de assets, Firebase y catalogo de micros; validacion CI pendiente de publicar ramas restantes.",
-  "last_tests": "203 Flutter completos y 4 dirigidos finales; analyze limpio; APK debug 9B y dos release 9C firmados y verificados; Hosting local con descarga/headers aprobado",
+  "stage": "Parte 10 publicada en cuatro PR: integridad, Firebase, micros y preparacion de lanzamiento; validacion funcional en dispositivo pendiente.",
+  "last_tests": "Parte 10: ver CI de los PR 1-4 para el resultado vigente; suite de 203 originales mas 4 nuevas, regresion Python aprobada y hashes de ciudad/mapa verificados.",
   "backup": "C:\\Proyecto_001\\.tools\\backups\\parte1C-before-move-20261106T195210Z.zip",
   "source_sha256": {
     "routes.txt": "67c5d06b83f809aae39149a87804dd6d41e0debc487184151b93de8d0990b361",
@@ -13,7 +13,7 @@
   "original_assets_removed": true,
   "published_pack": true,
   "quota_visibility": "No direct access to the user five-hour quota; stop on an observed warning or explicit user signal.",
-  "next_action": "Publicar ramas y PR de parte 10, verificar CI; validar Firebase en dispositivo; revisar legales antes de autorizar Hosting y distribucion.",
+  "next_action": "Revisar CI del commit actual de cada PR e integrar en orden 1-4; validar Firebase en dispositivo; revisar legales antes de autorizar Hosting y distribucion.",
   "resume_commands": [
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B tool/build_city_pack/build.py --pack",
     "C:\\Proyecto_001\\.tools\\city-pack-venv\\Scripts\\python.exe -B -m unittest discover -s tool/build_city_pack/tests -v"
@@ -354,6 +354,12 @@
     "new_micro_bytes": 936378,
     "app_distribution_uploaded": false,
     "city_document_initialized": true,
-    "hosting_deployed": false
+    "hosting_deployed": false,
+    "pull_requests": [
+      1,
+      2,
+      3,
+      4
+    ]
   }
 }
