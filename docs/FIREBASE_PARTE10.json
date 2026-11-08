@@ -1,0 +1,18 @@
+{
+  "project": "gowayki-lab",
+  "database": "(default)",
+  "edition": "STANDARD",
+  "city_document": "cities/arequipa",
+  "city_created_at": "2026-11-08T22:24:41.230796Z",
+  "city_read_back_matches_preview": true,
+  "preview": "docs/cities.arequipa.preview.json",
+  "download_sha256_verified": true,
+  "release_sha1_registered": "14894eb1d05393c89b1b453e5617431a854f6dc2",
+  "android_app_id": "1:959294066022:android:3ab035e603ff2ab4998ca7",
+  "require_google_check": "passed",
+  "preserve_hosting_regression_test": "passed",
+  "device_flows": "pending",
+  "rules_deployed_in_part10": false,
+  "hosting_deployed_in_part10": false,
+  "binaries_uploaded_in_part10": false
+}
