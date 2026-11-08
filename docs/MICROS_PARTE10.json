@@ -1,0 +1,78 @@
+{
+  "source": "fabriciorojas-10/gowayki-cloud-iot",
+  "branch": "feat/paradero-digital",
+  "directory": "frontend-react/public/micros",
+  "catalog_blob": "14151812e28fd2671b56e0a72c093ba9631d9a94",
+  "count": 17,
+  "added_bytes": 936378,
+  "files": {
+    "c10_megabus_38.webp": {
+      "bytes": 55140,
+      "sha256": "6a667f56f240dfa0ed6051762957442b35e12d4dbd56e955dde46fbd635b0ab3"
+    },
+    "c10_megabus_a.webp": {
+      "bytes": 54504,
+      "sha256": "cf212890a3013bf2fac2dd577873be0b446383e06a7c8c4a37ec19f3f26c6f4d"
+    },
+    "c10_megabus_d.webp": {
+      "bytes": 53136,
+      "sha256": "b8a8decc09d2f496461eda4774c28a4b8b6b30f5e96a36633c62d8267d671169"
+    },
+    "c10_megabus_la_mansion_del_fundador.webp": {
+      "bytes": 54202,
+      "sha256": "2572a788b0fa3eba6dbb5bf4d242dfce157ae6b3a75eff424e52aca470a3aa4d"
+    },
+    "c10_megabus_tiabaya_goyeneche.webp": {
+      "bytes": 52750,
+      "sha256": "707e2eb82656a88c99359899e6c1e887efae9fe500fe92c30a6a64dc1b8d59ec"
+    },
+    "c2_cono_norte_cettar.webp": {
+      "bytes": 53662,
+      "sha256": "7007ef7cfcdb75c86659269947a6a7fe9aee5f8c423c589d4c0652cf0d50f74a"
+    },
+    "c2_cono_norte_t.webp": {
+      "bytes": 52354,
+      "sha256": "1c5dbc283b557b5c822d5c6051568e006cba214e6c783d9ecd86c02b59a88f59"
+    },
+    "c4_union_aqp_a15.webp": {
+      "bytes": 57322,
+      "sha256": "73e0b1ceceae06e19f924aa5eb3366571c12d75ddac0a1552037ccd30358c7d1"
+    },
+    "c4_union_aqp_b_juan_xxiii.webp": {
+      "bytes": 54254,
+      "sha256": "5cea3eacd407a7d3f82e4898738d13c43b8c58930c53228d872f32d3ff707941"
+    },
+    "c4_union_aqp_b_miraflores_salvador.webp": {
+      "bytes": 54918,
+      "sha256": "819ff354f043c4e4462fd8ee4984692e2876cf650cae83e4d25b0d3bfd236034"
+    },
+    "c4_union_aqp_d.webp": {
+      "bytes": 60786,
+      "sha256": "022b87b62609d60e0ab230034f6058e4023b5b2b335074d50893795bd4406ca3"
+    },
+    "c4_union_aqp_graficos_b_p_polanco.webp": {
+      "bytes": 57790,
+      "sha256": "6ac655e968cad9d0cbf434cfc138e4be5310aabf377843431da0dc0a61676a29"
+    },
+    "c6_union_grau_a.webp": {
+      "bytes": 57390,
+      "sha256": "dd2b414541db7f88730db4c0c461acaae4919058e76a6cc0302e3e5af075cbbd"
+    },
+    "c7_aqpmasivo_b.webp": {
+      "bytes": 53880,
+      "sha256": "40d49c20cd4d58cdb3bdf783bbd0d01bdd9b0ac392bd41bac47442b880e0e4d7"
+    },
+    "c9_emarsistran_4_de_octubre_cayma.webp": {
+      "bytes": 53518,
+      "sha256": "8e3adabef9258fb05b6bf4b7208d158708348b29c2094aa8a8fabdf91644b9db"
+    },
+    "c9_emarsistran_alto_libertad.webp": {
+      "bytes": 52980,
+      "sha256": "14362747d5b09d423468068d4c2c15752bf2e4af84ae257b10f562ed5ca43422"
+    },
+    "chiguata_p.webp": {
+      "bytes": 57792,
+      "sha256": "4e1cd83cb5f3db4c735b046c37969a3e3fb929e36c90beec4b029b206777817a"
+    }
+  }
+}
