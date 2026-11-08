@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "959294066022-sml1ku3u1aq9sds6869bij040t5523lk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pe.edu.tecsup.gowayki_lab",
+            "certificate_hash": "14894eb1d05393c89b1b453e5617431a854f6dc2"
+          }
+        },
+        {
           "client_id": "959294066022-7jl40t2irpfk5p9f2nn9j5b4og4es583.apps.googleusercontent.com",
           "client_type": 3
         }
