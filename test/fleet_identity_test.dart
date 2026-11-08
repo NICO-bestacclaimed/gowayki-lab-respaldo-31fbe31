@@ -54,37 +54,40 @@ void main() {
     tester,
   ) async {
     final semantics = tester.ensureSemantics();
-    addTearDown(semantics.dispose);
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: ListTile(
-            leading: LineAvatar(
-              name: 'F2',
-              color: '#FFFFFF',
-              operatorName: 'Albotran',
+    try {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: ListTile(
+              leading: LineAvatar(
+                name: 'F2',
+                color: '#FFFFFF',
+                operatorName: 'Albotran',
+              ),
+              title: Text('Ruta'),
             ),
-            title: Text('Ruta'),
           ),
         ),
-      ),
-    );
-    expect(find.bySemanticsLabel(RegExp('Albotran · F2')), findsOneWidget);
-    final image = tester.widget<Image>(find.byType(Image));
-    final provider = image.image as ResizeImage;
-    expect(
-      (provider.imageProvider as AssetImage).assetName,
-      endsWith('albotran_f2.webp'),
-    );
-    final containers = tester.widgetList<Container>(find.byType(Container));
-    expect(
-      containers.any(
-        (c) =>
-            c.decoration is BoxDecoration &&
-            (c.decoration as BoxDecoration).border != null,
-      ),
-      isTrue,
-    );
-    expect(tester.takeException(), isNull);
+      );
+      expect(find.bySemanticsLabel(RegExp('Albotran · F2')), findsOneWidget);
+      final image = tester.widget<Image>(find.byType(Image));
+      final provider = image.image as ResizeImage;
+      expect(
+        (provider.imageProvider as AssetImage).assetName,
+        endsWith('albotran_f2.webp'),
+      );
+      final containers = tester.widgetList<Container>(find.byType(Container));
+      expect(
+        containers.any(
+          (c) =>
+              c.decoration is BoxDecoration &&
+              (c.decoration as BoxDecoration).border != null,
+        ),
+        isTrue,
+      );
+      expect(tester.takeException(), isNull);
+    } finally {
+      semantics.dispose();
+    }
   });
 }
