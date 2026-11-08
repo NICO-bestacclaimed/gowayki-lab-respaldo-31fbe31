@@ -72,8 +72,9 @@ class DefaultFirebaseOptions {
     for platform,app_id,path in [('android',android_id,'android/app/google-services.json'),('ios',ios_id,'ios/Runner/GoogleService-Info.plist')]:
         config['flutter']['platforms'][platform]['default'].update(projectId=project,appId=app_id,fileOutput=path)
     config['firestore']={'rules':'firestore.rules','indexes':'firestore.indexes.json'}
-    config['hosting']={'public':'hosting','ignore':['firebase.json','**/.*','**/node_modules/**']}
-    config['emulators']={'auth':{'host':'127.0.0.1','port':9099},'firestore':{'host':'127.0.0.1','port':8085},'ui':{'enabled':False},'singleProjectMode':True}
+    # Client refresh must preserve predeploy guards, headers and emulator ports.
+    config.setdefault('hosting',{'public':'hosting','ignore':['firebase.json','**/.*','**/node_modules/**']})
+    config.setdefault('emulators',{'auth':{'host':'127.0.0.1','port':9099},'firestore':{'host':'127.0.0.1','port':8085},'ui':{'enabled':False},'singleProjectMode':True})
     config_path.write_text(json.dumps(config,indent=2)+'\n',encoding='utf-8')
     (ROOT/'.firebaserc').write_text(json.dumps({'projects':{'default':project}},indent=2)+'\n',encoding='utf-8')
     report={'project_id':project,'android_package':'pe.edu.tecsup.gowayki_lab','android_app_id':android_id,'ios_bundle':ios['BUNDLE_ID'],'ios_app_id':ios_id,'android_config_sha256':sha(args.android),'ios_config_sha256':sha(args.ios),'same_project':True,'google_android_web_client_present':any(c.get('client_type')==3 for c in client.get('oauth_client',[])),'google_ios_client_present':bool(ios.get('CLIENT_ID')),'google_ios_url_scheme_present':bool(ios.get('REVERSED_CLIENT_ID'))}
