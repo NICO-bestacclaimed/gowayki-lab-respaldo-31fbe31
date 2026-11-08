@@ -8,6 +8,7 @@ import '../../providers/active_trip_provider.dart';
 import '../../providers/map_renderer_provider.dart';
 import '../explorer/presentation/widgets/explorer_map.dart';
 import '../game/game_screen.dart';
+import '../planner/presentation/widgets/itinerary_card.dart';
 
 class ActiveTripScreen extends ConsumerWidget {
   const ActiveTripScreen({super.key});
@@ -62,6 +63,11 @@ class ActiveTripScreen extends ConsumerWidget {
                   '${active.points.origin.name} → ${active.points.destination.name}',
                 ),
                 const SizedBox(height: 12),
+                if (leg is TransitLeg)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: LineAvatar(name: leg.lineName, color: leg.color),
+                  ),
                 Text(
                   message,
                   key: const ValueKey('active.step'),

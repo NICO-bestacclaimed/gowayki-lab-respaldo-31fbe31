@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../domain/planner/itinerary.dart';
 import '../../../../../shared/format/journey_format.dart';
 import '../../../../../shared/l10n/l10n.dart';
+import '../../../../../shared/brand/fleet_identity.dart';
 
 Color lineColor(String value) => Color(
   0xFF000000 |
@@ -9,20 +10,73 @@ Color lineColor(String value) => Color(
 );
 
 class LineAvatar extends StatelessWidget {
-  const LineAvatar({super.key, required this.name, required this.color});
-  final String name, color;
+  const LineAvatar({
+    super.key,
+    required this.name,
+    required this.color,
+    this.operatorName = '',
+  });
+  final String name, color, operatorName;
   @override
   Widget build(BuildContext context) {
-    final background = lineColor(color);
-    return CircleAvatar(
-      radius: 17,
-      backgroundColor: background,
-      foregroundColor: background.computeLuminance() > .5
-          ? Colors.black
-          : Colors.white,
-      child: Text(
-        name.length > 3 ? name.substring(0, 3) : name,
-        style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+    final fleet = FleetIdentity.resolve(
+      operatorName: operatorName,
+      color: color,
+    );
+    final background = lineColor(fleet.color);
+    final asset = fleet.assetFor(name);
+    final silhouette = Icon(
+      Icons.directions_bus_filled,
+      color: background,
+      size: 28,
+    );
+    return Semantics(
+      label: '${fleet.company} · $name',
+      image: true,
+      child: ExcludeSemantics(
+        child: SizedBox(
+          width: 84,
+          height: 52,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 28,
+                width: 80,
+                child: asset == null
+                    ? silhouette
+                    : Image.asset(
+                        asset,
+                        fit: BoxFit.contain,
+                        cacheWidth: 240,
+                        errorBuilder: (context, error, stack) => silhouette,
+                      ),
+              ),
+              Container(
+                width: 84,
+                height: 22,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                decoration: BoxDecoration(
+                  color: background,
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: lineColor(fleet.accent)),
+                ),
+                child: Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: background.computeLuminance() > .5
+                        ? Colors.black
+                        : Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
