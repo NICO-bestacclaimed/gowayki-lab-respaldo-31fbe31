@@ -2,7 +2,7 @@
 
 Aplicación Flutter de consulta y planificación con MapLibre, mapa MBTiles y paquete SQLite offline. Incluye búsqueda FTS5, recorridos y fichas, favoritos, viaje activo con alarma de bajada y Wayki Combi. Firebase añade acceso, sincronización, reportes comunitarios, ayuda y ranking semanal.
 
-Los tiempos, frecuencias, tarifas y caminatas son estimaciones. No hay GPS de buses ni seguimiento de vehículos en vivo. Los candidatos de paradero requieren validación física. La ubicación del viaje corresponde al propio dispositivo. El alcance web/PMTiles se aplazó por decisión del usuario; el trabajo actual se centra en Android/iOS nativo.
+Los tiempos, frecuencias, tarifas y caminatas son estimaciones. No hay GPS de buses; los tiempos se estiman por frecuencia. Los candidatos de paradero requieren validación física. La ubicación del viaje corresponde al propio dispositivo. El alcance web/PMTiles se aplazó por decisión del usuario; el trabajo actual se centra en Android/iOS nativo.
 
 ## Entorno en Windows
 
@@ -112,4 +112,4 @@ Wayki Combi ocupa 67.045 bytes con 15 sprites pequeños; los originales se conse
 
 Pendientes físicos: fluidez de mapa, GPS, notificación persistente, alarmas y permisos Android/iOS, rendimiento menor de 400 ms en Android de gama media, autenticación/sincronización y recepción de observabilidad reales. La medición Windows AOT de 28 muestras tuvo mediana 152,709 ms y máximo 393,125 ms; no equivale al criterio Android.
 
-Código y pruebas se organizan en `lib/domain`, `lib/infra`, `lib/app`, `lib/shared`, `lib/l10n` y `test`. `docs/ESTADO_TRABAJO.json` indica el último punto verificado. El código, APK y respaldos permanecen locales; no se ha hecho push, publicado Hosting ni distribuido apps. Las reglas e índices de Firestore sí se desplegaron con autorización del usuario.
+Código y pruebas se organizan en `lib/domain`, `lib/infra`, `lib/app`, `lib/shared`, `lib/l10n` y `test`. `docs/ESTADO_TRABAJO.json` indica el último punto verificado. El código y su historial están en [GitHub](https://github.com/NICO-bestacclaimed/gowayki-lab-respaldo-31fbe31), y los respaldos anteriores están en la release `respaldo-31fbe31`. Hosting y App Distribution siguen sin publicar. Las reglas e índices de Firestore sí se desplegaron con autorización del usuario.

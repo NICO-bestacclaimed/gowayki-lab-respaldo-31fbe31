@@ -1,0 +1,5 @@
+# Preserve exact bytes: city/map manifests verify SHA-256 and file sizes.
+assets/** -text
+*.geojson -text
+*.sqlite -text
+*.mbtiles -text
