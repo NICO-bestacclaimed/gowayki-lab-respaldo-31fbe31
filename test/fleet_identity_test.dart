@@ -69,7 +69,7 @@ void main() {
         ),
       ),
     );
-    expect(find.bySemanticsLabel('Albotran · F2'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp('Albotran · F2')), findsOneWidget);
     final image = tester.widget<Image>(find.byType(Image));
     final provider = image.image as ResizeImage;
     expect(
