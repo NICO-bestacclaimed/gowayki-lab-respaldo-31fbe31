@@ -16,8 +16,8 @@ revisado y aprobado. No se ha desplegado Hosting.
 `config/release-defines.example.json` contiene las URL propuestas. Usarlo con
 `--dart-define-from-file` **solo después** de aprobar, publicar y comprobar
 ambas páginas. Hasta entonces los enlaces legales permanecen desactivados
-por defecto. El documento de ciudad usa un commit inmutable de GitHub cuya
-descarga fue comprobada; no depende de publicar Hosting.
+por defecto. El documento de ciudad conserva versión, tamaño y hash. Se retiró la URL de
+GitHub al hacerse privado el repositorio. Falta un origen público autorizado.
 
 ## App Distribution
 
