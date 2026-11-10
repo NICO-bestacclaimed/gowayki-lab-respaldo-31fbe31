@@ -1,0 +1,6 @@
+{
+  "USE_FIREBASE": "true",
+  "ENABLE_OBSERVABILITY": "false",
+  "PRIVACY_URL": "https://gowayki-lab.web.app/privacidad/",
+  "TERMS_URL": "https://gowayki-lab.web.app/terminos/"
+}

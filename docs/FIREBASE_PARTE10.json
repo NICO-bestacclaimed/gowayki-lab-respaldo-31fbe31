@@ -14,5 +14,7 @@
   "device_flows": "pending",
   "rules_deployed_in_part10": false,
   "hosting_deployed_in_part10": false,
-  "binaries_uploaded_in_part10": false
+  "binaries_uploaded_in_part10": false,
+  "city_updated_at": "2026-11-10T00:40:07.102480Z",
+  "download_status": "public GitHub URL restored; anonymous download size and SHA-256 verified; Firestore read-back matches preview"
 }

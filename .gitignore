@@ -56,3 +56,9 @@ tool/firebase/node_modules/
 
 # Gradle diagnostics generated beside the Android project
 /android/build/
+
+# Signing material and private distribution lists, wherever created.
+*.p12
+*.pfx
+**/key.properties
+**/testers*.txt
