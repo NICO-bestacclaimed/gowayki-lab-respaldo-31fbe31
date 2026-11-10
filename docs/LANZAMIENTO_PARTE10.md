@@ -16,8 +16,10 @@ revisado y aprobado. No se ha desplegado Hosting.
 `config/release-defines.example.json` contiene las URL propuestas. Usarlo con
 `--dart-define-from-file` **solo después** de aprobar, publicar y comprobar
 ambas páginas. Hasta entonces los enlaces legales permanecen desactivados
-por defecto. El documento de ciudad conserva versión, tamaño y hash. Se retiró la URL de
-GitHub al hacerse privado el repositorio. Falta un origen público autorizado.
+por defecto. El documento de ciudad conserva versión, tamaño y hash. La URL de
+GitHub se restauró al volver a ser público el repositorio, tras verificar una
+descarga anónima contra el manifiesto. El enlace fija un commit y requiere
+que el repositorio siga siendo público.
 
 ## App Distribution
 

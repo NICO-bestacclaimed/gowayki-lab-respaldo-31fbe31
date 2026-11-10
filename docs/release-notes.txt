@@ -5,6 +5,6 @@ Firebase integra acceso, sincronización, reportes, ayuda y ranking con reglas p
 Actualizador del paquete con SHA-256 y recuperación; observabilidad preparada y desactivada.
 
 Parte 10: protección de bytes del paquete, catálogo de micros y colores por empresa y SHA-1 release registrada en Firebase.
-Pendientes: verificar en dispositivo Google y los demás flujos con Firebase. Los metadatos de ciudad ya están inicializados; la descarga queda pendiente de un origen público porque el repositorio es privado. Firestore, reglas e índices ya existían. Privacidad y términos incluyen el responsable y contacto suministrados y siguen pendientes de revisión/publicación.
+Pendientes: verificar en dispositivo Google y los demás flujos con Firebase. Los metadatos de ciudad ya están inicializados; la descarga pública desde GitHub está restaurada y verificada por tamaño y SHA-256. Firestore, reglas e índices ya existían. Privacidad y términos incluyen el responsable y contacto suministrados y siguen pendientes de revisión/publicación.
 Pruebas físicas pendientes: GPS, alarmas, modo avión, WebView y rendimiento Android; compilación iOS requiere Mac.
 Este archivo no certifica una publicación o revisión de tiendas.
